@@ -84,12 +84,13 @@
 
       @media (max-width: 768px) {
          .chatbot-container {
-            padding: 8px;
+            padding: 0;
          }
 
          .chatbot-content {
-            max-height: 95vh;
-            border-radius: 12px;
+            height: 100%;
+            max-height: 100%;
+            border-radius: 0;
          }
       }
 
@@ -98,7 +99,7 @@
          top: 12px;
          right: 12px;
          z-index: 10001;
-         background: rgba(0, 0, 0, 0.8);
+         background: rgba(0, 0, 0, 0.5);
          color: white;
          border: none;
          border-radius: 50%;
@@ -114,7 +115,7 @@
       }
 
       .chatbot-close-btn:hover {
-         background: rgba(0, 0, 0, 0.9);
+         background: rgba(0, 0, 0, 0.7);
          transform: scale(1.1);
       }
 
@@ -236,203 +237,25 @@
             </div>
          </div>
       </section>
-      <!-- Solution Section -->
-      <section class="py-20">
-         <div class="container mx-auto px-6 relative">
-            <div class="text-center max-w-3xl mx-auto">
-               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Introducing ProBookingQR</h2>
-               <p class="mt-4 text-slate-400 text-lg">One QR code. Unlimited bookings. Zero missed opportunities. Here's how it fills your calendar automatically.</p>
-            </div>
-            <div class="relative mt-16">
-               <!-- The line connecting the steps -->
-               <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-700 -translate-y-1/2"></div>
-               <div class="grid md:grid-cols-3 gap-12 relative">
-                  <!-- Step 1 -->
-                  <div class="text-center">
-                     <div class="relative mb-6">
-                        <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">1</div>
-                     </div>
-                     <h3 class="font-bold text-white text-xl mb-2">Client Scans QR Code</h3>
-                     <p class="text-slate-400">Place your unique QR code anywhere—on business cards, your window, social media. One scan opens your booking page.</p>
-                  </div>
-                  <!-- Step 2 -->
-                  <div class="text-center">
-                     <div class="relative mb-6">
-                        <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">2</div>
-                     </div>
-                     <h3 class="font-bold text-white text-xl mb-2">Instant Self-Booking</h3>
-                     <p class="text-slate-400">They pick a service and an available time that works for them. No calling, no waiting, no friction.</p>
-                  </div>
-                  <!-- Step 3 -->
-                  <div class="text-center">
-                     <div class="relative mb-6">
-                        <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">3</div>
-                     </div>
-                     <h3 class="font-bold text-white text-xl mb-2">Automated Follow-Up</h3>
-                     <p class="text-slate-400">Confirmations, reminders, and review requests are all sent automatically. Your calendar fills while you work.</p>
-                  </div>
-               </div>
-            </div>
-            <!-- Testimonial -->
-            <div class="mt-24 max-w-3xl mx-auto bg-slate-800/50 p-8 rounded-2xl border border-slate-700 text-center">
-               <p class="text-xl italic text-white">"I used to spend hours chasing bookings. Now my phone buzzes with new appointments while I'm working. I've booked <span class="text-indigo-400 font-semibold">40% more clients</span> without lifting a finger."</p>
-               <div class="mt-6 font-semibold text-slate-300">- Sarah M., Solo Stylist</div>
-               <p class="text-sm text-slate-500 mt-2">Verified via Trustpilot</p>
-            </div>
-         </div>
-      </section>
-      <!-- Pricing Section -->
-      <section id="pricing" class="pt-20 pb-28">
-         <div class="container mx-auto px-6 relative">
-            <div class="text-center max-w-3xl mx-auto">
-               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Simple Pricing That Pays for Itself</h2>
-               <p class="mt-4 text-slate-400 text-lg">No setup fees. No contracts. Just one flat rate that brings in more business than it costs.</p>
-            </div>
-            <div class="flex justify-center mt-12">
-               <div class="bg-slate-800 border-2 border-indigo-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-indigo-500/10">
-                  <div class="text-center">
-                     <h3 class="text-2xl font-bold text-white mb-2">ProBookingQR System</h3>
-                     <div class="flex items-center justify-center text-5xl font-extrabold text-white mb-2">
-                        <span class="text-3xl font-medium text-slate-500 line-through mr-3">$99</span>
-                        $49
-                        <span class="text-lg font-medium text-slate-400 ml-2">/month</span>
-                     </div>
-                     <p class="text-slate-400">Limited Time Offer. Cancel anytime.</p>
-                  </div>
-                  <ul class="space-y-4 my-8 text-slate-300">
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Custom QR-to-Book page with your branding
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Automatic appointment confirmations & reminders
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Google Calendar integration
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Automated review requests
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Reactivation texts for dormant clients
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included
-                     </li>
-                  </ul>
-                  <div class="bg-green-500/10 border border-green-400/30 text-green-300 p-4 rounded-lg text-center mb-6">
-                     <h4 class="font-bold">🛡️ 30-Day Money-Back Guarantee</h4>
-                     <p class="text-sm mt-1">If you're not completely satisfied, we'll refund every penny. No questions asked.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="mt-12 text-center bg-yellow-500/10 border border-yellow-600/30 text-yellow-200 max-w-2xl mx-auto p-4 rounded-lg">
-               <h4 class="font-bold text-yellow-100">⏰ Limited Time Offer: Lock In Your $49/Month Rate!</h4>
-               <p class="text-sm mt-1">We're only taking on 20 new salons this month to ensure perfect service. Secure your spot now!</p>
-            </div>
-         </div>
-      </section>
-      <!-- Client Results Section -->
-      <section class="py-20">
-         <div class="container mx-auto px-6 text-center relative">
-            <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">What Our Clients Are Seeing</h2>
-            <div class="mt-12 max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-left">
-               <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                  <p class="text-xl text-white font-bold">+11 New Appointments</p>
-                  <p class="text-slate-400 mt-2">"The first week I put the QR code on my mirror, 11 new clients booked without me lifting a finger."</p>
-                  <p class="mt-4 text-sm text-slate-500">— Mia L., Esthetician</p>
-               </div>
-               <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                  <p class="text-xl text-white font-bold">20% More Rebookings</p>
-                  <p class="text-slate-400 mt-2">"The automatic reminders help clients rebook without me asking — huge time saver."</p>
-                  <p class="mt-4 text-sm text-slate-500">— Jo, Independent Barber</p>
-               </div>
-               <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                  <p class="text-xl text-white font-bold">60-Second Setup</p>
-                  <p class="text-slate-400 mt-2">"It was so fast. I gave my info and had my booking page and QR code the next day."</p>
-                  <p class="mt-4 text-sm text-slate-500">— Rina, Lash Tech</p>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- CTA Section -->
-      <section class="bg-indigo-600">
-         <div class="container mx-auto px-6 py-20 text-center relative">
-            <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
-            <p class="mt-4 text-indigo-200 text-lg max-w-2xl mx-auto">Join over 200 salons already using ProBookingQR to fill their calendars automatically.</p>
-            <button onclick="openChatbot()" class="mt-8 inline-block bg-white hover:bg-slate-100 text-indigo-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105">
-               Get Started for Just $49
-            </button>
-            <p class="mt-4 text-indigo-200 text-sm">Setup is hands-free and takes less than 24 hours.</p>
-         </div>
-      </section>
    </main>
-   <!-- Footer -->
-   <footer class="bg-slate-900 border-t border-slate-800">
-      <div class="container mx-auto px-6 py-8 text-center text-slate-500">
-         <p>© 2025 ProBookingQR. All rights reserved.</p>
-      </div>
-   </footer>
    <!-- Chatbot Modal -->
    <div id="chatbot-modal">
       <div class="chatbot-container">
-         <button onclick="closeChatbot()" class="chatbot-close-btn">×</button>
          <div class="chatbot-content">
+            <button onclick="closeChatbot()" class="chatbot-close-btn">×</button>
             <div id="chatbot-root" class="w-full h-full"></div>
          </div>
       </div>
    </div>
    <script>
-      // --- This is the React Component that will be rendered in the chatbot-root div ---
-      // We define it here so it's globally available to the script tags that follow
       let ProBookingChatbot;
 
-      // --- Mobile detection and modal logic ---
-      function isMobileDevice() {
-         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
-      }
-
-      function showMobileMessage() {
+      function openChatbot() {
          const modal = document.getElementById('chatbot-modal');
-         const chatbotRoot = document.getElementById('chatbot-root');
-
-         // Replace chatbot content with mobile message
-         chatbotRoot.innerHTML = `
-                <div class="flex flex-col h-full bg-slate-50 text-slate-800 justify-center items-center p-6 text-center">
-                    <div class="max-w-sm">
-                        <div class="text-6xl mb-6">💻</div>
-                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Desktop Signup Required</h3>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            For the best signup experience, please visit this page on your computer or tablet. 
-                            Our setup process works best on larger screens!
-                        </p>
-                        <div class="space-y-3 mt-6">
-                            <p class="text-sm text-slate-500 font-medium">
-                                📧 Want us to email you the link?
-                            </p>
-                            <a href="mailto:info@probookingqr.com?subject=Send%20me%20the%20signup%20link&body=Hi!%20I'd%20like%20to%20sign%20up%20for%20ProBookingQR.%20Please%20send%20me%20the%20link%20to%20complete%20signup%20on%20my%20computer." 
-                                class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
-                                Email Me the Link
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
          modal.style.display = 'block';
          document.body.style.overflow = 'hidden';
-      }
-
-      function openChatbot() {
-         if (isMobileDevice()) {
-            showMobileMessage();
-         } else {
-            const modal = document.getElementById('chatbot-modal');
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            // Ensure the React component is rendered
-            if (ProBookingChatbot) {
-               ReactDOM.render(React.createElement(ProBookingChatbot), document.getElementById('chatbot-root'));
-            }
+         if (ProBookingChatbot) {
+            ReactDOM.render(React.createElement(ProBookingChatbot), document.getElementById('chatbot-root'));
          }
       }
 
@@ -440,9 +263,7 @@
          const modal = document.getElementById('chatbot-modal');
          modal.style.display = 'none';
          document.body.style.overflow = 'auto';
-
          const chatbotRoot = document.getElementById('chatbot-root');
-         // Unmount the component to reset its state
          ReactDOM.unmountComponentAtNode(chatbotRoot);
       }
 
@@ -527,7 +348,7 @@
             },
             {
                id: 'final_summary',
-               botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• Location: ${data.fullAddress}\n• Services: ${data.services.join(', ')}\n• Automated Messages: ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Ready to start booking more clients automatically?`,
+               botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• Location: ${data.fullAddress}\n• Services: ${data.services.join(', ')}\n• Automated Messages: ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`,
                inputType: 'final'
             }
          ];
@@ -567,17 +388,42 @@
                 setProgress(currentProgress);
                 if (currentProgress >= 100) {
                     clearInterval(interval);
+                    
+                    // --- SEND DATA TO EMAIL ENDPOINT ---
+                    fetch("https://formspree.io/f/mnnvldep", {
+                        method: 'POST',
+                        body: JSON.stringify(userData),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        console.log("Form submission response:", response);
+                    }).catch(error => {
+                        console.error("Form submission error:", error);
+                    });
+
+
                     setTimeout(() => {
-                        const nextStep = currentStep + 1;
-                        setCurrentStep(nextStep);
-                        const nextMessage = typeof conversationSteps[nextStep].botMessage === 'function'
-                            ? conversationSteps[nextStep].botMessage(userData)
-                            : conversationSteps[nextStep].botMessage;
-                        addBotMessage(nextMessage);
+                        const nextStepIndex = currentStep + 1;
+                        if (conversationSteps[nextStepIndex]) {
+                           setCurrentStep(nextStepIndex);
+                           const nextMessage = typeof conversationSteps[nextStepIndex].botMessage === 'function'
+                              ? conversationSteps[nextStepIndex].botMessage(userData)
+                              : conversationSteps[nextStepIndex].botMessage;
+                           addBotMessage(nextMessage);
+                        }
                     }, 500);
                 }
             }, 700);
          };
+
+         // This useEffect triggers the progress bar and data submission when the component reaches the correct step.
+         useEffect(() => {
+            if (conversationSteps[currentStep] && conversationSteps[currentStep].id === 'building_system') {
+               handleProgress();
+            }
+         }, [currentStep]);
+
 
          const handleNext = () => {
             const step = conversationSteps[currentStep];
@@ -590,12 +436,14 @@
                setCurrentInput('');
                
                setTimeout(() => {
-                  const nextStep = currentStep + 1;
-                  setCurrentStep(nextStep);
-                  const nextMessage = typeof conversationSteps[nextStep].botMessage === 'function'
-                     ? conversationSteps[nextStep].botMessage(newData)
-                     : conversationSteps[nextStep].botMessage;
-                  addBotMessage(nextMessage);
+                  const nextStepIndex = currentStep + 1;
+                   if (conversationSteps[nextStepIndex]) {
+                     setCurrentStep(nextStepIndex);
+                     const nextMessage = typeof conversationSteps[nextStepIndex].botMessage === 'function'
+                        ? conversationSteps[nextStepIndex].botMessage(newData)
+                        : conversationSteps[nextStepIndex].botMessage;
+                     addBotMessage(nextMessage);
+                  }
                }, 500);
 
             } else if (step.inputType === 'multiselect') {
@@ -603,13 +451,11 @@
                addUserMessage(userData[step.field].join(', '));
                
                setTimeout(() => {
-                  const nextStep = currentStep + 1;
-                  setCurrentStep(nextStep);
-                  const nextMessage = conversationSteps[nextStep].botMessage;
-                  addBotMessage(nextMessage);
-
-                  if (conversationSteps[nextStep].inputType === 'progress') {
-                     handleProgress();
+                  const nextStepIndex = currentStep + 1;
+                   if (conversationSteps[nextStepIndex]) {
+                     setCurrentStep(nextStepIndex);
+                     const nextMessage = conversationSteps[nextStepIndex].botMessage;
+                     addBotMessage(nextMessage);
                   }
                }, 500);
             }
@@ -650,6 +496,7 @@
                               placeholder={step.placeholder}
                               className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                               disabled={isTyping}
+                              autoFocus
                            />
                            <button onClick={handleNext} disabled={isTyping || !currentInput.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">
                               Send
@@ -659,7 +506,7 @@
                 case 'multiselect':
                     return (
                         <div>
-                           <div className="grid grid-cols-2 gap-2 mb-3">
+                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                               {step.options.map(option => {
                                  const isSelected = userData[step.field].includes(option);
                                  return (
@@ -684,13 +531,18 @@
                             <div className="progress-bar-container w-full">
                                 <div className="progress-bar" style={{width: `${progress}%`}}></div>
                             </div>
-                            <p className="text-slate-600 mt-2 text-sm">Building your system...</p>
+                            <p className="text-slate-600 mt-2 text-sm">Building your system & sending info...</p>
                         </div>
                     );
                 case 'final':
                     return (
-                        <a href="#pricing" onClick={closeChatbot} className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">
-                           Get Started for Just $49
+                        <a 
+                            href="https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600"
+                        >
+                           Complete Payment for $49
                         </a>
                     );
                 default:
@@ -732,7 +584,7 @@
          );
       };
 
-      // Initial render is handled by the openChatbot function for non-mobile devices
+      // Initial render is handled by the openChatbot function
    </script>
 </body>
 
