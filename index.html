@@ -4,35 +4,27 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
    <!-- SEO & Page Info -->
    <title>ProBookingQR | Stop Losing Clients to Missed Calls</title>
    <meta name="description" content="ProBookingQR helps solo professionals capture more clients with 24/7 automated booking via QR codes. No missed calls, no complex software.">
-
    <!-- Favicon -->
    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
-
    <!-- Social Media Sharing (Open Graph & Twitter) -->
    <meta property="og:title" content="ProBookingQR | Stop Losing Clients to Missed Calls">
    <meta property="og:description" content="Automated QR-to-Book system for solo service pros. Book more clients without missing calls.">
    <meta property="og:image" content="https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR">
    <meta property="og:url" content="https://your-domain.com/">
    <meta name="twitter:card" content="summary_large_image">
-
    <!-- Google Fonts: Inter -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
    <!-- Tailwind CSS -->
    <script src="https://cdn.tailwindcss.com"></script>
-
    <!-- React -->
    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-
    <style>
       /* Custom styles to supplement Tailwind */
       body {
@@ -42,7 +34,7 @@
       }
 
       .text-glow {
-         text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 0.3);
+         text-shadow: 0 0 15px rgba(167, 139, 250, 0.4), 0 0 25px rgba(167, 139, 250, 0.2);
       }
 
       .bg-grid-pattern {
@@ -50,7 +42,7 @@
          background-size: 20px 20px;
       }
 
-      /* FIXED: Mobile-responsive chatbot modal */
+      /* Mobile-responsive chatbot modal */
       #chatbot-modal {
          display: none;
          position: fixed;
@@ -59,13 +51,12 @@
          right: 0;
          bottom: 0;
          z-index: 9999;
-         background-color: rgba(0, 0, 0, 0.7);
+         background-color: rgba(0, 0, 0, 0.8);
          backdrop-filter: blur(4px);
          -webkit-backdrop-filter: blur(4px);
       }
 
-      /* FIXED: Mobile chatbot container */
-      .chatbot-mobile-container {
+      .chatbot-container {
          position: absolute;
          top: 0;
          left: 0;
@@ -74,10 +65,9 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         padding: 12px;
+         padding: 16px;
       }
 
-      /* FIXED: Desktop and mobile responsive sizing */
       .chatbot-content {
          width: 100%;
          height: 100%;
@@ -89,11 +79,11 @@
          overflow: hidden;
          display: flex;
          flex-direction: column;
+         position: relative;
       }
 
-      /* FIXED: Mobile-specific adjustments */
       @media (max-width: 768px) {
-         .chatbot-mobile-container {
+         .chatbot-container {
             padding: 8px;
          }
 
@@ -103,22 +93,21 @@
          }
       }
 
-      /* FIXED: Close button positioning */
       .chatbot-close-btn {
          position: absolute;
-         top: 16px;
-         right: 16px;
-         z-index: 10000;
+         top: 12px;
+         right: 12px;
+         z-index: 10001;
          background: rgba(0, 0, 0, 0.8);
          color: white;
          border: none;
          border-radius: 50%;
-         width: 40px;
-         height: 40px;
+         width: 36px;
+         height: 36px;
          display: flex;
          align-items: center;
          justify-content: center;
-         font-size: 24px;
+         font-size: 20px;
          font-weight: 300;
          cursor: pointer;
          transition: all 0.2s;
@@ -129,19 +118,10 @@
          transform: scale(1.1);
       }
 
-      .loader {
-         border: 4px solid #f3f3f3;
-         border-top: 4px solid #f97316;
-         border-radius: 50%;
-         width: 30px;
-         height: 30px;
-         animation: spin 1s linear infinite;
-      }
-
       .typing-indicator span {
          height: 8px;
          width: 8px;
-         background-color: #a8a29e;
+         background-color: #9ca3af;
          border-radius: 50%;
          display: inline-block;
          margin: 0 1px;
@@ -156,27 +136,30 @@
          animation-delay: 0.4s;
       }
 
-      @keyframes spin {
-         0% {
-            transform: rotate(0deg);
-         }
-
-         100% {
-            transform: rotate(360deg);
-         }
-      }
-
       @keyframes bounce {
          to {
             opacity: 0.3;
             transform: translate3d(0, -4px, 0);
          }
       }
+
+      .progress-bar-container {
+         width: 100%;
+         background-color: #e5e7eb;
+         border-radius: 9999px;
+         overflow: hidden;
+      }
+
+      .progress-bar {
+         height: 12px;
+         background-color: #6366f1;
+         border-radius: 9999px;
+         transition: width 0.5s ease-in-out;
+      }
    </style>
 </head>
 
 <body class="bg-slate-900 text-slate-300">
-
    <!-- Header -->
    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -185,12 +168,10 @@
          </a>
       </div>
    </header>
-
    <!-- Main Content -->
    <main class="relative overflow-hidden">
       <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
       <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-900"></div>
-
       <!-- Hero Section -->
       <section class="relative container mx-auto px-6 py-20 md:py-32 text-center">
          <div class="max-w-4xl mx-auto">
@@ -203,17 +184,15 @@
             <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10">
                Turn your business into a booking machine that works around the clock, even when you're busy with other clients.
             </p>
-            <a href="javascript:void(0)" onclick="openChatbot()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105">
+            <button onclick="openChatbot()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105">
                Get Your QR-to-Book System
-            </a>
-
+            </button>
             <div class="mt-16 bg-slate-800/50 backdrop-blur-md p-6 rounded-2xl max-w-2xl mx-auto border border-slate-700">
                <h3 class="font-bold text-white text-lg">"I missed 3 calls while doing hair today..."</h3>
                <p class="text-slate-400 mt-2">Sound familiar? Every missed call is money walking out the door. What if clients could book themselves instantly, even at 9 PM?</p>
             </div>
          </div>
       </section>
-
       <!-- Problem Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 relative">
@@ -224,32 +203,32 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
                <!-- Card 1 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-red-500/10 text-red-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Missed Phone Call Icon">
-                     <i data-feather="phone-missed"></i>
+                  <div class="bg-red-500/10 text-red-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
+                     📞
                   </div>
                   <h3 class="font-bold text-white text-lg mb-2">Missed Call = Lost Money</h3>
                   <p class="text-slate-400">New customers call once, get your voicemail, and book somewhere else immediately.</p>
                </div>
                <!-- Card 2 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-blue-500/10 text-blue-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Recurring Client Icon">
-                     <i data-feather="refresh-cw"></i>
+                  <div class="bg-blue-500/10 text-blue-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
+                     🔄
                   </div>
                   <h3 class="font-bold text-white text-lg mb-2">Clients Forget to Rebook</h3>
                   <p class="text-slate-400">Happy clients walk out but forget to schedule their next visit, leaving gaps in your calendar.</p>
                </div>
                <!-- Card 3 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-yellow-500/10 text-yellow-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Star Rating Icon">
-                     <i data-feather="star"></i>
+                  <div class="bg-yellow-500/10 text-yellow-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
+                     ⭐
                   </div>
                   <h3 class="font-bold text-white text-lg mb-2">No Reviews = No Growth</h3>
                   <p class="text-slate-400">Without a steady stream of fresh reviews, it's hard to build the trust needed to attract new clients.</p>
                </div>
                <!-- Card 4 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-green-500/10 text-green-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Dollar Sign Icon">
-                     <i data-feather="dollar-sign"></i>
+                  <div class="bg-green-500/10 text-green-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
+                     💰
                   </div>
                   <h3 class="font-bold text-white text-lg mb-2">Expensive, Bloated Software</h3>
                   <p class="text-slate-400">Complex salon software costs a fortune with features you'll never use. You just want more bookings.</p>
@@ -257,7 +236,6 @@
             </div>
          </div>
       </section>
-
       <!-- Solution Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 relative">
@@ -265,11 +243,9 @@
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Introducing ProBookingQR</h2>
                <p class="mt-4 text-slate-400 text-lg">One QR code. Unlimited bookings. Zero missed opportunities. Here's how it fills your calendar automatically.</p>
             </div>
-
             <div class="relative mt-16">
                <!-- The line connecting the steps -->
                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-700 -translate-y-1/2"></div>
-
                <div class="grid md:grid-cols-3 gap-12 relative">
                   <!-- Step 1 -->
                   <div class="text-center">
@@ -297,7 +273,6 @@
                   </div>
                </div>
             </div>
-
             <!-- Testimonial -->
             <div class="mt-24 max-w-3xl mx-auto bg-slate-800/50 p-8 rounded-2xl border border-slate-700 text-center">
                <p class="text-xl italic text-white">"I used to spend hours chasing bookings. Now my phone buzzes with new appointments while I'm working. I've booked <span class="text-indigo-400 font-semibold">40% more clients</span> without lifting a finger."</p>
@@ -306,7 +281,6 @@
             </div>
          </div>
       </section>
-
       <!-- Pricing Section -->
       <section id="pricing" class="pt-20 pb-28">
          <div class="container mx-auto px-6 relative">
@@ -314,7 +288,6 @@
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Simple Pricing That Pays for Itself</h2>
                <p class="mt-4 text-slate-400 text-lg">No setup fees. No contracts. Just one flat rate that brings in more business than it costs.</p>
             </div>
-
             <div class="flex justify-center mt-12">
                <div class="bg-slate-800 border-2 border-indigo-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-indigo-500/10">
                   <div class="text-center">
@@ -326,42 +299,38 @@
                      </div>
                      <p class="text-slate-400">Limited Time Offer. Cancel anytime.</p>
                   </div>
-
-                  <ul class="space-y-4 my-8">
+                  <ul class="space-y-4 my-8 text-slate-300">
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Custom QR-to-Book page with your branding
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Custom QR-to-Book page with your branding
                      </li>
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Automatic appointment confirmations & reminders
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Automatic appointment confirmations & reminders
                      </li>
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Google Calendar integration
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Google Calendar integration
                      </li>
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Automated review requests
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Automated review requests
                      </li>
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Reactivation texts for dormant clients
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Reactivation texts for dormant clients
                      </li>
                      <li class="flex items-center">
-                        <span role="img" aria-label="Checkmark" class="text-green-400 w-5 h-5 mr-3"><i data-feather="check-circle"></i></span> Complete setup & training included
+                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included
                      </li>
                   </ul>
-
                   <div class="bg-green-500/10 border border-green-400/30 text-green-300 p-4 rounded-lg text-center mb-6">
                      <h4 class="font-bold">🛡️ 30-Day Money-Back Guarantee</h4>
                      <p class="text-sm mt-1">If you're not completely satisfied, we'll refund every penny. No questions asked.</p>
                   </div>
                </div>
             </div>
-
             <div class="mt-12 text-center bg-yellow-500/10 border border-yellow-600/30 text-yellow-200 max-w-2xl mx-auto p-4 rounded-lg">
                <h4 class="font-bold text-yellow-100">⏰ Limited Time Offer: Lock In Your $49/Month Rate!</h4>
                <p class="text-sm mt-1">We're only taking on 20 new salons this month to ensure perfect service. Secure your spot now!</p>
             </div>
          </div>
       </section>
-
       <!-- Client Results Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 text-center relative">
@@ -385,179 +354,391 @@
             </div>
          </div>
       </section>
-
       <!-- CTA Section -->
       <section class="bg-indigo-600">
          <div class="container mx-auto px-6 py-20 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
             <p class="mt-4 text-indigo-200 text-lg max-w-2xl mx-auto">Join over 200 salons already using ProBookingQR to fill their calendars automatically.</p>
-            <a href="javascript:void(0)" onclick="openChatbot()" class="mt-8 inline-block bg-white hover:bg-slate-100 text-indigo-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105">
+            <button onclick="openChatbot()" class="mt-8 inline-block bg-white hover:bg-slate-100 text-indigo-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105">
                Get Started for Just $49
-            </a>
+            </button>
             <p class="mt-4 text-indigo-200 text-sm">Setup is hands-free and takes less than 24 hours.</p>
          </div>
       </section>
-
    </main>
-
    <!-- Footer -->
    <footer class="bg-slate-900 border-t border-slate-800">
       <div class="container mx-auto px-6 py-8 text-center text-slate-500">
          <p>© 2025 ProBookingQR. All rights reserved.</p>
       </div>
    </footer>
-
-   <!-- FIXED: Improved Chatbot Modal -->
+   <!-- Chatbot Modal -->
    <div id="chatbot-modal">
-      <div class="chatbot-mobile-container">
-         <button onclick="closeChatbot()" class="chatbot-close-btn" aria-label="Close chatbot">×</button>
+      <div class="chatbot-container">
+         <button onclick="closeChatbot()" class="chatbot-close-btn">×</button>
          <div class="chatbot-content">
-            <div id="chatbot-root" class="w-full h-full">
-               <!-- React Chatbot will be rendered here -->
-            </div>
+            <div id="chatbot-root" class="w-full h-full"></div>
          </div>
       </div>
    </div>
+   <script>
+      // --- This is the React Component that will be rendered in the chatbot-root div ---
+      // We define it here so it's globally available to the script tags that follow
+      let ProBookingChatbot;
 
+      // --- Mobile detection and modal logic ---
+      function isMobileDevice() {
+         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+      }
 
-   <!-- Deferred Scripts for Performance -->
-   <script src="https://unpkg.com/feather-icons"></script>
-   <script defer>
-      // Initialize Feather Icons after the script has loaded
-      document.addEventListener('DOMContentLoaded', () => {
-         feather.replace();
-      });
-
-      // FIXED: Chatbot Modal Functions
-      function openChatbot() {
+      function showMobileMessage() {
          const modal = document.getElementById('chatbot-modal');
+         const chatbotRoot = document.getElementById('chatbot-root');
+
+         // Replace chatbot content with mobile message
+         chatbotRoot.innerHTML = `
+                <div class="flex flex-col h-full bg-slate-50 text-slate-800 justify-center items-center p-6 text-center">
+                    <div class="max-w-sm">
+                        <div class="text-6xl mb-6">💻</div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Desktop Signup Required</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            For the best signup experience, please visit this page on your computer or tablet. 
+                            Our setup process works best on larger screens!
+                        </p>
+                        <div class="space-y-3">
+                            <p class="text-sm text-slate-500 font-medium">
+                                📧 Want us to email you the link?
+                            </p>
+                            <a href="mailto:info@probookingqr.com?subject=Send me the signup link&body=Hi! I'd like to sign up for ProBookingQR. Please send me the link to complete signup on my computer." 
+                                class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                                Email Me the Link
+                            </a>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-200">
+                            <p class="text-xs text-slate-400">
+                                Or bookmark this page and return on your computer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
          modal.style.display = 'block';
-         document.body.style.overflow = 'hidden'; // Prevent scrolling background
-         // Force a reflow to ensure the modal is properly displayed
-         modal.offsetHeight;
+         document.body.style.overflow = 'hidden';
+      }
+
+      function openChatbot() {
+         if (isMobileDevice()) {
+            showMobileMessage();
+         } else {
+            const modal = document.getElementById('chatbot-modal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            // Ensure the React component is rendered
+            if (ProBookingChatbot) {
+               ReactDOM.render(React.createElement(ProBookingChatbot), document.getElementById('chatbot-root'));
+            }
+         }
       }
 
       function closeChatbot() {
          const modal = document.getElementById('chatbot-modal');
          modal.style.display = 'none';
          document.body.style.overflow = 'auto';
+
+         const chatbotRoot = document.getElementById('chatbot-root');
+         // Unmount the component to reset its state
+         ReactDOM.unmountComponentAtNode(chatbotRoot);
       }
 
-      // FIXED: Close modal when clicking outside
       document.addEventListener('click', function(event) {
          const modal = document.getElementById('chatbot-modal');
-         const chatbotContent = document.querySelector('.chatbot-content');
-
-         if (event.target === modal && !chatbotContent.contains(event.target)) {
+         if (event.target === modal) {
             closeChatbot();
          }
       });
-
-      // FIXED: Prevent modal from closing when clicking inside chatbot
-      document.addEventListener('click', function(event) {
-         const chatbotContent = document.querySelector('.chatbot-content');
-         if (chatbotContent && chatbotContent.contains(event.target)) {
-            event.stopPropagation();
-         }
-      });
    </script>
-
-   <!-- React Chatbot Script -->
+   <!-- React Chatbot Component Definition -->
    <script type="text/babel">
       const { useState, useEffect, useRef } = React;
 
-        // FIXED: Main App Component with proper mobile styling
-        const App = () => {
-          return (
-            <div className="w-full h-full font-sans flex">
-              <ProBookingChatbot />
-            </div>
-          );
-        };
-
-        // FIXED: Main Chatbot Component with mobile optimizations
-        const ProBookingChatbot = () => {
-          // State management
-          const [currentStep, setCurrentStep] = useState(0);
-          const [messages, setMessages] = useState([]);
-          const [userData, setUserData] = useState({
+      ProBookingChatbot = () => {
+         const [currentStep, setCurrentStep] = useState(0);
+         const [messages, setMessages] = useState([]);
+         const [userData, setUserData] = useState({
             firstName: '',
             salonName: '',
             fullAddress: '',
-            timezone: 'EST',
-            hours: {
-                mon: { open: '09:00', close: '17:00', closed: false },
-                tue: { open: '09:00', close: '17:00', closed: false },
-                wed: { open: '09:00', close: '17:00', closed: false },
-                thu: { open: '09:00', close: '17:00', closed: false },
-                fri: { open: '09:00', close: '17:00', closed: false },
-                sat: { open: '10:00', close: '16:00', closed: true },
-                sun: { open: '10:00', close: '16:00', closed: true }
-            },
             services: [],
-            smartMessages: [],
-          });
-          const [isTyping, setIsTyping] = useState(false);
-          const [isLoading, setIsLoading] = useState(false);
-          const messagesEndRef = useRef(null);
+            smartMessages: []
+         });
+         const [isTyping, setIsTyping] = useState(false);
+         const [currentInput, setCurrentInput] = useState('');
+         const [progress, setProgress] = useState(0);
+         const messagesEndRef = useRef(null);
 
-          // Available services for selection
-          const serviceOptions = [
-            'Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 
+         const serviceOptions = [
+            'Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing',
             'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions',
             'Scalp Treatments', 'Blowouts'
-          ];
-
-          // Smart message options for selection
-          const messageOptions = [
+         ];
+         const messageOptions = [
             'Booking confirmation', '24-hour reminder', 'Thank you & review',
             'Win-back inactive', 'Rebook promotion'
-          ];
+         ];
 
-          // --- CONVERSATION FLOW ---
-          const conversationSteps = [
+         const conversationSteps = [
             {
-              id: 'welcome',
-              botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?",
-              inputType: 'text',
-              field: 'firstName',
-              placeholder: 'Enter your first name...'
+               id: 'welcome',
+               botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?",
+               inputType: 'text',
+               field: 'firstName',
+               placeholder: 'Enter your first name...'
             },
             {
-              id: 'salon_name',
-              botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`,
-              inputType: 'text',
-              field: 'salonName',
-              placeholder: 'Enter your salon name...'
+               id: 'salon_name',
+               botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`,
+               inputType: 'text',
+               field: 'salonName',
+               placeholder: 'Enter your salon name...'
             },
             {
-              id: 'address_hours',
-              botMessage: "Perfect! Now I need your business address and hours so clients know where and when to find you. 📍",
-              inputType: 'address_hours',
-              field: 'addressAndHours'
+               id: 'address',
+               botMessage: "Perfect! Now I need your business address so clients know where to find you. 📍",
+               inputType: 'text',
+               field: 'fullAddress',
+               placeholder: 'Enter your full business address...'
             },
             {
-              id: 'services',
-              botMessage: "Great, location is set! Now, what services do you want people to book online? Pick up to 5.",
-              inputType: 'multiselect',
-              options: serviceOptions,
-              maxSelections: 5,
-              field: 'services'
+               id: 'services',
+               botMessage: "Great! Now, what services do you want people to book online? Pick up to 5.",
+               inputType: 'multiselect',
+               options: serviceOptions,
+               maxSelections: 5,
+               field: 'services'
             },
             {
-              id: 'smart_messages',
-              botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:",
-              inputType: 'multiselect',
-              options: messageOptions,
-              maxSelections: 5,
-              field: 'smartMessages'
+               id: 'smart_messages',
+               botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:",
+               inputType: 'multiselect',
+               options: messageOptions,
+               maxSelections: 5,
+               field: 'smartMessages'
             },
             {
-              id: 'building_system',
-              botMessage: "Awesome! Let me build your system. This will just take a moment...",
-              inputType: 'progress',
-              action: 'buildSystem'
+               id: 'building_system',
+               botMessage: "Awesome! Let me build your system. This will just take a moment...",
+               inputType: 'progress'
             },
             {
-              id: 'final_summary',
-              botMessage: (data) => `🎉 Your QR booking system is
+               id: 'final_summary',
+               botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• Location: ${data.fullAddress}\n• Services: ${data.services.join(', ')}\n• Automated Messages: ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Ready to start booking more clients automatically?`,
+               inputType: 'final'
+            }
+         ];
+
+         const scrollToBottom = () => {
+            if (messagesEndRef.current) {
+                messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            }
+         };
+
+         useEffect(() => {
+            scrollToBottom();
+         }, [messages, isTyping]);
+
+         useEffect(() => {
+            if (messages.length === 0 && currentStep === 0) {
+               addBotMessage(conversationSteps[0].botMessage);
+            }
+         }, []);
+
+         const addBotMessage = (message) => {
+            setIsTyping(true);
+            setTimeout(() => {
+               setMessages(prev => [...prev, { type: 'bot', content: message }]);
+               setIsTyping(false);
+            }, 1000);
+         };
+
+         const addUserMessage = (message) => {
+            setMessages(prev => [...prev, { type: 'user', content: message }]);
+         };
+
+         const handleProgress = () => {
+            let currentProgress = 0;
+            const interval = setInterval(() => {
+                currentProgress += 25;
+                setProgress(currentProgress);
+                if (currentProgress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        const nextStep = currentStep + 1;
+                        setCurrentStep(nextStep);
+                        const nextMessage = typeof conversationSteps[nextStep].botMessage === 'function'
+                            ? conversationSteps[nextStep].botMessage(userData)
+                            : conversationSteps[nextStep].botMessage;
+                        addBotMessage(nextMessage);
+                    }, 500);
+                }
+            }, 700);
+         };
+
+         const handleNext = () => {
+            const step = conversationSteps[currentStep];
+
+            if (step.inputType === 'text') {
+               if (!currentInput.trim()) return;
+               addUserMessage(currentInput);
+               const newData = { ...userData, [step.field]: currentInput };
+               setUserData(newData);
+               setCurrentInput('');
+               
+               setTimeout(() => {
+                  const nextStep = currentStep + 1;
+                  setCurrentStep(nextStep);
+                  const nextMessage = typeof conversationSteps[nextStep].botMessage === 'function'
+                     ? conversationSteps[nextStep].botMessage(newData)
+                     : conversationSteps[nextStep].botMessage;
+                  addBotMessage(nextMessage);
+               }, 500);
+
+            } else if (step.inputType === 'multiselect') {
+               if (userData[step.field].length === 0) return;
+               addUserMessage(userData[step.field].join(', '));
+               
+               setTimeout(() => {
+                  const nextStep = currentStep + 1;
+                  setCurrentStep(nextStep);
+                  const nextMessage = conversationSteps[nextStep].botMessage;
+                  addBotMessage(nextMessage);
+
+                  if (conversationSteps[nextStep].inputType === 'progress') {
+                     handleProgress();
+                  }
+               }, 500);
+            }
+         };
+         
+         const handleMultiSelectToggle = (option, field, maxSelections) => {
+            setUserData(prev => {
+                const currentSelection = prev[field];
+                const isSelected = currentSelection.includes(option);
+                if (isSelected) {
+                    return { ...prev, [field]: currentSelection.filter(item => item !== option) };
+                } else if (currentSelection.length < maxSelections) {
+                    return { ...prev, [field]: [...currentSelection, option] };
+                }
+                return prev;
+            });
+         };
+         
+         const handleKeyDown = (event) => {
+             if (event.key === 'Enter') {
+                 handleNext();
+             }
+         };
+
+         const renderInput = () => {
+            const step = conversationSteps[currentStep];
+            if (!step) return null;
+
+            switch(step.inputType) {
+                case 'text':
+                    return (
+                        <div className="flex items-center space-x-2">
+                           <input
+                              type="text"
+                              value={currentInput}
+                              onChange={(e) => setCurrentInput(e.target.value)}
+                              onKeyDown={handleKeyDown}
+                              placeholder={step.placeholder}
+                              className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                              disabled={isTyping}
+                           />
+                           <button onClick={handleNext} disabled={isTyping || !currentInput.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">
+                              Send
+                           </button>
+                        </div>
+                    );
+                case 'multiselect':
+                    return (
+                        <div>
+                           <div className="grid grid-cols-2 gap-2 mb-3">
+                              {step.options.map(option => {
+                                 const isSelected = userData[step.field].includes(option);
+                                 return (
+                                    <button 
+                                       key={option}
+                                       onClick={() => handleMultiSelectToggle(option, step.field, step.maxSelections)}
+                                       className={`p-3 border rounded-lg text-sm text-left ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}
+                                    >
+                                       {option} {isSelected && '✓'}
+                                    </button>
+                                 );
+                              })}
+                           </div>
+                           <button onClick={handleNext} disabled={isTyping || userData[step.field].length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">
+                              Continue
+                           </button>
+                        </div>
+                    );
+                case 'progress':
+                    return (
+                        <div className="p-4 flex flex-col items-center justify-center">
+                            <div className="progress-bar-container w-full">
+                                <div className="progress-bar" style={{width: `${progress}%`}}></div>
+                            </div>
+                            <p className="text-slate-600 mt-2 text-sm">Building your system...</p>
+                        </div>
+                    );
+                case 'final':
+                    return (
+                        <a href="#pricing" onClick={closeChatbot} className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">
+                           Get Started for Just $49
+                        </a>
+                    );
+                default:
+                    return null;
+            }
+         };
+
+         return (
+            <div className="flex flex-col h-full bg-slate-100 text-slate-800">
+               <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                  {messages.map((msg, index) => (
+                     <div key={index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div
+                           className={`max-w-xs md:max-w-md p-3 rounded-2xl whitespace-pre-wrap ${
+                              msg.type === 'user'
+                                 ? 'bg-indigo-600 text-white rounded-br-lg'
+                                 : 'bg-slate-200 text-slate-800 rounded-bl-lg'
+                           }`}
+                        >
+                           {msg.content}
+                        </div>
+                     </div>
+                  ))}
+                  {isTyping && (
+                     <div className="flex justify-start">
+                        <div className="p-3 rounded-2xl bg-slate-200 rounded-bl-lg">
+                           <div className="typing-indicator">
+                              <span></span><span></span><span></span>
+                           </div>
+                        </div>
+                     </div>
+                  )}
+                  <div ref={messagesEndRef} />
+               </div>
+               <div className="p-4 bg-white border-t border-slate-200">
+                  {renderInput()}
+               </div>
+            </div>
+         );
+      };
+
+      // Initial render is handled by the openChatbot function for non-mobile devices
+   </script>
+</body>
+
+</html>
