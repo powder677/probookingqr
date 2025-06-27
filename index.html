@@ -414,8 +414,9 @@
           const [userData, setUserData] = useState({
             firstName: '',
             salonName: '',
+            isTeamBusiness: false,
+            teamMembers: [],
             fullAddress: '',
-            timezone: 'EST',
             hours: {
                 mon: { open: '09:00', close: '17:00', closed: false },
                 tue: { open: '09:00', close: '17:00', closed: false },
@@ -460,6 +461,12 @@
               inputType: 'text',
               field: 'salonName',
               placeholder: 'Enter your salon name...'
+            },
+            {
+              id: 'team_members',
+              botMessage: (data) => `Got it, ${data.salonName}! Are you working solo, or do you have a team? This helps us create individual booking pages and QR codes for each person.`,
+              inputType: 'team_setup',
+              field: 'teamSetup'
             },
             {
               id: 'address_hours',
@@ -567,23 +574,28 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
           };
 
           const handleUserResponse = async (responseValue, field) => {
-            let responseText = `Address and hours have been set.`;
-             if (Array.isArray(responseValue)) {
+            let responseText = '';
+            let updatedData = { ...userData };
+
+            if (field === 'teamSetup') {
+                const members = responseValue.teamMembers || [];
+                responseText = responseValue.isTeamBusiness ? `Team: ${members.map(m => `${m.name} (${m.role})`).join(', ')}` : "It's Just Me";
+                updatedData = { ...userData, ...responseValue };
+            }
+            else if (field === 'addressAndHours') {
+                 responseText = `Address and hours have been set.`;
+                 updatedData = { ...userData, ...responseValue };
+            }
+            else if (Array.isArray(responseValue)) {
                  responseText = responseValue.join(', ');
-             } else if (typeof responseValue !== 'object') {
+                 updatedData[field] = responseValue;
+            } else {
                  responseText = responseValue;
-             }
+                 updatedData[field] = responseValue;
+            }
 
             addMessage(responseText, false);
-            
-            let updatedData;
-            if (field === 'addressAndHours') {
-                updatedData = { ...userData, ...responseValue };
-            } else {
-                updatedData = { ...userData, [field]: responseValue };
-            }
             setUserData(updatedData);
-
             processStep(currentStep + 1, updatedData);
           };
 
@@ -668,7 +680,6 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
         const AddressHoursComponent = ({ onResponse, field }) => {
             const [addressData, setAddressData] = useState({
                 fullAddress: '',
-                timezone: 'EST',
                 hours: {
                     mon: { open: '09:00', close: '17:00', closed: false },
                     tue: { open: '09:00', close: '17:00', closed: false },
