@@ -97,42 +97,15 @@
       /* Styles for the chatbot modal */
       #chatbot-modal {
          display: none;
-         position: fixed;
-         top: 0;
-         left: 0;
-         right: 0;
-         bottom: 0;
-         z-index: 9999;
-         padding: 1rem;
-         align-items: center;
-         justify-content: center;
-         background-color: rgba(0, 0, 0, 0.7);
-         backdrop-filter: blur(4px);
+         /* Initially hidden */
       }
 
       #chatbot-root {
-         width: 100%;
-         max-width: 32rem;
-         /* 512px */
          height: 100%;
-         max-height: calc(100vh - 2rem);
-         margin: 0 auto;
-      }
-
-      @media (max-width: 640px) {
-         #chatbot-modal {
-            padding: 0;
-         }
-
-         #chatbot-root {
-            max-width: none;
-            max-height: none;
-            border-radius: 0;
-         }
-
-         #chatbot-modal .chatbot-container {
-            border-radius: 0;
-         }
+         width: 100%;
+         border-radius: 1rem;
+         /* 16px */
+         overflow: hidden;
       }
    </style>
 </head>
@@ -370,12 +343,13 @@
    </footer>
 
    <!-- Chatbot Modal -->
-   <div id="chatbot-modal" class="fixed inset-0 z-50">
-      <div class="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm"></div>
-      <div class="relative w-full h-full">
-         <button onclick="closeChatbot()" class="absolute top-4 right-4 text-white text-3xl font-light hover:text-gray-300 z-50 bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center" aria-label="Close chatbot">×</button>
-         <div id="chatbot-root" class="w-full h-full">
-            <!-- React Chatbot will be rendered here -->
+   <div id="chatbot-modal" style="display: none;">
+      <div class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-40"></div>
+      <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+         <div id="chatbot-container" class="relative w-full h-full max-w-lg max-h-[90vh] bg-white md:rounded-2xl shadow-2xl">
+            <button onclick="closeChatbot()" class="absolute -top-12 right-0 md:top-2 md:right-2 text-white text-4xl font-light hover:text-gray-300 z-50" aria-label="Close chatbot">×</button>
+            <div id="chatbot-root" class="w-full h-full">
+            </div>
          </div>
       </div>
    </div>
@@ -392,7 +366,7 @@
       // Chatbot Modal Functions
       function openChatbot() {
          var modal = document.getElementById('chatbot-modal');
-         modal.style.display = 'block';
+         modal.style.display = 'block'; // Changed from 'flex'
          document.body.style.overflow = 'hidden'; // Prevent scrolling background
       }
 
@@ -410,7 +384,7 @@
         // Main App Component
         const App = () => {
           return (
-            <div className="bg-orange-50 w-full h-full font-sans flex items-center justify-center">
+            <div className="w-full h-full font-sans">
               <ProBookingChatbot />
             </div>
           );
@@ -644,7 +618,7 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
           const currentStepData = conversationSteps[currentStep];
 
           return (
-            <div className="chatbot-container w-full h-full flex flex-col bg-white md:rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+            <div className="w-full h-full flex flex-col bg-white md:rounded-2xl shadow-2xl overflow-hidden">
               <div className="chat-header p-4 bg-gray-50 border-b border-gray-200">
                 <h3 className="text-lg font-bold text-gray-800 text-center">ProBookingQR Setup</h3>
                 <div className="progress-bar bg-gray-200 rounded-full h-2 mt-2">
