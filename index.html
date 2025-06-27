@@ -42,18 +42,12 @@
       }
 
       .text-glow {
-         text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 0.3);
+         text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
       }
 
       .bg-grid-pattern {
          background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
          background-size: 20px 20px;
-      }
-
-      /* Styles for the chatbot modal */
-      #chatbot-modal {
-         display: none;
-         /* Hidden by default */
       }
 
       .loader {
@@ -97,6 +91,40 @@
          to {
             opacity: 0.3;
             transform: translate3d(0, -4px, 0);
+         }
+      }
+
+      /* Styles for the chatbot modal */
+      #chatbot-modal {
+         display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         z-index: 9999;
+         padding: 1rem;
+         align-items: center;
+         justify-content: center;
+         background-color: rgba(0, 0, 0, 0.7);
+         backdrop-filter: blur(4px);
+      }
+
+      #chatbot-root {
+         width: 100%;
+         max-width: 32rem;
+         height: 100%;
+         max-height: calc(100vh - 2rem);
+         margin: 0 auto;
+      }
+
+      @media (max-width: 640px) {
+         #chatbot-modal {
+            padding: 0.5rem;
+         }
+
+         #chatbot-root {
+            max-height: calc(100vh - 1rem);
          }
       }
    </style>
@@ -335,9 +363,9 @@
    </footer>
 
    <!-- Chatbot Modal -->
-   <div id="chatbot-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <button onclick="closeChatbot()" class="absolute top-4 right-4 text-white text-5xl font-light hover:text-gray-300 z-50" aria-label="Close chatbot">×</button>
-      <div id="chatbot-root" class="w-full max-w-lg" style="height: 90vh; max-height: 700px;">
+   <div id="chatbot-modal">
+      <button onclick="closeChatbot()" class="absolute top-2 right-2 z-50 w-8 h-8 flex items-center justify-center text-white text-2xl font-light hover:text-gray-300 bg-black bg-opacity-50 rounded-full" aria-label="Close chatbot">×</button>
+      <div id="chatbot-root">
          <!-- React Chatbot will be rendered here -->
       </div>
    </div>
@@ -353,12 +381,14 @@
 
       // Chatbot Modal Functions
       function openChatbot() {
-         document.getElementById('chatbot-modal').style.display = 'flex';
+         var modal = document.getElementById('chatbot-modal');
+         modal.style.display = 'flex';
          document.body.style.overflow = 'hidden'; // Prevent scrolling background
       }
 
       function closeChatbot() {
-         document.getElementById('chatbot-modal').style.display = 'none';
+         var modal = document.getElementById('chatbot-modal');
+         modal.style.display = 'none';
          document.body.style.overflow = 'auto';
       }
    </script>
