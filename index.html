@@ -5,27 +5,32 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+   <!-- SEO & Page Info -->
    <title>ProBookingQR | Stop Losing Clients to Missed Calls</title>
    <meta name="description" content="ProBookingQR helps solo professionals capture more clients with 24/7 automated booking via QR codes. No missed calls, no complex software.">
 
+   <!-- Favicon -->
    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
 
+   <!-- Social Media Sharing (Open Graph & Twitter) -->
    <meta property="og:title" content="ProBookingQR | Stop Losing Clients to Missed Calls">
    <meta property="og:description" content="Automated QR-to-Book system for solo service pros. Book more clients without missing calls.">
    <meta property="og:image" content="https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR">
    <meta property="og:url" content="https://your-domain.com/">
    <meta name="twitter:card" content="summary_large_image">
 
+   <!-- Google Fonts: Inter -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+   <!-- Tailwind CSS -->
    <script src="https://cdn.tailwindcss.com"></script>
 
+   <!-- React -->
    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
 
    <style>
       /* Custom styles to supplement Tailwind */
@@ -92,6 +97,7 @@
 
 <body class="bg-slate-900 text-slate-300">
 
+   <!-- Header -->
    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
          <a href="#" class="text-2xl font-bold text-white">
@@ -100,10 +106,12 @@
       </div>
    </header>
 
+   <!-- Main Content -->
    <main class="relative overflow-hidden">
       <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
       <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-900"></div>
 
+      <!-- Hero Section -->
       <section class="relative container mx-auto px-6 py-20 md:py-32 text-center">
          <div class="max-w-4xl mx-auto">
             <div class="inline-block bg-indigo-500/10 text-indigo-400 text-sm font-semibold px-4 py-1 rounded-full mb-4">
@@ -126,6 +134,7 @@
          </div>
       </section>
 
+      <!-- Problem Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
@@ -133,6 +142,7 @@
                <p class="mt-4 text-slate-400 text-lg">You're wearing all the hats, and something has to give. Usually, it's missed opportunities.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+               <!-- Card 1 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
                   <div class="bg-red-500/10 text-red-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Missed Phone Call Icon">
                      <i data-feather="phone-missed"></i>
@@ -140,6 +150,7 @@
                   <h3 class="font-bold text-white text-lg mb-2">Missed Call = Lost Money</h3>
                   <p class="text-slate-400">New customers call once, get your voicemail, and book somewhere else immediately.</p>
                </div>
+               <!-- Card 2 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
                   <div class="bg-blue-500/10 text-blue-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Recurring Client Icon">
                      <i data-feather="refresh-cw"></i>
@@ -147,6 +158,7 @@
                   <h3 class="font-bold text-white text-lg mb-2">Clients Forget to Rebook</h3>
                   <p class="text-slate-400">Happy clients walk out but forget to schedule their next visit, leaving gaps in your calendar.</p>
                </div>
+               <!-- Card 3 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
                   <div class="bg-yellow-500/10 text-yellow-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Star Rating Icon">
                      <i data-feather="star"></i>
@@ -154,6 +166,7 @@
                   <h3 class="font-bold text-white text-lg mb-2">No Reviews = No Growth</h3>
                   <p class="text-slate-400">Without a steady stream of fresh reviews, it's hard to build the trust needed to attract new clients.</p>
                </div>
+               <!-- Card 4 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
                   <div class="bg-green-500/10 text-green-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4" role="img" aria-label="Dollar Sign Icon">
                      <i data-feather="dollar-sign"></i>
@@ -165,6 +178,7 @@
          </div>
       </section>
 
+      <!-- Solution Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
@@ -173,9 +187,11 @@
             </div>
 
             <div class="relative mt-16">
+               <!-- The line connecting the steps -->
                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-700 -translate-y-1/2"></div>
 
                <div class="grid md:grid-cols-3 gap-12 relative">
+                  <!-- Step 1 -->
                   <div class="text-center">
                      <div class="relative mb-6">
                         <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">1</div>
@@ -183,6 +199,7 @@
                      <h3 class="font-bold text-white text-xl mb-2">Client Scans QR Code</h3>
                      <p class="text-slate-400">Place your unique QR code anywhere—on business cards, your window, social media. One scan opens your booking page.</p>
                   </div>
+                  <!-- Step 2 -->
                   <div class="text-center">
                      <div class="relative mb-6">
                         <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">2</div>
@@ -190,6 +207,7 @@
                      <h3 class="font-bold text-white text-xl mb-2">Instant Self-Booking</h3>
                      <p class="text-slate-400">They pick a service and an available time that works for them. No calling, no waiting, no friction.</p>
                   </div>
+                  <!-- Step 3 -->
                   <div class="text-center">
                      <div class="relative mb-6">
                         <div class="bg-indigo-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto z-10 relative border-4 border-slate-900">3</div>
@@ -200,6 +218,7 @@
                </div>
             </div>
 
+            <!-- Testimonial -->
             <div class="mt-24 max-w-3xl mx-auto bg-slate-800/50 p-8 rounded-2xl border border-slate-700 text-center">
                <p class="text-xl italic text-white">"I used to spend hours chasing bookings. Now my phone buzzes with new appointments while I'm working. I've booked <span class="text-indigo-400 font-semibold">40% more clients</span> without lifting a finger."</p>
                <div class="mt-6 font-semibold text-slate-300">- Sarah M., Solo Stylist</div>
@@ -208,6 +227,7 @@
          </div>
       </section>
 
+      <!-- Pricing Section -->
       <section id="pricing" class="pt-20 pb-28">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
@@ -262,6 +282,7 @@
          </div>
       </section>
 
+      <!-- Client Results Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">What Our Clients Are Seeing</h2>
@@ -285,6 +306,7 @@
          </div>
       </section>
 
+      <!-- CTA Section -->
       <section class="bg-indigo-600">
          <div class="container mx-auto px-6 py-20 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
@@ -298,17 +320,24 @@
 
    </main>
 
+   <!-- Footer -->
    <footer class="bg-slate-900 border-t border-slate-800">
       <div class="container mx-auto px-6 py-8 text-center text-slate-500">
          <p>© 2025 ProBookingQR. All rights reserved.</p>
       </div>
    </footer>
 
+   <!-- Chatbot Modal -->
    <div id="chatbot-modal" style="display: none;">
       <div class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-50"></div>
       <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
          <div id="chatbot-container" class="relative w-full h-full max-w-lg max-h-[90vh]">
-            <button onclick="closeChatbot()" class="absolute -top-12 right-0 md:top-2 md:right-2 text-white text-4xl font-light hover:text-gray-300 z-10" aria-label="Close chatbot">×</button>
+            <button onclick="closeChatbot()" class="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors z-10 p-2 rounded-full bg-slate-800/50" aria-label="Close chatbot">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+               </svg>
+            </button>
             <div id="chatbot-root" class="w-full h-full">
             </div>
          </div>
@@ -316,6 +345,7 @@
    </div>
 
 
+   <!-- Deferred Scripts for Performance -->
    <script src="https://unpkg.com/feather-icons"></script>
    <script defer>
       // Initialize Feather Icons after the script has loaded
@@ -337,330 +367,435 @@
       }
    </script>
 
+   <!-- Firebase SDK -->
+   <script type="module">
+      // Import the functions you need from the SDKs you need
+      import {
+         initializeApp
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import {
+         getAuth,
+         signInAnonymously,
+         signInWithCustomToken,
+         setPersistence,
+         inMemoryPersistence
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+      import {
+         getFirestore,
+         doc,
+         setDoc,
+         serverTimestamp
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+      // These will be populated by the environment. Provide dummy values for local testing.
+      const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+         apiKey: "your-api-key",
+         authDomain: "your-auth-domain",
+         projectId: "your-project-id"
+      };
+
+      // Initialize Firebase
+      try {
+         const app = initializeApp(firebaseConfig);
+         const auth = getAuth(app);
+         const db = getFirestore(app);
+
+         // Make db and other firebase functions available to the React script
+         window.firebase = {
+            db,
+            auth,
+            doc,
+            setDoc,
+            serverTimestamp
+         };
+
+         // Sign in the user
+         await setPersistence(auth, inMemoryPersistence); // Use in-memory persistence for this session
+         if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            try {
+               // Attempt to sign in with the provided custom token
+               await signInWithCustomToken(auth, __initial_auth_token);
+               console.log("Firebase: Signed in with custom token.");
+            } catch (error) {
+               // This can happen if the token from the environment is invalid or expired.
+               // We'll log a warning and fall back to anonymous sign-in to ensure the app remains functional.
+               console.warn("Firebase: Custom token sign-in failed. This is expected if the token is invalid. Falling back to anonymous sign-in.", error.message);
+               await signInAnonymously(auth);
+               console.log("Firebase: Signed in anonymously after custom token failure.");
+            }
+         } else {
+            // If no custom token is provided, sign in anonymously by default.
+            await signInAnonymously(auth);
+            console.log("Firebase: Signed in anonymously.");
+         }
+      } catch (error) {
+         console.error("Firebase Initialization Error:", error);
+         // Expose a dummy object so the app doesn't crash
+         if (!window.firebase) {
+            window.firebase = null;
+         }
+      }
+   </script>
+
+
+   <!-- React Chatbot Script -->
    <script type="text/babel">
       const { useState, useEffect, useRef } = React;
 
-        // Main App Component
-        const App = () => {
-            return (
-                <div className="w-full h-full font-sans">
-                    <ProBookingChatbot />
-                </div>
-            );
-        };
+         // Main App Component
+         const App = () => {
+           return (
+             <div className="w-full h-full font-sans">
+               <ProBookingChatbot />
+             </div>
+           );
+         };
 
-        // Main Chatbot Component
-        const ProBookingChatbot = () => {
-            // State management
-            const [currentStep, setCurrentStep] = useState(0);
-            const [messages, setMessages] = useState([]);
-            const [userData, setUserData] = useState({
-                firstName: '',
-                salonName: '',
-                isTeamBusiness: false,
-                teamMembers: [],
-                fullAddress: '',
-                hours: {
-                    mon: { open: '09:00', close: '17:00', closed: false },
-                    tue: { open: '09:00', close: '17:00', closed: false },
-                    wed: { open: '09:00', close: '17:00', closed: false },
-                    thu: { open: '09:00', close: '17:00', closed: false },
-                    fri: { open: '09:00', close: '17:00', closed: false },
-                    sat: { open: '10:00', close: '16:00', closed: true },
-                    sun: { open: '10:00', close: '16:00', closed: true }
-                },
-                services: [],
-                smartMessages: [],
-            });
-            const [isTyping, setIsTyping] = useState(false);
-            const [isLoading, setIsLoading] = useState(false);
-            const messagesEndRef = useRef(null);
+         // Main Chatbot Component
+         const ProBookingChatbot = () => {
+           // State management
+           const [currentStep, setCurrentStep] = useState(0);
+           const [messages, setMessages] = useState([]);
+           const [userData, setUserData] = useState({
+             firstName: '',
+             salonName: '',
+             isTeamBusiness: false,
+             teamMembers: [],
+             fullAddress: '',
+             hours: {
+                 mon: { open: '09:00', close: '17:00', closed: false },
+                 tue: { open: '09:00', close: '17:00', closed: false },
+                 wed: { open: '09:00', close: '17:00', closed: false },
+                 thu: { open: '09:00', close: '17:00', closed: false },
+                 fri: { open: '09:00', close: '17:00', closed: false },
+                 sat: { open: '10:00', close: '16:00', closed: true },
+                 sun: { open: '10:00', close: '16:00', closed: true }
+             },
+             services: [],
+             smartMessages: [],
+           });
+           const [isTyping, setIsTyping] = useState(false);
+           const [isLoading, setIsLoading] = useState(false);
+           const messagesEndRef = useRef(null);
 
-            // Available services for selection
-            const serviceOptions = [
-                'Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 
-                'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions',
-                'Scalp Treatments', 'Blowouts'
-            ];
+           // Available services for selection
+           const serviceOptions = [
+             'Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 
+             'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions',
+             'Scalp Treatments', 'Blowouts'
+           ];
 
-            // Smart message options for selection
-            const messageOptions = [
-                'Booking confirmation', '24-hour reminder', 'Thank you & review',
-                'Win-back inactive', 'Rebook promotion'
-            ];
+           // Smart message options for selection
+           const messageOptions = [
+             'Booking confirmation', '24-hour reminder', 'Thank you & review',
+             'Win-back inactive', 'Rebook promotion'
+           ];
 
-            // --- CONVERSATION FLOW ---
-            const conversationSteps = [
-                {
-                    id: 'welcome',
-                    botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?",
-                    inputType: 'text',
-                    field: 'firstName',
-                    placeholder: 'Enter your first name...'
-                },
-                {
-                    id: 'salon_name',
-                    botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`,
-                    inputType: 'text',
-                    field: 'salonName',
-                    placeholder: 'Enter your salon name...'
-                },
-                {
-                    id: 'team_members',
-                    botMessage: (data) => `Got it, ${data.salonName}! Are you working solo, or do you have a team? This helps us create individual booking pages and QR codes for each person.`,
-                    inputType: 'team_setup',
-                    field: 'teamSetup'
-                },
-                {
-                    id: 'address_hours',
-                    botMessage: "Perfect! Now I need your business address and hours so clients know where and when to find you. 📍",
-                    inputType: 'address_hours',
-                    field: 'addressAndHours'
-                },
-                {
-                    id: 'services',
-                    botMessage: "Great, location is set! Now, what services do you want people to book online? Pick up to 5.",
-                    inputType: 'multiselect',
-                    options: serviceOptions,
-                    maxSelections: 5,
-                    field: 'services'
-                },
-                {
-                    id: 'smart_messages',
-                    botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:",
-                    inputType: 'multiselect',
-                    options: messageOptions,
-                    maxSelections: 5,
-                    field: 'smartMessages'
-                },
-                {
-                    id: 'building_system',
-                    botMessage: "Awesome! Let me build your system. This will just take a moment...",
-                    inputType: 'progress',
-                    action: 'buildSystem'
-                },
-                {
-                    id: 'final_summary',
-                    botMessage: (data) => `🎉 Your QR booking system is ready! Here's what you get:
+           // --- CONVERSATION FLOW ---
+           const conversationSteps = [
+             {
+               id: 'welcome',
+               botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?",
+               inputType: 'text',
+               field: 'firstName',
+               placeholder: 'Enter your first name...'
+             },
+             {
+               id: 'salon_name',
+               botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`,
+               inputType: 'text',
+               field: 'salonName',
+               placeholder: 'Enter your salon name...'
+             },
+             {
+               id: 'team_members',
+               botMessage: (data) => `Got it, ${data.salonName}! Are you working solo, or do you have a team? This helps us create individual booking pages and QR codes for each person.`,
+               inputType: 'team_setup',
+               field: 'teamSetup'
+             },
+             {
+               id: 'address_hours',
+               botMessage: "Perfect! Now I need your business address and hours so clients know where and when to find you. 📍",
+               inputType: 'address_hours',
+               field: 'addressAndHours'
+             },
+             {
+               id: 'services',
+               botMessage: "Great, location is set! Now, what services do you want people to book online? Pick up to 5.",
+               inputType: 'multiselect',
+               options: serviceOptions,
+               maxSelections: 5,
+               field: 'services'
+             },
+             {
+               id: 'smart_messages',
+               botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:",
+               inputType: 'multiselect',
+               options: messageOptions,
+               maxSelections: 5,
+               field: 'smartMessages'
+             },
+             {
+               id: 'building_system',
+               botMessage: "Awesome! Let me build your system. This will just take a moment...",
+               inputType: 'progress',
+               action: 'buildSystem'
+             },
+             {
+               id: 'final_summary',
+               botMessage: (data) => `🎉 Your QR booking system is ready! Here's what you get:
 • Custom booking page: book.probookingqr.com/${data.salonName.toLowerCase().replace(/\s+/g, '-')}
 • Printable QR codes for your salon
 • Automated messages: ${data.smartMessages.join(', ')}
 • Real-time calendar sync & mobile booking
 
 Ready to activate your system for just $49/month (usually $99)? This offer is for the first 20 clients this month. You can cancel anytime.`,
-                    inputType: 'payment',
-                    field: 'payment'
-                }
-            ];
-            
-            // --- CORE LOGIC ---
+               inputType: 'payment',
+               field: 'payment'
+             }
+           ];
+           
+           // --- CORE LOGIC ---
 
-            const addMessage = (text, isBot = false, inputType = null) => {
-                const newMessage = {
-                    id: Date.now() + Math.random(),
-                    text,
-                    isBot,
-                    timestamp: new Date(),
-                    inputType,
-                };
-                setMessages(prev => [...prev, newMessage]);
-                if(isBot) setIsTyping(false);
-            };
+           const addMessage = (text, isBot = false, inputType = null) => {
+             const newMessage = {
+               id: Date.now() + Math.random(),
+               text,
+               isBot,
+               timestamp: new Date(),
+               inputType,
+             };
+             setMessages(prev => [...prev, newMessage]);
+             if(isBot) setIsTyping(false);
+           };
 
-            const scrollToBottom = () => {
-                if (messagesEndRef.current) {
-                    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-                }
-            };
+           const scrollToBottom = () => {
+             if (messagesEndRef.current) {
+                 messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+             }
+           };
 
-            useEffect(scrollToBottom, [messages, isTyping]);
-            
-            const processStep = async (stepIndex, data) => {
-                if (stepIndex >= conversationSteps.length) return;
+           useEffect(scrollToBottom, [messages, isTyping]);
+           
+           const processStep = async (stepIndex, data) => {
+             if (stepIndex >= conversationSteps.length) return;
 
-                const step = conversationSteps[stepIndex];
-                setCurrentStep(stepIndex);
-                
-                if (step.id === 'final_summary') {
-                    await saveOnboardingData(data);
-                }
+             const step = conversationSteps[stepIndex];
+             setCurrentStep(stepIndex);
+             
+             // If the step requires an async action before displaying the message (like saving data)
+             if (step.id === 'final_summary') {
+                 setIsLoading(true);
+                 await saveOnboardingData(data);
+                 setIsLoading(false);
+             }
 
-                const botMessageText = typeof step.botMessage === 'function'
-                    ? step.botMessage(data)
-                    : step.botMessage;
-                
-                if (botMessageText) {
-                    setTimeout(() => {
-                        setIsTyping(true);
-                        setTimeout(() => {
-                            addMessage(botMessageText, true, step.inputType);
-                        }, 1000);
-                    }, 500);
-                }
-                
-                if (step.action) {
-                    setIsLoading(true);
-                    await handleAction(step.action, data, stepIndex);
-                    setIsLoading(false);
-                }
-            };
-            
-            const handleAction = async (action, data, stepIndex) => {
-                switch (action) {
-                    case 'buildSystem':
-                        await showBuildingProgress();
-                        processStep(stepIndex + 1, data);
-                        break;
-                    default:
-                        break;
-                }
-            };
+             const botMessageText = typeof step.botMessage === 'function'
+               ? step.botMessage(data)
+               : step.botMessage;
+             
+             if (botMessageText) {
+                 setTimeout(() => {
+                   setIsTyping(true);
+                   setTimeout(() => {
+                     addMessage(botMessageText, true, step.inputType);
+                   }, 1000);
+                 }, 500);
+             }
+             
+             if (step.action) {
+               setIsLoading(true);
+               await handleAction(step.action, data, stepIndex);
+               setIsLoading(false);
+             }
+           };
+           
+           const handleAction = async (action, data, stepIndex) => {
+             switch (action) {
+               case 'buildSystem':
+                 await showBuildingProgress();
+                 processStep(stepIndex + 1, data);
+                 break;
+               default:
+                 break;
+             }
+           };
 
-            const handleUserResponse = async (responseValue, field) => {
-                let responseText = '';
-                let updatedData = { ...userData };
+           const handleUserResponse = async (responseValue, field) => {
+             let responseText = '';
+             let updatedData = { ...userData };
 
-                if (field === 'teamSetup') {
-                    const members = responseValue.teamMembers || [];
-                    responseText = responseValue.isTeamBusiness ? `Team: ${members.map(m => `${m.name} (${m.role})`).join(', ')}` : "It's Just Me";
-                    updatedData = { ...userData, ...responseValue };
-                }
-                else if (field === 'addressAndHours') {
-                    responseText = `Address and hours have been set.`;
-                    updatedData = { ...userData, ...responseValue };
-                }
-                else if (Array.isArray(responseValue)) {
-                    responseText = responseValue.join(', ');
-                    updatedData[field] = responseValue;
-                } else {
-                    responseText = responseValue;
-                    updatedData[field] = responseValue;
-                }
+             if (field === 'teamSetup') {
+                 const members = responseValue.teamMembers || [];
+                 responseText = responseValue.isTeamBusiness ? `Team: ${members.map(m => `${m.name} (${m.role})`).join(', ')}` : "It's Just Me";
+                 updatedData = { ...userData, ...responseValue };
+             }
+             else if (field === 'addressAndHours') {
+                 responseText = `Address and hours have been set.`;
+                 updatedData = { ...userData, ...responseValue };
+             }
+             else if (Array.isArray(responseValue)) {
+                 responseText = responseValue.join(', ');
+                 updatedData[field] = responseValue;
+             } else {
+                 responseText = responseValue;
+                 updatedData[field] = responseValue;
+             }
 
-                addMessage(responseText, false);
-                setUserData(updatedData);
-                processStep(currentStep + 1, updatedData);
-            };
+             addMessage(responseText, false);
+             setUserData(updatedData);
+             processStep(currentStep + 1, updatedData);
+           };
 
-            const saveOnboardingData = async (data) => {
-                console.log("--- ONBOARDING DATA READY TO SEND ---");
-                console.log(JSON.stringify(data, null, 2));
-                return Promise.resolve();
-            };
+           const saveOnboardingData = async (data) => {
+             // Check if firebase is available and user is authenticated
+             if (!window.firebase || !window.firebase.auth.currentUser) {
+                 console.error("Firebase not initialized or user not signed in.");
+                 addMessage("⚠️ Connection error! Could not save your data. Please check your connection or contact support.", true);
+                 return;
+             }
 
-            const showBuildingProgress = () => {
-                return new Promise((resolve) => {
-                    const steps = [
-                        "✅ Creating your booking page...",
-                        "✅ Adding your services...",
-                        "✅ Setting up smart notifications...",
-                        "✅ Generating unique QR codes..."
-                    ];
-                    
-                    let delay = 0;
-                    steps.forEach((step, index) => {
-                        delay += 1200;
-                        setTimeout(() => {
-                            setMessages(prev => [...prev, { id: Math.random(), text: step, isBot: true }]);
-                            if (index === steps.length - 1) {
-                                setTimeout(resolve, 1000);
-                            }
-                        }, delay);
-                    });
-                });
-            };
+             const { db, auth, doc, setDoc, serverTimestamp } = window.firebase;
+             const userId = auth.currentUser.uid;
+             const appId = typeof __app_id !== 'undefined' ? __app_id : 'probookingqr-demo';
 
-            useEffect(() => {
-                processStep(0, userData);
-            }, []);
+             // Path for user's private data, following specified structure
+             const userOnboardingRef = doc(db, 'artifacts', appId, 'users', userId, 'onboardingData', 'salonProfile');
 
-            const currentStepData = conversationSteps[currentStep];
+             console.log("--- SAVING ONBOARDING DATA TO FIRESTORE ---");
+             
+             try {
+                 await setDoc(userOnboardingRef, {
+                     ...data,
+                     createdAt: serverTimestamp(),
+                     updatedAt: serverTimestamp(),
+                     userId: userId,
+                 });
+                 console.log("Successfully saved data to Firestore.");
+             } catch (error) {
+                 console.error("Error writing document to Firestore: ", error);
+                 addMessage("⚠️ Oops! There was a problem saving your profile. You can continue, but please contact support to ensure your setup is complete.", true);
+             }
+           };
 
-            return (
-                <div className="w-full h-full flex flex-col bg-white md:rounded-2xl shadow-2xl overflow-hidden">
-                    <div className="chat-header p-4 bg-gray-50 border-b border-gray-200">
-                        <h3 className="text-lg font-bold text-gray-800 text-center">ProBookingQR Setup</h3>
-                        <div className="progress-bar bg-gray-200 rounded-full h-2 mt-2">
-                        <div
-                            className="progress-fill bg-orange-500 h-2 rounded-full transition-all duration-500"
-                            style={{ width: `${(currentStep / (conversationSteps.length - 1)) * 100}%` }}
-                        />
-                        </div>
-                    </div>
+           const showBuildingProgress = () => {
+             return new Promise((resolve) => {
+               const steps = [
+                 "✅ Creating your booking page...",
+                 "✅ Adding your services...",
+                 "✅ Setting up smart notifications...",
+                 "✅ Generating unique QR codes..."
+               ];
+               
+               let delay = 0;
+               steps.forEach((step, index) => {
+                 delay += 1200;
+                 setTimeout(() => {
+                   setMessages(prev => [...prev, { id: Math.random(), text: step, isBot: true }]);
+                   if (index === steps.length - 1) {
+                     setTimeout(resolve, 1000);
+                   }
+                 }, delay);
+               });
+             });
+           };
 
-                    <div className="messages-container flex-1 p-4 overflow-y-auto bg-orange-100/50">
-                        {messages.map(message => (
-                        <div key={message.id} className={`message flex my-3 ${message.isBot ? 'justify-start' : 'justify-end'}`}>
-                            <div className={`message-bubble max-w-xs md:max-w-md p-3 rounded-2xl ${message.isBot ? 'bg-white text-gray-700 shadow-sm' : 'bg-orange-500 text-white'}`}>
-                                <p className="whitespace-pre-wrap">{message.text}</p>
-                            </div>
-                        </div>
-                        ))}
-                        {isTyping && (
-                        <div className="message flex my-3 justify-start">
-                            <div className="message-bubble flex items-center space-x-1.5 p-3 rounded-2xl bg-white text-gray-700 shadow-sm">
-                                <div className="typing-indicator">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                        </div>
-                        )}
-                        <div ref={messagesEndRef} />
-                    </div>
+           useEffect(() => {
+             // Start the conversation on initial render
+             processStep(0, userData);
+           }, []);
 
-                    <div className="input-container p-4 bg-gray-50 border-t border-gray-200">
-                        <InputComponent
-                            key={currentStep}
-                            step={currentStepData}
-                            onResponse={handleUserResponse}
-                            isLoading={isLoading}
-                        />
-                    </div>
-                </div>
-            );
-        };
-        
-        const AddressHoursComponent = ({ onResponse, field }) => {
-            const [addressData, setAddressData] = useState({
-                fullAddress: '',
-                hours: {
-                    mon: { open: '09:00', close: '17:00', closed: false },
-                    tue: { open: '09:00', close: '17:00', closed: false },
-                    wed: { open: '09:00', close: '17:00', closed: false },
-                    thu: { open: '09:00', close: '17:00', closed: false },
-                    fri: { open: '09:00', close: '17:00', closed: false },
-                    sat: { open: '10:00', close: '16:00', closed: true },
-                    sun: { open: '10:00', close: '16:00', closed: true }
-                }
-            });
+           const currentStepData = conversationSteps[currentStep];
 
-            const handleHoursChange = (day, part, value) => {
-                setAddressData(prev => ({
-                    ...prev,
-                    hours: {
-                        ...prev.hours,
-                        [day]: { ...prev.hours[day], [part]: value }
-                    }
-                }));
-            };
-            
-            const handleInputChange = (e) => {
-                const { name, value } = e.target;
-                setAddressData(prev => ({ ...prev, [name]: value }));
-            };
+           return (
+             <div className="w-full h-full flex flex-col bg-white md:rounded-2xl shadow-2xl overflow-hidden">
+               <div className="chat-header p-4 bg-gray-50 border-b border-gray-200">
+                 <h3 className="text-lg font-bold text-gray-800 text-center">ProBookingQR Setup</h3>
+                 <div className="progress-bar bg-gray-200 rounded-full h-2 mt-2">
+                   <div
+                     className="progress-fill bg-orange-500 h-2 rounded-full transition-all duration-500"
+                     style={{ width: `${(currentStep / (conversationSteps.length - 1)) * 100}%` }}
+                   />
+                 </div>
+               </div>
 
-            const handleSubmit = () => {
-                if(addressData.fullAddress.trim()) {
-                    onResponse(addressData, field);
-                } else {
-                    alert('Please enter a business address.');
-                }
-            };
-            
-            const dayNames = { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' };
+               <div className="messages-container flex-1 p-4 overflow-y-auto bg-orange-100/50">
+                 {messages.map(message => (
+                   <div key={message.id} className={`message flex my-3 ${message.isBot ? 'justify-start' : 'justify-end'}`}>
+                     <div className={`message-bubble max-w-xs md:max-w-md p-3 rounded-2xl ${message.isBot ? 'bg-white text-gray-700 shadow-sm' : 'bg-orange-500 text-white'}`}>
+                       <p className="whitespace-pre-wrap">{message.text}</p>
+                     </div>
+                   </div>
+                 ))}
+                 {isTyping && (
+                   <div className="message flex my-3 justify-start">
+                     <div className="message-bubble flex items-center space-x-1.5 p-3 rounded-2xl bg-white text-gray-700 shadow-sm">
+                       <div className="typing-indicator">
+                         <span></span><span></span><span></span>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+                 <div ref={messagesEndRef} />
+               </div>
 
-            return (
-                <div className="space-y-4 text-sm">
-                    <div>
-                        <label className="font-bold text-gray-700">Full Business Address</label>
-                        <textarea name="fullAddress" value={addressData.fullAddress} onChange={handleInputChange} rows="2" placeholder="123 Main Street, Suite 2B, City, State 12345" className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 text-gray-900">
+               <div className="input-container p-4 bg-gray-50 border-t border-gray-200">
+                 <InputComponent
+                   key={currentStep}
+                   step={currentStepData}
+                   onResponse={handleUserResponse}
+                   isLoading={isLoading}
+                 />
+               </div>
+             </div>
+           );
+         };
+         
+         const AddressHoursComponent = ({ onResponse, field }) => {
+             const [addressData, setAddressData] = useState({
+                 fullAddress: '',
+                 hours: {
+                     mon: { open: '09:00', close: '17:00', closed: false },
+                     tue: { open: '09:00', close: '17:00', closed: false },
+                     wed: { open: '09:00', close: '17:00', closed: false },
+                     thu: { open: '09:00', close: '17:00', closed: false },
+                     fri: { open: '09:00', close: '17:00', closed: false },
+                     sat: { open: '10:00', close: '16:00', closed: true },
+                     sun: { open: '10:00', close: '16:00', closed: true }
+                 }
+             });
+             const [error, setError] = useState(null);
+
+             const handleHoursChange = (day, part, value) => {
+                 setAddressData(prev => ({
+                     ...prev,
+                     hours: {
+                         ...prev.hours,
+                         [day]: { ...prev.hours[day], [part]: value }
+                     }
+                 }));
+             };
+             
+             const handleInputChange = (e) => {
+                 const { name, value } = e.target;
+                 setAddressData(prev => ({ ...prev, [name]: value }));
+                 if(name === 'fullAddress' && value.trim()) {
+                     setError(null);
+                 }
+             };
+
+             const handleSubmit = () => {
+                 if(addressData.fullAddress.trim()) {
+                     onResponse(addressData, field);
+                 } else {
+                     setError('Please enter a business address.');
+                 }
+             };
+             
+             const dayNames = { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' };
+
+             return (
+                 <div className="space-y-4 text-sm">
+                     <div>
+                         <label className="font-bold text-gray-700">Full Business Address</label>
+                         <textarea name="fullAddress" value={addressData.fullAddress} onChange={handleInputChange} rows="2" placeholder="123 Main Street, Suite 2B, City, State 12345" className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 text-gray-900">
