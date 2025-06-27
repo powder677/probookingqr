@@ -27,6 +27,12 @@
    <!-- Tailwind CSS -->
    <script src="https://cdn.tailwindcss.com"></script>
 
+   <!-- React -->
+   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
    <style>
       /* Custom styles to supplement Tailwind */
       body {
@@ -36,12 +42,62 @@
       }
 
       .text-glow {
-         text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+         text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 0.3);
       }
 
       .bg-grid-pattern {
          background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
          background-size: 20px 20px;
+      }
+
+      /* Styles for the chatbot modal */
+      #chatbot-modal {
+         display: none;
+         /* Hidden by default */
+      }
+
+      .loader {
+         border: 4px solid #f3f3f3;
+         border-top: 4px solid #f97316;
+         border-radius: 50%;
+         width: 30px;
+         height: 30px;
+         animation: spin 1s linear infinite;
+      }
+
+      .typing-indicator span {
+         height: 8px;
+         width: 8px;
+         background-color: #a8a29e;
+         border-radius: 50%;
+         display: inline-block;
+         margin: 0 1px;
+         animation: bounce 0.6s infinite alternate;
+      }
+
+      .typing-indicator span:nth-child(2) {
+         animation-delay: 0.2s;
+      }
+
+      .typing-indicator span:nth-child(3) {
+         animation-delay: 0.4s;
+      }
+
+      @keyframes spin {
+         0% {
+            transform: rotate(0deg);
+         }
+
+         100% {
+            transform: rotate(360deg);
+         }
+      }
+
+      @keyframes bounce {
+         to {
+            opacity: 0.3;
+            transform: translate3d(0, -4px, 0);
+         }
       }
    </style>
 </head>
@@ -49,7 +105,7 @@
 <body class="bg-slate-900 text-slate-300">
 
    <!-- Header -->
-   <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+   <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
          <a href="#" class="text-2xl font-bold text-white">
             ProBooking<span class="text-indigo-400">QR</span>
@@ -74,7 +130,7 @@
             <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10">
                Turn your business into a booking machine that works around the clock, even when you're busy with other clients.
             </p>
-            <a href="https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05" target="_blank" rel="noopener noreferrer" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105">
+            <a href="javascript:void(0)" onclick="openChatbot()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105">
                Get Your QR-to-Book System
             </a>
 
@@ -190,8 +246,12 @@
                <div class="bg-slate-800 border-2 border-indigo-500 rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-indigo-500/10">
                   <div class="text-center">
                      <h3 class="text-2xl font-bold text-white mb-2">ProBookingQR System</h3>
-                     <p class="text-5xl font-extrabold text-white mb-2">$99<span class="text-lg font-medium text-slate-400">/month</span></p>
-                     <p class="text-slate-400">No hidden fees. Cancel anytime.</p>
+                     <div class="flex items-center justify-center text-5xl font-extrabold text-white mb-2">
+                        <span class="text-3xl font-medium text-slate-500 line-through mr-3">$99</span>
+                        $49
+                        <span class="text-lg font-medium text-slate-400 ml-2">/month</span>
+                     </div>
+                     <p class="text-slate-400">Limited Time Offer. Cancel anytime.</p>
                   </div>
 
                   <ul class="space-y-4 my-8">
@@ -223,7 +283,7 @@
             </div>
 
             <div class="mt-12 text-center bg-yellow-500/10 border border-yellow-600/30 text-yellow-200 max-w-2xl mx-auto p-4 rounded-lg">
-               <h4 class="font-bold text-yellow-100">⏰ Limited Time Offer: First Month Only $49</h4>
+               <h4 class="font-bold text-yellow-100">⏰ Limited Time Offer: Lock In Your $49/Month Rate!</h4>
                <p class="text-sm mt-1">We're only taking on 20 new salons this month to ensure perfect service. Secure your spot now!</p>
             </div>
          </div>
@@ -258,7 +318,7 @@
          <div class="container mx-auto px-6 py-20 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
             <p class="mt-4 text-indigo-200 text-lg max-w-2xl mx-auto">Join over 200 salons already using ProBookingQR to fill their calendars automatically.</p>
-            <a href="https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05" target="_blank" rel="noopener noreferrer" class="mt-8 inline-block bg-white hover:bg-slate-100 text-indigo-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105">
+            <a href="javascript:void(0)" onclick="openChatbot()" class="mt-8 inline-block bg-white hover:bg-slate-100 text-indigo-600 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105">
                Get Started for Just $49
             </a>
             <p class="mt-4 text-indigo-200 text-sm">Setup is hands-free and takes less than 24 hours.</p>
@@ -274,6 +334,15 @@
       </div>
    </footer>
 
+   <!-- Chatbot Modal -->
+   <div id="chatbot-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm items-center justify-center p-4 z-50">
+      <button onclick="closeChatbot()" class="absolute top-4 right-4 text-white text-5xl font-light hover:text-gray-300 z-50" aria-label="Close chatbot">×</button>
+      <div id="chatbot-root" class="w-full max-w-lg h-full max-h-[700px] md:h-[90vh]">
+         <!-- React Chatbot will be rendered here -->
+      </div>
+   </div>
+
+
    <!-- Deferred Scripts for Performance -->
    <script src="https://unpkg.com/feather-icons"></script>
    <script defer>
@@ -281,8 +350,427 @@
       document.addEventListener('DOMContentLoaded', () => {
          feather.replace();
       });
+
+      // Chatbot Modal Functions
+      function openChatbot() {
+         document.getElementById('chatbot-modal').style.display = 'flex';
+         document.body.style.overflow = 'hidden'; // Prevent scrolling background
+      }
+
+      function closeChatbot() {
+         document.getElementById('chatbot-modal').style.display = 'none';
+         document.body.style.overflow = 'auto';
+      }
    </script>
 
+   <!-- React Chatbot Script -->
+   <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+        // Main App Component
+        const App = () => {
+          return (
+            <div className="bg-orange-50 w-full h-full font-sans flex items-center justify-center">
+              <ProBookingChatbot />
+            </div>
+          );
+        };
+
+        // Main Chatbot Component
+        const ProBookingChatbot = () => {
+          // State management
+          const [currentStep, setCurrentStep] = useState(0);
+          const [messages, setMessages] = useState([]);
+          const [userData, setUserData] = useState({
+            firstName: '',
+            salonName: '',
+            zipCode: '',
+            hours: {},
+            services: [],
+            smartMessages: [],
+            googleData: null,
+            hoursConfirmed: '',
+          });
+          const [isTyping, setIsTyping] = useState(false);
+          const [isLoading, setIsLoading] = useState(false);
+          const messagesEndRef = useRef(null);
+
+          // Available services for selection
+          const serviceOptions = [
+            'Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 
+            'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions',
+            'Scalp Treatments', 'Blowouts'
+          ];
+
+          // Smart message options for selection
+          const messageOptions = [
+            'Booking confirmation', '24-hour reminder', 'Thank you & review',
+            'Win-back inactive', 'Rebook promotion'
+          ];
+
+          // --- CONVERSATION FLOW ---
+          const conversationSteps = [
+            {
+              id: 'welcome',
+              botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?",
+              inputType: 'text',
+              field: 'firstName',
+              placeholder: 'Enter your first name...'
+            },
+            {
+              id: 'salon_name',
+              botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`,
+              inputType: 'text',
+              field: 'salonName',
+              placeholder: 'Enter your salon name...'
+            },
+            {
+              id: 'zip_code',
+              botMessage: "And what's the salon's ZIP code?",
+              inputType: 'text',
+              field: 'zipCode',
+              placeholder: 'Enter ZIP code...'
+            },
+            {
+              id: 'google_lookup',
+              botMessage: (data) => `Perfect! Let me check online for ${data.salonName}...`,
+              inputType: 'loading',
+              action: 'fetchGoogleData'
+            },
+            {
+              id: 'confirm_hours',
+              botMessage: (data) => {
+                const googleData = data.googleData || {};
+                const address = googleData.address || '123 Main St, Anytown, USA';
+                const rating = googleData.rating || '4.8';
+                const reviewCount = googleData.reviewCount || 87;
+                const hours = googleData.hours || 'Mon-Sat 9am-7pm, Sunday closed';
+                
+                return `Found it! Is this your salon?\n\n**${data.salonName}**\n${address}\n⭐ ${rating} (${reviewCount} reviews)\n\nYour hours look like ${hours}. Is this all correct?`;
+              },
+              inputType: 'buttons',
+              options: ['Yes, that\'s right', 'No, I\'ll set them later'],
+              field: 'hoursConfirmed'
+            },
+            {
+              id: 'services',
+              botMessage: "Great. What services do you want people to book online? Pick up to 5.",
+              inputType: 'multiselect',
+              options: serviceOptions,
+              maxSelections: 5,
+              field: 'services'
+            },
+            {
+              id: 'smart_messages',
+              botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:",
+              inputType: 'multiselect',
+              options: messageOptions,
+              maxSelections: 5,
+              field: 'smartMessages'
+            },
+            {
+              id: 'building_system',
+              botMessage: "Awesome! Let me build your system. This will just take a moment...",
+              inputType: 'progress',
+              action: 'buildSystem'
+            },
+            {
+              id: 'final_summary',
+              botMessage: (data) => `🎉 Your QR booking system is ready! Here's what you get:
+• Custom booking page: book.probookingqr.com/${data.salonName.toLowerCase().replace(/\s+/g, '-')}
+• Printable QR codes for your salon
+• Automated messages: ${data.smartMessages.join(', ')}
+• Real-time calendar sync & mobile booking
+
+Ready to activate your system for just $49/month (usually $99)? This offer is for the first 20 clients this month. You can cancel anytime.`,
+              inputType: 'payment',
+              field: 'payment'
+            }
+          ];
+          
+          // --- CORE LOGIC ---
+
+          const addMessage = (text, isBot = false, inputType = null) => {
+            const newMessage = {
+              id: Date.now() + Math.random(),
+              text,
+              isBot,
+              timestamp: new Date(),
+              inputType,
+            };
+            setMessages(prev => [...prev, newMessage]);
+            if(isBot) setIsTyping(false);
+          };
+
+          const scrollToBottom = () => {
+            if (messagesEndRef.current) {
+                messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            }
+          };
+
+          useEffect(scrollToBottom, [messages, isTyping]);
+          
+          const processStep = async (stepIndex, data) => {
+            if (stepIndex >= conversationSteps.length) return;
+
+            const step = conversationSteps[stepIndex];
+            setCurrentStep(stepIndex);
+            
+            if (step.id === 'final_summary') {
+              await saveOnboardingData(data);
+            }
+
+            const botMessageText = typeof step.botMessage === 'function'
+              ? step.botMessage(data)
+              : step.botMessage;
+            
+            if (botMessageText) {
+               setTimeout(() => {
+                 setIsTyping(true);
+                 setTimeout(() => {
+                   addMessage(botMessageText, true, step.inputType);
+                 }, 1000);
+               }, 500);
+            }
+            
+            if (step.action) {
+              setIsLoading(true);
+              await handleAction(step.action, data, stepIndex);
+              setIsLoading(false);
+            }
+          };
+          
+          const handleAction = async (action, data, stepIndex) => {
+            switch (action) {
+              case 'fetchGoogleData':
+                const googleData = await fetchGooglePlaces(data.salonName, data.zipCode);
+                const updatedDataWithGoogle = { ...data, googleData };
+                setUserData(updatedDataWithGoogle);
+                processStep(stepIndex + 1, updatedDataWithGoogle);
+                break;
+              case 'buildSystem':
+                await showBuildingProgress();
+                processStep(stepIndex + 1, data);
+                break;
+              default:
+                break;
+            }
+          };
+
+          const handleUserResponse = async (responseValue, field) => {
+            const responseText = Array.isArray(responseValue) ? responseValue.join(', ') : responseValue;
+            addMessage(responseText, false);
+
+            const updatedData = { ...userData, [field]: responseValue };
+            setUserData(updatedData);
+
+            processStep(currentStep + 1, updatedData);
+          };
+          
+          const fetchGooglePlaces = async (salonName, zipCode) => {
+            console.log(`Searching for ${salonName} in ${zipCode}...`);
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve({ 
+                    hours: 'Mon-Sat 9am-7pm, Sunday closed',
+                    address: `123 Fashion Ave, Beverly Hills, CA ${zipCode}`,
+                    rating: '4.8',
+                    reviewCount: 87
+                });
+              }, 2000);
+            });
+          };
+
+          const saveOnboardingData = async (data) => {
+            console.log("--- ONBOARDING DATA READY TO SEND ---");
+            console.log(JSON.stringify(data, null, 2));
+            return Promise.resolve();
+          };
+
+          const showBuildingProgress = () => {
+            return new Promise((resolve) => {
+              const steps = [
+                "✅ Creating your booking page...",
+                "✅ Adding your services...",
+                "✅ Setting up smart notifications...",
+                "✅ Generating unique QR codes..."
+              ];
+              
+              let delay = 0;
+              steps.forEach((step, index) => {
+                delay += 1200;
+                setTimeout(() => {
+                  setMessages(prev => [...prev, { id: Math.random(), text: step, isBot: true }]);
+                  if (index === steps.length - 1) {
+                    setTimeout(resolve, 1000);
+                  }
+                }, delay);
+              });
+            });
+          };
+
+          useEffect(() => {
+            processStep(0, userData);
+          }, []);
+
+          const currentStepData = conversationSteps[currentStep];
+
+          return (
+            <div className="chatbot-container w-full h-full flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+              <div className="chat-header p-4 bg-gray-50 border-b border-gray-200">
+                <h3 className="text-lg font-bold text-gray-800 text-center">ProBookingQR Setup</h3>
+                <div className="progress-bar bg-gray-200 rounded-full h-2 mt-2">
+                  <div
+                    className="progress-fill bg-orange-500 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${(currentStep / (conversationSteps.length - 1)) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              <div className="messages-container flex-1 p-4 overflow-y-auto bg-orange-100/50">
+                {messages.map(message => (
+                  <div key={message.id} className={`message flex my-3 ${message.isBot ? 'justify-start' : 'justify-end'}`}>
+                    <div className={`message-bubble max-w-xs md:max-w-md p-3 rounded-2xl ${message.isBot ? 'bg-white text-gray-700 shadow-sm' : 'bg-orange-500 text-white'}`}>
+                      <p className="whitespace-pre-wrap">{message.text}</p>
+                    </div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="message flex my-3 justify-start">
+                    <div className="message-bubble flex items-center space-x-1.5 p-3 rounded-2xl bg-white text-gray-700 shadow-sm">
+                      <div className="typing-indicator">
+                        <span></span><span></span><span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              <div className="input-container p-4 bg-gray-50 border-t border-gray-200">
+                <InputComponent
+                  key={currentStep}
+                  step={currentStepData}
+                  onResponse={handleUserResponse}
+                  isLoading={isLoading}
+                />
+              </div>
+            </div>
+          );
+        };
+
+
+        const InputComponent = ({ step, onResponse, isLoading }) => {
+          const [inputValue, setInputValue] = useState('');
+          const [selectedOptions, setSelectedOptions] = useState([]);
+
+          if (!step || isLoading || (step.inputType === 'loading') || (step.inputType === 'progress')) {
+              return (
+                  <div className="flex justify-center items-center h-16">
+                      <div className="loader"></div>
+                  </div>
+              );
+          }
+
+          const handleSubmit = () => {
+            if (step.inputType === 'text' && inputValue.trim()) {
+              onResponse(inputValue.trim(), step.field);
+              setInputValue('');
+            } else if (step.inputType === 'multiselect' && selectedOptions.length > 0) {
+              onResponse(selectedOptions, step.field);
+              setSelectedOptions([]);
+            }
+          };
+
+          const handleOptionToggle = (option) => {
+            setSelectedOptions(prev => {
+              if (prev.includes(option)) {
+                return prev.filter(item => item !== option);
+              } else if (prev.length < (step.maxSelections || 999)) {
+                return [...prev, option];
+              }
+              return prev;
+            });
+          };
+
+          switch (step.inputType) {
+            case 'text':
+              return (
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+                    placeholder={step.placeholder || "Type your answer..."}
+                    autoFocus
+                    className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                  <button onClick={handleSubmit} disabled={!inputValue.trim()} className="px-6 py-2 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                    Send
+                  </button>
+                </div>
+              );
+
+            case 'buttons':
+              return (
+                <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                  {step.options.map(option => (
+                    <button
+                      key={option}
+                      onClick={() => onResponse(option, step.field)}
+                      className="w-full px-4 py-3 bg-white border-2 border-orange-500 text-orange-500 font-semibold rounded-lg hover:bg-orange-50 transition-colors"
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              );
+
+            case 'multiselect':
+              return (
+                <div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
+                    {step.options.map(option => (
+                      <button
+                        key={option}
+                        onClick={() => handleOptionToggle(option)}
+                        className={`text-sm text-center p-3 rounded-lg border-2 transition-all duration-200 ${selectedOptions.includes(option) ? 'bg-orange-500 text-white border-orange-500 font-bold' : 'bg-white text-gray-700 border-gray-300 hover:border-orange-500'}`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={selectedOptions.length === 0}
+                    className="w-full px-4 py-3 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 disabled:bg-gray-300 transition-colors"
+                  >
+                    Continue ({selectedOptions.length})
+                  </button>
+                </div>
+              );
+
+            case 'payment':
+              return (
+                <div className="text-center">
+                  <button
+                    onClick={() => window.location.href = 'https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05'}
+                    className="w-full px-4 py-3 bg-green-500 text-white font-bold text-lg rounded-lg hover:bg-green-600 transition-colors shadow-lg"
+                  >
+                    Activate My System - $49/month
+                  </button>
+                  <p className="text-xs text-gray-500 mt-2">Questions? Text us at (555) 123-4567</p>
+                </div>
+              );
+
+            default:
+              return null;
+          }
+        };
+
+        ReactDOM.render(<App />, document.getElementById('chatbot-root'));
+    </script>
 </body>
 
 </html>
