@@ -384,12 +384,19 @@
           const [userData, setUserData] = useState({
             firstName: '',
             salonName: '',
-            zipCode: '',
-            hours: {},
+            fullAddress: '',
+            timezone: 'EST',
+            hours: {
+                mon: { open: '09:00', close: '17:00', closed: false },
+                tue: { open: '09:00', close: '17:00', closed: false },
+                wed: { open: '09:00', close: '17:00', closed: false },
+                thu: { open: '09:00', close: '17:00', closed: false },
+                fri: { open: '09:00', close: '17:00', closed: false },
+                sat: { open: '10:00', close: '16:00', closed: true },
+                sun: { open: '10:00', close: '16:00', closed: true }
+            },
             services: [],
             smartMessages: [],
-            googleData: null,
-            hoursConfirmed: '',
           });
           const [isTyping, setIsTyping] = useState(false);
           const [isLoading, setIsLoading] = useState(false);
@@ -425,36 +432,14 @@
               placeholder: 'Enter your salon name...'
             },
             {
-              id: 'zip_code',
-              botMessage: "And what's the salon's ZIP code?",
-              inputType: 'text',
-              field: 'zipCode',
-              placeholder: 'Enter ZIP code...'
-            },
-            {
-              id: 'google_lookup',
-              botMessage: (data) => `Perfect! Let me check online for ${data.salonName}...`,
-              inputType: 'loading',
-              action: 'fetchGoogleData'
-            },
-            {
-              id: 'confirm_hours',
-              botMessage: (data) => {
-                const googleData = data.googleData || {};
-                const address = googleData.address || '123 Main St, Anytown, USA';
-                const rating = googleData.rating || '4.8';
-                const reviewCount = googleData.reviewCount || 87;
-                const hours = googleData.hours || 'Mon-Sat 9am-7pm, Sunday closed';
-                
-                return `Found it! Is this your salon?\n\n**${data.salonName}**\n${address}\n⭐ ${rating} (${reviewCount} reviews)\n\nYour hours look like ${hours}. Is this all correct?`;
-              },
-              inputType: 'buttons',
-              options: ['Yes, that\'s right', 'No, I\'ll set them later'],
-              field: 'hoursConfirmed'
+              id: 'address_hours',
+              botMessage: "Perfect! Now I need your business address and hours so clients know where and when to find you. 📍",
+              inputType: 'address_hours',
+              field: 'addressAndHours'
             },
             {
               id: 'services',
-              botMessage: "Great. What services do you want people to book online? Pick up to 5.",
+              botMessage: "Great, location is set! Now, what services do you want people to book online? Pick up to 5.",
               inputType: 'multiselect',
               options: serviceOptions,
               maxSelections: 5,
@@ -542,12 +527,6 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
           
           const handleAction = async (action, data, stepIndex) => {
             switch (action) {
-              case 'fetchGoogleData':
-                const googleData = await fetchGooglePlaces(data.salonName, data.zipCode);
-                const updatedDataWithGoogle = { ...data, googleData };
-                setUserData(updatedDataWithGoogle);
-                processStep(stepIndex + 1, updatedDataWithGoogle);
-                break;
               case 'buildSystem':
                 await showBuildingProgress();
                 processStep(stepIndex + 1, data);
@@ -558,27 +537,24 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
           };
 
           const handleUserResponse = async (responseValue, field) => {
-            const responseText = Array.isArray(responseValue) ? responseValue.join(', ') : responseValue;
-            addMessage(responseText, false);
+            let responseText = `Address and hours have been set.`;
+             if (Array.isArray(responseValue)) {
+                 responseText = responseValue.join(', ');
+             } else if (typeof responseValue !== 'object') {
+                 responseText = responseValue;
+             }
 
-            const updatedData = { ...userData, [field]: responseValue };
+            addMessage(responseText, false);
+            
+            let updatedData;
+            if (field === 'addressAndHours') {
+                updatedData = { ...userData, ...responseValue };
+            } else {
+                updatedData = { ...userData, [field]: responseValue };
+            }
             setUserData(updatedData);
 
             processStep(currentStep + 1, updatedData);
-          };
-          
-          const fetchGooglePlaces = async (salonName, zipCode) => {
-            console.log(`Searching for ${salonName} in ${zipCode}...`);
-            return new Promise(resolve => {
-              setTimeout(() => {
-                resolve({ 
-                    hours: 'Mon-Sat 9am-7pm, Sunday closed',
-                    address: `123 Fashion Ave, Beverly Hills, CA ${zipCode}`,
-                    rating: '4.8',
-                    reviewCount: 87
-                });
-              }, 2000);
-            });
           };
 
           const saveOnboardingData = async (data) => {
@@ -658,119 +634,49 @@ Ready to activate your system for just $49/month (usually $99)? This offer is fo
             </div>
           );
         };
-
-
-        const InputComponent = ({ step, onResponse, isLoading }) => {
-          const [inputValue, setInputValue] = useState('');
-          const [selectedOptions, setSelectedOptions] = useState([]);
-
-          if (!step || isLoading || (step.inputType === 'loading') || (step.inputType === 'progress')) {
-              return (
-                  <div className="flex justify-center items-center h-16">
-                      <div className="loader"></div>
-                  </div>
-              );
-          }
-
-          const handleSubmit = () => {
-            if (step.inputType === 'text' && inputValue.trim()) {
-              onResponse(inputValue.trim(), step.field);
-              setInputValue('');
-            } else if (step.inputType === 'multiselect' && selectedOptions.length > 0) {
-              onResponse(selectedOptions, step.field);
-              setSelectedOptions([]);
-            }
-          };
-
-          const handleOptionToggle = (option) => {
-            setSelectedOptions(prev => {
-              if (prev.includes(option)) {
-                return prev.filter(item => item !== option);
-              } else if (prev.length < (step.maxSelections || 999)) {
-                return [...prev, option];
-              }
-              return prev;
+        
+        const AddressHoursComponent = ({ onResponse, field }) => {
+            const [addressData, setAddressData] = useState({
+                fullAddress: '',
+                timezone: 'EST',
+                hours: {
+                    mon: { open: '09:00', close: '17:00', closed: false },
+                    tue: { open: '09:00', close: '17:00', closed: false },
+                    wed: { open: '09:00', close: '17:00', closed: false },
+                    thu: { open: '09:00', close: '17:00', closed: false },
+                    fri: { open: '09:00', close: '17:00', closed: false },
+                    sat: { open: '10:00', close: '16:00', closed: true },
+                    sun: { open: '10:00', close: '16:00', closed: true }
+                }
             });
-          };
 
-          switch (step.inputType) {
-            case 'text':
-              return (
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-                    placeholder={step.placeholder || "Type your answer..."}
-                    autoFocus
-                    className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                  <button onClick={handleSubmit} disabled={!inputValue.trim()} className="px-6 py-2 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
-                    Send
-                  </button>
-                </div>
-              );
+            const handleHoursChange = (day, part, value) => {
+                setAddressData(prev => ({
+                    ...prev,
+                    hours: {
+                        ...prev.hours,
+                        [day]: { ...prev.hours[day], [part]: value }
+                    }
+                }));
+            };
+            
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setAddressData(prev => ({ ...prev, [name]: value }));
+            };
 
-            case 'buttons':
-              return (
-                <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                  {step.options.map(option => (
-                    <button
-                      key={option}
-                      onClick={() => onResponse(option, step.field)}
-                      className="w-full px-4 py-3 bg-white border-2 border-orange-500 text-orange-500 font-semibold rounded-lg hover:bg-orange-50 transition-colors"
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              );
+            const handleSubmit = () => {
+                if(addressData.fullAddress.trim()) {
+                    onResponse(addressData, field);
+                } else {
+                    alert('Please enter a business address.');
+                }
+            };
+            
+            const dayNames = { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' };
 
-            case 'multiselect':
-              return (
-                <div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
-                    {step.options.map(option => (
-                      <button
-                        key={option}
-                        onClick={() => handleOptionToggle(option)}
-                        className={`text-sm text-center p-3 rounded-lg border-2 transition-all duration-200 ${selectedOptions.includes(option) ? 'bg-orange-500 text-white border-orange-500 font-bold' : 'bg-white text-gray-700 border-gray-300 hover:border-orange-500'}`}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    onClick={handleSubmit}
-                    disabled={selectedOptions.length === 0}
-                    className="w-full px-4 py-3 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 disabled:bg-gray-300 transition-colors"
-                  >
-                    Continue ({selectedOptions.length})
-                  </button>
-                </div>
-              );
-
-            case 'payment':
-              return (
-                <div className="text-center">
-                  <button
-                    onClick={() => window.location.href = 'https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05'}
-                    className="w-full px-4 py-3 bg-green-500 text-white font-bold text-lg rounded-lg hover:bg-green-600 transition-colors shadow-lg"
-                  >
-                    Activate My System - $49/month
-                  </button>
-                  <p className="text-xs text-gray-500 mt-2">Questions? Text us at (555) 123-4567</p>
-                </div>
-              );
-
-            default:
-              return null;
-          }
-        };
-
-        ReactDOM.render(<App />, document.getElementById('chatbot-root'));
-    </script>
-</body>
-
-</html>
+            return (
+                <div className="space-y-4 text-sm">
+                    <div>
+                        <label className="font-bold text-gray-700">Full Business Address</label>
+                        <textarea name="fullAddress" value={addressData.fullAddress} onChange={handleInputChange} rows="2" placeholder="123 Main Street, Suite 2B, City, State 12345" className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 text-gray-900">
