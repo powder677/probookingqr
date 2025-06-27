@@ -285,6 +285,7 @@
             firstName: '',
             salonName: '',
             fullAddress: '',
+            stylists: '', // Added stylists field
             services: [],
             smartMessages: []
          });
@@ -325,9 +326,16 @@
                field: 'fullAddress',
                placeholder: 'Enter your full business address...'
             },
+            { // New step for stylists
+               id: 'stylists',
+               botMessage: "Great. How many stylists will be using this calendar, and what are their first names?",
+               inputType: 'text',
+               field: 'stylists',
+               placeholder: 'e.g., 2: Sarah, Jo'
+            },
             {
                id: 'services',
-               botMessage: "Great! Now, what services do you want people to book online? Pick up to 5.",
+               botMessage: "Excellent! Now, what services do you want people to book online? Pick up to 5.",
                inputType: 'multiselect',
                options: serviceOptions,
                maxSelections: 5,
@@ -348,7 +356,7 @@
             },
             {
                id: 'final_summary',
-               botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• Location: ${data.fullAddress}\n• Services: ${data.services.join(', ')}\n• Automated Messages: ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`,
+               botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• Location: ${data.fullAddress}\n• Stylists: ${data.stylists}\n• Services: ${data.services.join(', ')}\n• Automated Messages: ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`,
                inputType: 'final'
             }
          ];
@@ -389,7 +397,6 @@
                 if (currentProgress >= 100) {
                     clearInterval(interval);
                     
-                    // --- SEND DATA TO EMAIL ENDPOINT ---
                     fetch("https://formspree.io/f/mnnvldep", {
                         method: 'POST',
                         body: JSON.stringify(userData),
@@ -417,7 +424,6 @@
             }, 700);
          };
 
-         // This useEffect triggers the progress bar and data submission when the component reaches the correct step.
          useEffect(() => {
             if (conversationSteps[currentStep] && conversationSteps[currentStep].id === 'building_system') {
                handleProgress();
