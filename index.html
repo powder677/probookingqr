@@ -284,7 +284,7 @@
          </div>
       </section>
 
-      <!-- New Features Section -->
+      <!-- Features Section -->
       <section id="features" class="py-20">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
@@ -353,7 +353,58 @@
          </div>
       </section>
 
-      <!-- New FAQ Section -->
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="py-20">
+         <div class="container mx-auto px-6 max-w-4xl relative">
+            <div class="text-center">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">How It All Works</h2>
+            </div>
+            <div class="mt-12 space-y-6">
+               <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">How do QR codes work for booking appointments?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <div class="text-slate-400 mt-4 space-y-4">
+                     <p>QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar without downloading any apps. The QR code links directly to your online booking form where customers can select services, pick times, and confirm appointments in under 30 seconds.</p>
+                  </div>
+               </details>
+               <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">What's the easiest way to set up online booking for a small business?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <div class="text-slate-400 mt-4 space-y-6">
+                     <p>The easiest way to set up online booking is using a QR code booking system that requires no website integration, no app development, and takes under 10 minutes to configure. Simply connect your calendar, customize your services, and generate a QR code that customers can scan to book instantly.</p>
+                     <div>
+                        <h3 class="font-semibold text-white mb-3">5-Minute Setup Process:</h3>
+                        <ol class="list-decimal list-inside space-y-2">
+                           <li><strong>Create Account & Connect Calendar:</strong> Sign up and sync with your existing calendar.</li>
+                           <li><strong>Add Your Services:</strong> List services with names, durations, and prices.</li>
+                           <li><strong>Set Your Availability:</strong> Choose your working hours and days.</li>
+                           <li><strong>Generate Your QR Code:</strong> Download it instantly, ready to display anywhere.</li>
+                           <li><strong>Start Taking Bookings:</strong> Customers can book immediately.</li>
+                        </ol>
+                     </div>
+                  </div>
+               </details>
+               <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">How can I reduce no-shows for appointments?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <div class="text-slate-400 mt-4 space-y-6">
+                     <p>The most effective way to reduce appointment no-shows is using automated SMS and email reminders sent 24 hours and 2 hours before appointments, combined with requiring confirmation to book. This combination can reduce no-shows by 40-70% immediately.</p>
+                     <div>
+                        <h3 class="font-semibold text-white mb-3">7 Proven Methods to Reduce No-Shows:</h3>
+                        <ol class="list-decimal list-inside space-y-2">
+                           <li><strong>Automated SMS & Email Reminders:</strong> The most effective method, reducing no-shows by 38-50%.</li>
+                           <li><strong>Require Booking Confirmation:</strong> Ensures genuine commitment from clients.</li>
+                           <li><strong>Implement a Cancellation Policy:</strong> Communicates professionalism and the value of your time.</li>
+                           <li><strong>Collect Payments or Deposits:</strong> Financial commitment dramatically increases attendance.</li>
+                           <li><strong>Make Rescheduling Easy:</strong> Many no-shows happen because rescheduling seems difficult.</li>
+                           <li><strong>Optimize Booking Windows:</strong> Limit how far in advance customers can book.</li>
+                           <li><strong>Follow Up After No-Shows:</strong> A friendly follow-up can improve future attendance.</li>
+                        </ol>
+                     </div>
+                  </div>
+               </details>
+            </div>
+         </div>
+      </section>
+
+      <!-- FAQ Section -->
       <section id="faq" class="py-20">
          <div class="container mx-auto px-6 max-w-4xl relative">
             <div class="text-center">
@@ -380,7 +431,7 @@
          </div>
       </section>
 
-      <!-- New Final CTA Section -->
+      <!-- Final CTA Section -->
       <section class="bg-indigo-600">
          <div class="container mx-auto px-6 py-20 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
@@ -428,10 +479,12 @@
 
          // Accessibility: Trap focus inside the modal
          focusableElements = modal.querySelectorAll(focusableElementsString);
-         firstFocusableElement = focusableElements[0];
-         lastFocusableElement = focusableElements[focusableElements.length - 1];
-         firstFocusableElement.focus();
-         modal.addEventListener('keydown', trapFocus);
+         if (focusableElements.length > 0) {
+            firstFocusableElement = focusableElements[0];
+            lastFocusableElement = focusableElements[focusableElements.length - 1];
+            firstFocusableElement.focus();
+            modal.addEventListener('keydown', trapFocus);
+         }
       }
 
       function closeChatbot() {
@@ -461,7 +514,7 @@
       });
 
       function trapFocus(e) {
-         if (e.key !== 'Tab') {
+         if (e.key !== 'Tab' || !firstFocusableElement) {
             return;
          }
          if (e.shiftKey) { // Shift + Tab
@@ -483,171 +536,257 @@
 
    <!-- React Chatbot Component Definition -->
    <script type="text/babel">
-      const { useState, useEffect, useRef } = React;
+      // --- Constants and Configuration ---
+        const { useState, useEffect, useRef } = React;
 
-        // --- Global Firebase Config ---
-        // These are assumed to be provided by the environment
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
+        const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnnvldep";
+        const INITIAL_USER_DATA = {
+            firstName: '', salonName: '', fullAddress: '', employeeCount: 0,
+            employees: [], services: [], smartMessages: []
+        };
+        const SERVICE_OPTIONS = ['Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions', 'Scalp Treatments', 'Blowouts'];
+        const MESSAGE_OPTIONS = ['Booking confirmation', '24-hour reminder', 'Thank you & review', 'Win-back inactive', 'Rebook promotion'];
+        const EMPLOYEE_ROLES = ['Stylist', 'Barber', 'Esthetician', 'Nail Technician', 'Massage Therapist', 'Receptionist'];
+
+        const CONVERSATION_STEPS = [
+            { id: 'welcome', botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?", inputType: 'text', field: 'firstName', placeholder: 'Enter your first name...' },
+            { id: 'salon_name', botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`, inputType: 'text', field: 'salonName', placeholder: 'Enter your salon name...' },
+            { id: 'address', botMessage: "Perfect! Now I need your business address so clients know where to find you. 📍", inputType: 'text', field: 'fullAddress', placeholder: 'Enter your full business address...' },
+            { id: 'employee_count', botMessage: "Great. How many employees take appointments or service customers?", inputType: 'number', field: 'employeeCount', placeholder: 'e.g., 3' },
+            { id: 'services', botMessage: "Excellent! Now, what services do you want people to book online? Pick up to 5.", inputType: 'multiselect', options: SERVICE_OPTIONS, maxSelections: 5, field: 'services' },
+            { id: 'smart_messages', botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:", inputType: 'multiselect', options: MESSAGE_OPTIONS, maxSelections: 5, field: 'smartMessages' },
+            { id: 'building_system', botMessage: "Awesome! Let me build your system. This will just take a moment...", inputType: 'progress' },
+            { id: 'final_summary', botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• **Location:** ${data.fullAddress}\n• **Team:**\n${data.employees.map(e => `  - ${e.name} (${e.role})`).join('\n')}\n• **Services:** ${data.services.join(', ')}\n• **Automated Messages:** ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`, inputType: 'final' }
+        ];
+
+        // --- Refactored Input Components ---
+
+        const TextInput = ({ onSubmit, placeholder, disabled, type, label }) => {
+            const [input, setInput] = useState('');
+            const inputId = 'text-input-' + type;
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (!input.trim()) return;
+                onSubmit(input);
+                setInput('');
+            };
+            return (
+                <form onSubmit={handleSubmit} className="flex items-center space-x-2">
+                    <label htmlFor={inputId} className="sr-only">{label}</label>
+                    <input id={inputId} type={type} value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" disabled={disabled} autoFocus />
+                    <button type="submit" disabled={disabled || !input.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Send</button>
+                </form>
+            );
+        };
+
+        const MultiSelectInput = ({ options, maxSelections, field, userData, setUserData, onComplete }) => {
+            const handleToggle = (option) => {
+                setUserData(prev => {
+                    const currentSelection = prev[field] || [];
+                    const isSelected = currentSelection.includes(option);
+                    if (isSelected) {
+                        return { ...prev, [field]: currentSelection.filter(item => item !== option) };
+                    } else if (currentSelection.length < maxSelections) {
+                        return { ...prev, [field]: [...currentSelection, option] };
+                    }
+                    return prev;
+                });
+            };
+
+            const selection = userData[field] || [];
+
+            return (
+                <div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                        {options.map(option => {
+                            const isSelected = selection.includes(option);
+                            return <button key={option} onClick={() => handleToggle(option)} className={`p-3 border rounded-lg text-sm text-left transition-colors ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}>{option} {isSelected && '✓'}</button>;
+                        })}
+                    </div>
+                    <button onClick={onComplete} disabled={selection.length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Continue</button>
+                </div>
+            );
+        };
+        
+        const EmployeeForm = ({ employeeIndex, totalEmployees, onSave }) => {
+            const [employee, setEmployee] = useState({ name: '', role: 'Stylist' });
+            const [error, setError] = useState('');
+
+            const handleSave = () => {
+                if (!employee.name.trim()) {
+                    setError("Please enter the employee's name.");
+                    return;
+                }
+                setError('');
+                onSave(employee);
+                setEmployee({ name: '', role: 'Stylist' }); // Reset for next employee
+            };
+
+            return (
+                <div className="space-y-3">
+                    <p className="font-semibold text-slate-700" id="employee-form-heading">Employee {employeeIndex + 1} of {totalEmployees}</p>
+                    <input type="text" placeholder="Employee's Name" value={employee.name} onChange={e => setEmployee({ ...employee, name: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg" aria-label="Employee's Name" autoFocus />
+                    <select value={employee.role} onChange={e => setEmployee({ ...employee, role: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg bg-white" aria-label="Employee's Role">
+                        {EMPLOYEE_ROLES.map(role => <option key={role} value={role}>{role}</option>)}
+                    </select>
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
+                    <button onClick={handleSave} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700">
+                        {employeeIndex + 1 < totalEmployees ? 'Next Employee' : 'Finish & Continue'}
+                    </button>
+                </div>
+            );
+        };
+        
+        const ProgressBar = ({ progress }) => (<div className="p-4 flex flex-col items-center justify-center"><div className="progress-bar-container w-full"><div className="progress-bar" style={{ width: `${progress}%` }}></div></div><p className="text-slate-600 mt-2 text-sm">Building your system & sending info...</p></div>);
+        
+        const FinalButton = () => (<a href="https://buy.stripe.com/00g14qg9r9T2dEI5kk" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600 transition-colors">Complete Payment for $49</a>);
+        
+        const TypingIndicator = () => (<div className="flex justify-start"><div className="p-3 rounded-2xl bg-slate-200 rounded-bl-lg"><div className="typing-indicator"><span></span><span></span><span></span></div></div></div>);
+
+        // --- Main Chatbot Component ---
+
         ProBookingChatbot = () => {
-            // --- Firebase State ---
+            // --- State Management ---
             const [db, setDb] = useState(null);
             const [auth, setAuth] = useState(null);
             const [userId, setUserId] = useState(null);
             const [isAuthReady, setIsAuthReady] = useState(false);
             const [isLoadingState, setIsLoadingState] = useState(true);
 
-            // --- Core State ---
             const [currentStep, setCurrentStep] = useState(0);
             const [messages, setMessages] = useState([]);
-            const [userData, setUserData] = useState({
-                firstName: '', salonName: '', fullAddress: '', employeeCount: 0,
-                employees: [], services: [], smartMessages: []
-            });
+            const [userData, setUserData] = useState(INITIAL_USER_DATA);
             const [isTyping, setIsTyping] = useState(false);
             const [progress, setProgress] = useState(0);
-            const messagesEndRef = useRef(null);
-
-            // --- Dynamic State ---
+            
             const [isCollectingEmployees, setIsCollectingEmployees] = useState(false);
             const [currentEmployeeIndex, setCurrentEmployeeIndex] = useState(0);
-            const [tempEmployee, setTempEmployee] = useState({ name: '', role: 'Stylist' });
 
-            // --- Static Data ---
-            const serviceOptions = ['Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions', 'Scalp Treatments', 'Blowouts'];
-            const messageOptions = ['Booking confirmation', '24-hour reminder', 'Thank you & review', 'Win-back inactive', 'Rebook promotion'];
-            const employeeRoles = ['Stylist', 'Barber', 'Esthetician', 'Nail Technician', 'Massage Therapist', 'Receptionist'];
+            const messagesEndRef = useRef(null);
+            
+            // --- Hooks ---
 
-            const conversationSteps = [
-                { id: 'welcome', botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?", inputType: 'text', field: 'firstName', placeholder: 'Enter your first name...' },
-                { id: 'salon_name', botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`, inputType: 'text', field: 'salonName', placeholder: 'Enter your salon name...' },
-                { id: 'address', botMessage: "Perfect! Now I need your business address so clients know where to find you. 📍", inputType: 'text', field: 'fullAddress', placeholder: 'Enter your full business address...' },
-                { id: 'employee_count', botMessage: "Great. How many employees take appointments or service customers?", inputType: 'number', field: 'employeeCount', placeholder: 'e.g., 3' },
-                { id: 'services', botMessage: "Excellent! Now, what services do you want people to book online? Pick up to 5.", inputType: 'multiselect', options: serviceOptions, maxSelections: 5, field: 'services' },
-                { id: 'smart_messages', botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:", inputType: 'multiselect', options: messageOptions, maxSelections: 5, field: 'smartMessages' },
-                { id: 'building_system', botMessage: "Awesome! Let me build your system. This will just take a moment...", inputType: 'progress' },
-                { id: 'final_summary', botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• **Location:** ${data.fullAddress}\n• **Team:**\n${data.employees.map(e => `  - ${e.name} (${e.role})`).join('\n')}\n• **Services:** ${data.services.join(', ')}\n• **Automated Messages:** ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`, inputType: 'final' }
-            ];
-
-            // --- Firebase Initialization and Auth ---
+            // Firebase Initialization and Auth
             useEffect(() => {
                 if (!firebaseConfig || !window.firebaseServices) {
                     console.error("Firebase config or services not found.");
-                    setIsAuthReady(true); // Proceed without persistence
+                    setIsAuthReady(true);
                     setIsLoadingState(false);
                     return;
                 }
-                
                 const { initializeApp, getFirestore, getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } = window.firebaseServices;
-                
                 const app = initializeApp(firebaseConfig);
                 const authInstance = getAuth(app);
-                const dbInstance = getFirestore(app);
-
-                setDb(dbInstance);
                 setAuth(authInstance);
+                setDb(getFirestore(app));
 
-                onAuthStateChanged(authInstance, async (user) => {
+                const unsubscribe = onAuthStateChanged(authInstance, (user) => {
                     if (user) {
                         setUserId(user.uid);
-                    } else {
+                    }
+                    setIsAuthReady(true);
+                });
+
+                if (!authInstance.currentUser) {
+                    (async () => {
                         try {
-                            if(initialAuthToken) {
+                            if (initialAuthToken) {
                                 await signInWithCustomToken(authInstance, initialAuthToken);
                             } else {
                                 await signInAnonymously(authInstance);
                             }
                         } catch (error) {
-                            console.error("Anonymous sign-in failed", error);
-                            setIsLoadingState(false); // Stop loading on auth error
+                            console.log("Custom token sign-in failed, falling back to anonymous. Error code:", error.code);
+                            try {
+                                await signInAnonymously(authInstance);
+                            } catch (anonError) {
+                                console.error("Critical: Fallback anonymous sign-in also failed.", anonError);
+                                setIsAuthReady(true);
+                            }
                         }
-                    }
+                    })();
+                } else {
+                    setUserId(authInstance.currentUser.uid);
                     setIsAuthReady(true);
-                });
+                }
+
+                return () => unsubscribe();
             }, []);
 
-            // --- Load State from Firestore ---
+            // Load State from Firestore
             useEffect(() => {
                 if (!isAuthReady || !db || !userId) {
-                    if(isAuthReady) setIsLoadingState(false); // If auth is ready but no db/userId, stop loading
+                    if (isAuthReady) setIsLoadingState(false);
                     return;
-                };
-
+                }
                 const { doc, getDoc } = window.firebaseServices;
                 const docRef = doc(db, 'artifacts', appId, 'users', userId, 'onboardingState', 'data');
-                
                 getDoc(docRef).then(docSnap => {
                     if (docSnap.exists()) {
-                        const savedState = docSnap.data();
-                        // Restore state only if it's past the initial welcome message
-                        if(savedState.messages && savedState.messages.length > 1) {
-                            setUserData(savedState.userData || userData);
-                            setCurrentStep(savedState.currentStep || 0);
-                            setMessages(savedState.messages || []);
+                        const { userData: savedData, currentStep: savedStep, messages: savedMessages } = docSnap.data();
+                        if (savedMessages && savedMessages.length > 1) {
+                            setUserData(savedData || INITIAL_USER_DATA);
+                            setCurrentStep(savedStep || 0);
+                            setMessages(savedMessages || []);
                         }
                     }
-                    setIsLoadingState(false); // Done loading from Firestore
                 }).catch(error => {
                     console.error("Error loading state from Firestore:", error);
-                    setIsLoadingState(false); // Stop loading on fetch error
+                }).finally(() => {
+                    setIsLoadingState(false);
                 });
             }, [isAuthReady, db, userId]);
 
-            // --- Save State to Firestore ---
+            // Save State to Firestore
             useEffect(() => {
-                // Don't save initial state or while loading
-                if (isLoadingState || !isAuthReady || !db || !userId) return;
-                // Only save if we have some user interaction
-                if (messages.length <= 1 && !userData.firstName) return;
-
+                if (isLoadingState || !isAuthReady || !db || !userId || messages.length <= 1) return;
                 const { doc, setDoc } = window.firebaseServices;
-                const stateToSave = { userData, currentStep, messages };
                 const docRef = doc(db, 'artifacts', appId, 'users', userId, 'onboardingState', 'data');
-
-                setDoc(docRef, stateToSave, { merge: true })
-                  .catch(error => console.error("Error saving state:", error));
-
-            }, [userData, currentStep, messages, isLoadingState, isAuthReady, db, userId]);
+                setDoc(docRef, { userData, currentStep, messages }, { merge: true })
+                    .catch(error => console.error("Error saving state:", error));
+            }, [userData, currentStep, messages]);
             
-
-            // --- Chat Logic ---
-            const scrollToBottom = () => { if (messagesEndRef.current) { messagesEndRef.current.scrollIntoView({ behavior: "smooth" }); } };
-            useEffect(scrollToBottom, [messages, isTyping]);
-
+            // Auto-scroll messages
             useEffect(() => {
-                // Start conversation only if it's fresh (no loaded messages)
-                if (!isLoadingState && messages.length === 0 && currentStep === 0) {
-                    addBotMessage(conversationSteps[0].botMessage, 500);
+                if (messagesEndRef.current) {
+                   messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
                 }
-            }, [isLoadingState]);
+            }, [messages, isTyping]);
+            
+            // --- Chat Logic & Step Progression ---
+
+            const addMessage = (type, content) => {
+                setMessages(prev => [...prev, { type, content, id: Date.now() }]);
+            };
 
             const addBotMessage = (message, delay = 1000) => {
                 setIsTyping(true);
                 setTimeout(() => {
-                    setMessages(prev => [...prev, { type: 'bot', content: message, id: Date.now() }]);
+                    addMessage('bot', message);
                     setIsTyping(false);
                 }, delay);
             };
 
-            const addUserMessage = (message) => { setMessages(prev => [...prev, { type: 'user', content: message, id: Date.now() }]); };
-
-            const goToNextStep = (newData) => {
+            const goToNextStep = (currentData) => {
                 const nextStepIndex = currentStep + 1;
-                if (conversationSteps[nextStepIndex]) {
+                const nextStep = CONVERSATION_STEPS[nextStepIndex];
+                if (nextStep) {
+                    const messageContent = typeof nextStep.botMessage === 'function' ? nextStep.botMessage(currentData || userData) : nextStep.botMessage;
+                    
+                    if(nextStep.id !== 'building_system') {
+                        addBotMessage(messageContent);
+                    }
                     setCurrentStep(nextStepIndex);
-                    const nextMessage = typeof conversationSteps[nextStepIndex].botMessage === 'function' 
-                        ? conversationSteps[nextStepIndex].botMessage(newData || userData) 
-                        : conversationSteps[nextStepIndex].botMessage;
-                    addBotMessage(nextMessage);
                 }
             };
-
+            
             const handleSend = (value) => {
-                const step = conversationSteps[currentStep];
-                if (!step || !value.trim()) return;
-                addUserMessage(value);
+                addMessage('user', value);
+                const step = CONVERSATION_STEPS[currentStep];
                 const newData = { ...userData, [step.field]: value };
                 setUserData(newData);
 
@@ -665,80 +804,88 @@
                     setTimeout(() => goToNextStep(newData), 500);
                 }
             };
-            
-            const handleMultiSelectNext = () => {
-                const step = conversationSteps[currentStep];
-                if (userData[step.field].length === 0) return;
-                addUserMessage(userData[step.field].join(', '));
-                setTimeout(() => goToNextStep(), 500);
-            };
 
-            const handleSaveEmployee = () => {
-                if (!tempEmployee.name.trim()) {
-                    addBotMessage("Please enter the employee's name."); return;
-                }
-                addUserMessage(`Employee ${currentEmployeeIndex + 1}: ${tempEmployee.name} (${tempEmployee.role})`);
-                
-                const updatedEmployees = [...userData.employees, tempEmployee];
+            const handleMultiSelectNext = () => {
+                const step = CONVERSATION_STEPS[currentStep];
+                if (!userData[step.field] || userData[step.field].length === 0) return;
+                addMessage('user', userData[step.field].join(', '));
+                setTimeout(() => goToNextStep(userData), 500);
+            };
+            
+            const handleSaveEmployee = (employee) => {
+                addMessage('user', `Employee ${currentEmployeeIndex + 1}: ${employee.name} (${employee.role})`);
+                const updatedEmployees = [...userData.employees, employee];
                 const newUserData = { ...userData, employees: updatedEmployees };
                 setUserData(newUserData);
-                
-                const nextEmployeeNum = currentEmployeeIndex + 2;
-                if (nextEmployeeNum <= userData.employeeCount) {
+
+                if (currentEmployeeIndex + 1 < userData.employeeCount) {
                     setCurrentEmployeeIndex(prev => prev + 1);
-                    setTempEmployee({ name: '', role: 'Stylist' });
-                    addBotMessage(`Great! Now for employee ${nextEmployeeNum} of ${userData.employeeCount}.`);
+                    addBotMessage(`Great! Now for employee ${currentEmployeeIndex + 2} of ${userData.employeeCount}.`);
                 } else {
                     setIsCollectingEmployees(false);
                     setCurrentEmployeeIndex(0);
-                    setTempEmployee({ name: '', role: 'Stylist' });
                     setTimeout(() => goToNextStep(newUserData), 500);
                 }
             };
-            
-            // --- Progress Bar & Data Submission ---
+
+            // This effect triggers the entire conversation flow
             useEffect(() => {
-                if (conversationSteps[currentStep] && conversationSteps[currentStep].id === 'building_system') {
-                    let currentProgress = 0;
-                    const interval = setInterval(() => {
-                        currentProgress += 25;
-                        setProgress(currentProgress);
-                        if (currentProgress >= 100) {
-                            clearInterval(interval);
-                            // Submit to Formspree
-                            fetch("https://formspree.io/f/mnnvldep", { 
-                                method: 'POST', 
-                                body: JSON.stringify(userData), 
-                                headers: { 'Content-Type': 'application/json' } 
-                            })
+                if (!isLoadingState) {
+                    if (messages.length === 0) {
+                        addBotMessage(CONVERSATION_STEPS[0].botMessage, 500);
+                    }
+                    
+                    const currentStepData = CONVERSATION_STEPS[currentStep];
+                    if (currentStepData && currentStepData.id === 'building_system' && !isTyping) {
+                        handleBuildSystem();
+                    }
+                }
+            }, [isLoadingState, currentStep]);
+            
+            const handleBuildSystem = () => {
+                let currentProgress = 0;
+                const interval = setInterval(() => {
+                    currentProgress += 25;
+                    setProgress(currentProgress);
+                    if (currentProgress >= 100) {
+                        clearInterval(interval);
+                        fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: JSON.stringify(userData), headers: { 'Content-Type': 'application/json' } })
                             .then(res => {
                                 if (!res.ok) throw new Error("Submission failed");
-                                console.log("Form submission successful:", res);
-                                setTimeout(() => goToNextStep(), 500);
+                                setTimeout(() => {
+                                    const nextStepIndex = currentStep + 1;
+                                    const finalStep = CONVERSATION_STEPS[nextStepIndex];
+                                    if(finalStep) {
+                                        const finalMessage = finalStep.botMessage(userData);
+                                        addBotMessage(finalMessage, 500);
+                                        setCurrentStep(nextStepIndex);
+                                    }
+                                }, 500);
                             })
                             .catch(err => {
                                 console.error("Form submission error:", err);
-                                addBotMessage("Oh no! There was an issue sending your info. Please try refreshing or contact support. Don't worry, your progress is saved.");
+                                addBotMessage("Oh no! There was an issue sending your info. Please try refreshing or contact support. Your progress is saved.");
                             });
-                        }
-                    }, 700);
-                }
-            }, [currentStep]);
+                    }
+                }, 700);
+            };
             
-            // --- Component Renders ---
+            // --- Render Logic ---
             const renderInput = () => {
-                if (isLoadingState) return null;
-                if (isCollectingEmployees) return <EmployeeForm />;
+                if (isLoadingState || isTyping) return null;
+                if (isCollectingEmployees) {
+                    return <EmployeeForm employeeIndex={currentEmployeeIndex} totalEmployees={userData.employeeCount} onSave={handleSaveEmployee} />;
+                }
                 
-                const step = conversationSteps[currentStep];
-                if (!step || isTyping) return null;
+                const step = CONVERSATION_STEPS[currentStep];
+                if (!step) return null;
 
                 switch (step.inputType) {
                     case 'text':
                     case 'number':
                         return <TextInput onSubmit={handleSend} placeholder={step.placeholder} disabled={isTyping} type={step.inputType} label={step.botMessage} />;
                     case 'multiselect':
-                        return <MultiSelectInput />;
+                        return <MultiSelectInput options={step.options} maxSelections={step.maxSelections} field={step.field} userData={userData} setUserData={setUserData} onComplete={handleMultiSelectNext} />;
                     case 'progress':
                         return <ProgressBar progress={progress} />;
                     case 'final':
@@ -747,87 +894,22 @@
                 }
             };
             
-            const EmployeeForm = () => (
-                <div className="space-y-3">
-                    <p className="font-semibold text-slate-700" id="employee-form-heading">Employee {currentEmployeeIndex + 1} of {userData.employeeCount}</p>
-                    <input type="text" placeholder="Employee's Name" value={tempEmployee.name} onChange={e => setTempEmployee({ ...tempEmployee, name: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg" aria-label="Employee's Name" autoFocus />
-                    <select value={tempEmployee.role} onChange={e => setTempEmployee({ ...tempEmployee, role: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg bg-white" aria-label="Employee's Role">
-                        {employeeRoles.map(role => <option key={role} value={role}>{role}</option>)}
-                    </select>
-                    <button onClick={handleSaveEmployee} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700">
-                        {currentEmployeeIndex + 1 < userData.employeeCount ? 'Next Employee' : 'Finish & Continue'}
-                    </button>
-                </div>
-            );
-
-            const TextInput = ({ onSubmit, placeholder, disabled, type, label }) => {
-                const [input, setInput] = useState('');
-                const inputId = 'text-input-' + type;
-                const handleSubmit = (e) => { 
-                    e.preventDefault();
-                    if (!input.trim()) return;
-                    onSubmit(input); 
-                    setInput(''); 
-                };
-                return (
-                    <form onSubmit={handleSubmit} className="flex items-center space-x-2">
-                        <label htmlFor={inputId} className="sr-only">{label}</label>
-                        <input id={inputId} type={type} value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" disabled={disabled} autoFocus />
-                        <button type="submit" disabled={disabled || !input.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Send</button>
-                    </form>
-                );
-            };
-
-            const MultiSelectInput = () => {
-                const step = conversationSteps[currentStep];
-                const handleToggle = (option) => {
-                    setUserData(prev => {
-                        const currentSelection = prev[step.field];
-                        const isSelected = currentSelection.includes(option);
-                        if (isSelected) {
-                            return { ...prev, [step.field]: currentSelection.filter(item => item !== option) };
-                        } else if (currentSelection.length < step.maxSelections) {
-                            return { ...prev, [step.field]: [...currentSelection, option] };
-                        }
-                        return prev;
-                    });
-                };
-                return (
-                    <div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                            {step.options.map(option => {
-                                const isSelected = userData[step.field].includes(option);
-                                return <button key={option} onClick={() => handleToggle(option)} className={`p-3 border rounded-lg text-sm text-left ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}>{option} {isSelected && '✓'}</button>;
-                            })}
-                        </div>
-                        <button onClick={handleMultiSelectNext} disabled={isTyping || userData[step.field].length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Continue</button>
-                    </div>
-                );
-            };
-
-            const ProgressBar = ({ progress }) => (<div className="p-4 flex flex-col items-center justify-center"><div className="progress-bar-container w-full"><div className="progress-bar" style={{ width: `${progress}%` }}></div></div><p className="text-slate-600 mt-2 text-sm">Building your system & sending info...</p></div>);
-            const FinalButton = () => (<a href="https://buy.stripe.com/00g14qg9r9T2dEI5kk" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">Complete Payment for $49</a>);
-            
             return (
                 <div className="flex flex-col h-full bg-slate-100 text-slate-800">
                     <h2 id="chatbot-heading" className="sr-only">ProBookingQR Setup Chatbot</h2>
-                    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4" aria-live="polite" aria-atomic="false">
                         {isLoadingState ? (
-                            <div className="flex justify-center items-center h-full"><div className="typing-indicator"><span></span><span></span><span></span></div></div>
+                           <div className="flex justify-center items-center h-full"><TypingIndicator /></div>
                         ) : (
-                            <>
-                                {messages.map((msg, index) => (
-                                    <div key={msg.id || index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            <React.Fragment>
+                                {messages.map((msg) => (
+                                    <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                                         <div className={`max-w-xs md:max-w-md p-3 rounded-2xl whitespace-pre-wrap shadow-sm ${msg.type === 'user' ? 'bg-indigo-600 text-white rounded-br-lg' : 'bg-slate-200 text-slate-800 rounded-bl-lg'}`}>{msg.content}</div>
                                     </div>
                                 ))}
-                                {isTyping && (
-                                    <div className="flex justify-start">
-                                        <div className="p-3 rounded-2xl bg-slate-200 rounded-bl-lg"><div className="typing-indicator"><span></span><span></span><span></span></div></div>
-                                    </div>
-                                )}
+                                {isTyping && <TypingIndicator />}
                                 <div ref={messagesEndRef} />
-                            </>
+                            </React.Fragment>
                         )}
                     </div>
                     <div className="p-4 bg-white border-t border-slate-200">
@@ -836,7 +918,7 @@
                 </div>
             );
         };
-    </script>
+   </script>
 </body>
 
 </html>
