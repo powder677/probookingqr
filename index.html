@@ -25,6 +25,54 @@
    <script src="[https://unpkg.com/react@17/umd/react.development.js](https://unpkg.com/react@17/umd/react.development.js)" crossorigin></script>
    <script src="[https://unpkg.com/react-dom@17/umd/react-dom.development.js](https://unpkg.com/react-dom@17/umd/react-dom.development.js)" crossorigin></script>
    <script src="[https://unpkg.com/babel-standalone@6/babel.min.js](https://unpkg.com/babel-standalone@6/babel.min.js)"></script>
+   <!-- FAQ Schema Markup -->
+   <script type="application/ld+json">
+      {
+         "@context": "[https://schema.org](https://schema.org)",
+         "@type": "FAQPage",
+         "mainEntity": [{
+               "@type": "Question",
+               "name": "How do QR codes work for booking appointments?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar without downloading any apps. The QR code links directly to your online booking form where customers can select services, pick times, and confirm appointments in under 30 seconds."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "Do customers need to download an app to use QR code booking?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No, customers don't need to download any apps. QR code booking works through the customer's existing phone camera and web browser. They simply scan the code and the booking form opens instantly in their browser."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "How long does it take to book an appointment with a QR code?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Booking with a QR code takes less than 30 seconds. Customers scan the code, select their service and preferred time, enter their contact details, and receive instant confirmation."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "What if I already have a website?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a \"Book Now\" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "Can I block off personal time?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like \"Doctor's Appointment\" or \"Lunch\"). Our system will see that you're busy and won't show that time as available for booking."
+               }
+            }
+         ]
+      }
+   </script>
    <style>
       /* Custom styles to supplement Tailwind */
       body {
@@ -179,6 +227,12 @@
          <a href="#" class="text-2xl font-bold text-white">
             ProBooking<span class="text-indigo-400">QR</span>
          </a>
+         <nav class="hidden md:flex items-center space-x-6">
+            <a href="#features" class="text-slate-300 hover:text-indigo-400 transition-colors">Features</a>
+            <a href="#how-it-works" class="text-slate-300 hover:text-indigo-400 transition-colors">How It Works</a>
+            <a href="#pricing" class="text-slate-300 hover:text-indigo-400 transition-colors">Pricing</a>
+            <a href="#faq" class="text-slate-300 hover:text-indigo-400 transition-colors">FAQ</a>
+         </nav>
       </div>
    </header>
    <!-- Main Content -->
@@ -250,6 +304,55 @@
          </div>
       </section>
 
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="py-20 bg-slate-900/50">
+         <div class="container mx-auto px-6 relative">
+            <div class="text-center max-w-3xl mx-auto">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">How QR Code Booking Works</h2>
+               <p class="mt-4 text-slate-400 text-lg">From scan to confirmation in under 30 seconds. No apps, no passwords, no hassle.</p>
+            </div>
+
+            <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl my-12 max-w-4xl mx-auto">
+               <p class="text-lg text-slate-300 text-center"><strong>QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar.</strong> The code links directly to your online form where they can pick services, choose times, and confirm appointments.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+               <!-- Step 1 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">1</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Customer Scans</h3>
+                  </div>
+                  <p class="text-slate-400">They point their phone camera at your QR code on a business card, your front door, or a social media post.</p>
+               </div>
+               <!-- Step 2 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">2</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Form Opens</h3>
+                  </div>
+                  <p class="text-slate-400">The code instantly opens your branded booking page in their phone's web browser. No app download is required.</p>
+               </div>
+               <!-- Step 3 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">3</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Select & Book</h3>
+                  </div>
+                  <p class="text-slate-400">They choose a service, pick an available time from your live calendar, and enter their contact details.</p>
+               </div>
+               <!-- Step 4 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">4</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Get Confirmed</h3>
+                  </div>
+                  <p class="text-slate-400">You both receive instant confirmation, and the client gets an automatic reminder before the appointment.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
       <!-- Pricing Section -->
       <section id="pricing" class="py-20">
          <div class="container mx-auto px-6 relative">
@@ -292,7 +395,7 @@
       </section>
 
       <!-- New Features Section -->
-      <section id="features" class="py-20">
+      <section id="features" class="py-20 bg-slate-900/50">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Everything You Need to Fill Your Calendar</h2>
