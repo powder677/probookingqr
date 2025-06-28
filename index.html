@@ -408,15 +408,15 @@
                         <input type="number" id="avgService" value="75" min="10" max="500" class="w-full bg-slate-700 border-slate-600 text-white rounded-lg p-3">
                      </div>
                      <div>
-                        <label for="missedCalls" class="block mb-2 font-semibold text-slate-300">Missed Calls Per Week: <span id="missedCallsValue" class="font-bold text-indigo-400">8</span></label>
+                        <label for="missedCalls" class="block mb-2 font-semibold text-slate-300">Missed Calls Per Week: <span id="missedCallsValue" class="font-bold text-indigo-400"></span></label>
                         <input type="range" id="missedCalls" class="range-slider" min="1" max="50" value="8">
                      </div>
                      <div>
-                        <label for="conversionRate" class="block mb-2 font-semibold text-slate-300">Booking Conversion Rate (%): <span id="conversionValue" class="font-bold text-indigo-400">60%</span></label>
+                        <label for="conversionRate" class="block mb-2 font-semibold text-slate-300">Booking Conversion Rate (%): <span id="conversionValue" class="font-bold text-indigo-400"></span></label>
                         <input type="range" id="conversionRate" class="range-slider" min="10" max="90" value="60">
                      </div>
                      <div>
-                        <label for="rebookRate" class="block mb-2 font-semibold text-slate-300">Current Rebook Rate (%): <span id="rebookValue" class="font-bold text-indigo-400">45%</span></label>
+                        <label for="rebookRate" class="block mb-2 font-semibold text-slate-300">Current Rebook Rate (%): <span id="rebookValue" class="font-bold text-indigo-400"></span></label>
                         <input type="range" id="rebookRate" class="range-slider" min="20" max="80" value="45">
                      </div>
                   </div>
@@ -426,19 +426,19 @@
                      <div class="space-y-4">
                         <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg">
                            <span class="font-medium text-slate-400">New Monthly Bookings</span>
-                           <span class="font-bold text-lg text-white" id="newBookings">21 appointments</span>
+                           <span class="font-bold text-lg text-white" id="newBookings"></span>
                         </div>
                         <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg">
                            <span class="font-medium text-slate-400">Additional Monthly Revenue</span>
-                           <span class="font-bold text-lg text-white" id="additionalRevenue">$1,559</span>
+                           <span class="font-bold text-lg text-white" id="additionalRevenue"></span>
                         </div>
                         <div class="flex justify-between items-center bg-green-500/10 p-4 rounded-lg">
                            <span class="font-bold text-green-300">Annual Revenue Increase</span>
-                           <span class="font-bold text-2xl text-green-300" id="annualIncrease">$18,705</span>
+                           <span class="font-bold text-2xl text-green-300" id="annualIncrease"></span>
                         </div>
                         <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg">
                            <span class="font-medium text-slate-400">ROI on ProBookingQR</span>
-                           <span class="font-bold text-lg text-white" id="roi">3,718%</span>
+                           <span class="font-bold text-lg text-white" id="roi"></span>
                         </div>
                      </div>
                      <p class="text-xs text-slate-500 mt-4 text-center">*Estimates based on industry averages and client data.</p>
@@ -655,18 +655,26 @@
             conversionValueSpan.textContent = conversionRateInput.value + '%';
             rebookValueSpan.textContent = rebookRateInput.value + '%';
 
-            // Calculations
-            const weeklyLostBookings = missedCalls * conversionRate;
-            const monthlyLostBookings = weeklyLostBookings * 4.33;
+            // --- Revised & Corrected Calculations ---
 
-            const capturedBookings = monthlyLostBookings * 0.85; // 85% capture rate
-            const additionalRebookings = capturedBookings * (Math.min(rebookRate + 0.20, 0.85) - rebookRate);
+            // 1. Calculate new bookings from captured missed calls
+            const monthlyLostBookings = (missedCalls * conversionRate) * 4.33;
+            const capturedBookings = monthlyLostBookings * 0.85; // Assume 85% of missed calls are captured
 
+            // 2. Calculate additional bookings from improved rebooking rate on the NEWLY captured clients
+            // A 20% improvement on the existing rate, capped at 85% total.
+            const improvedRebookRate = Math.min(rebookRate * 1.20, 0.85);
+            const rebookingLift = improvedRebookRate - rebookRate;
+            const additionalRebookings = capturedBookings * rebookingLift;
+
+            // 3. Total new appointments and revenue
             const totalNewBookings = Math.round(capturedBookings + additionalRebookings);
             const additionalRevenue = totalNewBookings * avgService;
             const annualIncrease = additionalRevenue * 12;
-            const proBookingCost = 97 * 12;
-            const roi = ((annualIncrease - proBookingCost) / proBookingCost * 100);
+
+            // 4. Calculate ROI based on correct annual cost
+            const annualCost = 49 + (97 * 11); // $49 for month 1, $97 for months 2-12
+            const roi = annualCost > 0 ? ((annualIncrease - annualCost) / annualCost * 100) : 0;
 
             // Update display
             newBookingsSpan.textContent = `${totalNewBookings} appointments`;
@@ -683,7 +691,12 @@
          updateCalculation();
       }
 
-      setupROICalculator();
+      // Ensure the calculator is set up after the DOM is loaded
+      if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', setupROICalculator);
+      } else {
+         setupROICalculator();
+      }
    </script>
 
    <!-- React Chatbot Component Definition -->
