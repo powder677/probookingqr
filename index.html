@@ -8,23 +8,79 @@
    <title>ProBookingQR | Stop Losing Clients to Missed Calls</title>
    <meta name="description" content="ProBookingQR helps solo professionals capture more clients with 24/7 automated booking via QR codes. No missed calls, no complex software.">
    <!-- Favicon -->
-   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22[http://www.w3.org/2000/svg%22](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
    <!-- Social Media Sharing (Open Graph & Twitter) -->
    <meta property="og:title" content="ProBookingQR | Stop Losing Clients to Missed Calls">
    <meta property="og:description" content="Automated QR-to-Book system for solo service pros. Book more clients without missing calls.">
-   <meta property="og:image" content="https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR">
-   <meta property="og:url" content="https://your-domain.com/">
+   <meta property="og:image" content="[https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR](https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR)">
+   <meta property="og:url" content="[https://your-domain.com/](https://your-domain.com/)">
    <meta name="twitter:card" content="summary_large_image">
    <!-- Google Fonts: Inter -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+   <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+   <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap)" rel="stylesheet">
    <!-- Tailwind CSS -->
-   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
    <!-- React -->
-   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   <script src="[https://unpkg.com/react@17/umd/react.development.js](https://unpkg.com/react@17/umd/react.development.js)" crossorigin></script>
+   <script src="[https://unpkg.com/react-dom@17/umd/react-dom.development.js](https://unpkg.com/react-dom@17/umd/react-dom.development.js)" crossorigin></script>
+   <script src="[https://unpkg.com/babel-standalone@6/babel.min.js](https://unpkg.com/babel-standalone@6/babel.min.js)"></script>
+   <!-- FAQ Schema Markup -->
+   <script type="application/ld+json">
+      {
+         "@context": "[https://schema.org](https://schema.org)",
+         "@type": "FAQPage",
+         "mainEntity": [{
+               "@type": "Question",
+               "name": "How do QR codes work for booking appointments?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar without downloading any apps. The QR code links directly to your online booking form where customers can select services, pick times, and confirm appointments in under 30 seconds."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "How to reduce no-shows for appointments?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The most effective way to reduce appointment no-shows is using automated SMS and email reminders sent 24 hours and 2 hours before appointments, combined with requiring confirmation to book. This can reduce no-shows by 40-70% immediately."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "Do I need a website to offer online booking?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No, you don't need a website for QR code booking. The system creates a standalone booking page that customers access by scanning your QR code. You can display the QR code anywhere - business cards, tables, social media, or print materials."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "Do appointment reminders really reduce no-shows?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, automated appointment reminders can reduce no-shows by 38-50%. SMS reminders are most effective, with email reminders also showing significant improvement in attendance rates."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "Can I block off personal time?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like \"Doctor's Appointment\" or \"Lunch\"). Our system will see that you're busy and won't show that time as available for booking."
+               }
+            },
+            {
+               "@type": "Question",
+               "name": "When should you send appointment reminders?",
+               "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Send the first reminder 24 hours before the appointment and a second reminder 2 hours before. This two-reminder system is most effective at reducing no-shows while not being overly aggressive."
+               }
+            }
+         ]
+      }
+   </script>
    <style>
       /* Custom styles to supplement Tailwind */
       body {
@@ -169,6 +225,16 @@
       details[open] summary .plus-icon {
          transform: rotate(45deg);
       }
+
+      .checkmark {
+         color: #22c55e;
+         font-weight: bold;
+      }
+
+      .x-mark {
+         color: #ef4444;
+         font-weight: bold;
+      }
    </style>
 </head>
 
@@ -179,6 +245,16 @@
          <a href="#" class="text-2xl font-bold text-white">
             ProBooking<span class="text-indigo-400">QR</span>
          </a>
+         <!-- Navigation -->
+         <nav class="hidden md:flex items-center space-x-5">
+            <a href="#features" class="text-slate-300 hover:text-indigo-400 transition-colors">Features</a>
+            <a href="#how-it-works" class="text-slate-300 hover:text-indigo-400 transition-colors">How It Works</a>
+            <a href="#easy-setup" class="text-slate-300 hover:text-indigo-400 transition-colors">Easy Setup</a>
+            <a href="#reduce-no-shows" class="text-slate-300 hover:text-indigo-400 transition-colors">Reduce No-Shows</a>
+            <a href="#pricing" class="text-slate-300 hover:text-indigo-400 transition-colors">Pricing</a>
+            <a href="#about" class="text-slate-300 hover:text-indigo-400 transition-colors">About Us</a>
+            <a href="#faq" class="text-slate-300 hover:text-indigo-400 transition-colors">FAQ</a>
+         </nav>
       </div>
    </header>
    <!-- Main Content -->
@@ -250,6 +326,184 @@
          </div>
       </section>
 
+      <!-- Features Section -->
+      <section id="features" class="py-20">
+         <div class="container mx-auto px-6 relative">
+            <div class="text-center max-w-3xl mx-auto">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Everything You Need to Fill Your Calendar</h2>
+               <p class="mt-4 text-slate-400 text-lg">ProBookingQR isn't just a QR code. It's a complete, automated system designed to bring you more business with less effort.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+               <!-- Feature Cards -->
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Your Own Booking Page</h3>
+                  <p class="text-slate-400">Get a simple, beautiful booking page branded for your business. No ugly third-party logos. Just your services, your times, and your brand.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Unlimited QR Code Scans</h3>
+                  <p class="text-slate-400">Put your QR code everywhere: business cards, your front door, social media posts. There are no limits on how many clients can scan and book.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Google Calendar Sync</h3>
+                  <p class="text-slate-400">New appointments appear in your Google Calendar instantly. We block off times you're already busy, so you're never double-booked.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Automated Reminders</h3>
+                  <p class="text-slate-400">Dramatically reduce no-shows with automated SMS reminders sent to your clients 24 hours before their appointment. You don't lift a finger.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Automatic Review Requests</h3>
+                  <p class="text-slate-400">After their appointment, clients automatically get a text asking for a review, with a direct link to your Google or Yelp page. Build your reputation on autopilot.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Hands-Free Setup</h3>
+                  <p class="text-slate-400">There's no complicated software for you to learn. Just answer a few questions in our setup chat, and we build the entire system for you in under 24 hours.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="py-20 bg-slate-900/50">
+         <div class="container mx-auto px-6 relative">
+            <div class="text-center max-w-3xl mx-auto">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">The 4-Step QR Booking Process</h2>
+               <p class="mt-4 text-slate-400 text-lg">From scan to confirmation in under 30 seconds. No apps, no passwords, no hassle.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+               <!-- Step Cards -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">1</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Scan the Code</h3>
+                  </div>
+                  <p class="text-slate-400">A customer points their phone camera at your QR code on a business card, your front door, or a social media post.</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">2</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Open The Form</h3>
+                  </div>
+                  <p class="text-slate-400">The code instantly opens your branded booking page in their phone's web browser. No app download is required.</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">3</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Select & Book</h3>
+                  </div>
+                  <p class="text-slate-400">They choose a service, pick an available time from your live calendar, and enter their contact details.</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <div class="flex items-center mb-4">
+                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">4</div>
+                     <h3 class="font-bold text-white text-lg ml-4">Get Confirmed</h3>
+                  </div>
+                  <p class="text-slate-400">You both receive instant confirmation, and the client gets an automatic reminder before the appointment.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Easy Setup Section -->
+      <section id="easy-setup" class="py-20">
+         <div class="container mx-auto px-6 relative">
+            <div class="text-center max-w-3xl mx-auto">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">The Easiest Way to Set Up Online Booking</h2>
+               <p class="mt-4 text-slate-400 text-lg">Get started in minutes. No website, no downloads, no technical skills required.</p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white text-center mt-16 mb-10">Booking System Comparison</h3>
+            <div class="overflow-x-auto">
+               <table class="min-w-full bg-slate-800 border border-slate-700 rounded-lg text-sm">
+                  <thead>
+                     <tr class="bg-slate-700/50">
+                        <th class="p-4 text-left font-semibold">Feature</th>
+                        <th class="p-4 text-center font-semibold">ProBookingQR</th>
+                        <th class="p-4 text-center font-semibold">Website Plugins</th>
+                        <th class="p-4 text-center font-semibold">Custom App</th>
+                     </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-700">
+                     <tr>
+                        <td class="p-4"><strong>Setup Time</strong></td>
+                        <td class="p-4 text-center"><span class="checkmark">Under 24 Hours</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">1-4 Weeks</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">2-6 Months</span></td>
+                     </tr>
+                     <tr>
+                        <td class="p-4"><strong>Technical Skills Required</strong></td>
+                        <td class="p-4 text-center"><span class="checkmark">None</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">Moderate</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">High</span></td>
+                     </tr>
+                     <tr>
+                        <td class="p-4"><strong>Upfront Cost</strong></td>
+                        <td class="p-4 text-center"><span class="checkmark">$49</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">$500-$3,000</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">$5,000+</span></td>
+                     </tr>
+                     <tr>
+                        <td class="p-4"><strong>Needs Existing Website</strong></td>
+                        <td class="p-4 text-center"><span class="checkmark">No</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">Yes</span></td>
+                        <td class="p-4 text-center"><span class="checkmark">No</span></td>
+                     </tr>
+                     <tr>
+                        <td class="p-4"><strong>Customer App Download</strong></td>
+                        <td class="p-4 text-center"><span class="checkmark">Not Required</span></td>
+                        <td class="p-4 text-center"><span class="checkmark">Not Required</span></td>
+                        <td class="p-4 text-center"><span class="x-mark">Required</span></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </section>
+
+      <!-- Reduce No-Shows Section -->
+      <section id="reduce-no-shows" class="py-20 bg-slate-900/50">
+         <div class="container mx-auto px-6 relative">
+            <div class="text-center max-w-3xl mx-auto">
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">7 Proven Methods to Reduce No-Shows</h2>
+               <p class="mt-4 text-slate-400 text-lg">Stop losing money to empty chairs. Implement these simple strategies and reduce no-shows by up to 70%.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+               <!-- Method Cards -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">1. Automated Reminders</h3>
+                  <p class="text-slate-400">Send automatic SMS & email reminders 24 hours before the appointment. This is the single most effective way to prevent no-shows.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: 38-50% Reduction</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">2. Require Confirmation</h3>
+                  <p class="text-slate-400">Ask clients to click a button to confirm they're coming. It creates a small but powerful psychological commitment.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: 25-35% Reduction</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">3. Cancellation Policy</h3>
+                  <p class="text-slate-400">Clearly state your cancellation policy (e.g., 24-hour notice). Even without fees, it sets a professional tone and expectation.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: 20-30% Reduction</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">4. Collect Deposits</h3>
+                  <p class="text-slate-400">Requiring a small, refundable deposit at the time of booking dramatically increases the show-up rate.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: 30-50% Reduction</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">5. Easy Rescheduling</h3>
+                  <p class="text-slate-400">Provide a one-click link in reminders to reschedule. People are less likely to no-show if they can easily move the appointment.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: 15-25% Reduction</p>
+               </div>
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">6. Follow Up on No-Shows</h3>
+                  <p class="text-slate-400">Send a friendly, automated "We missed you!" message. It helps re-engage clients and discourages repeat offenses.</p>
+                  <p class="text-green-400 font-bold mt-3">Impact: Improves Future Attendance</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
       <!-- Pricing Section -->
       <section id="pricing" class="py-20">
          <div class="container mx-auto px-6 relative">
@@ -269,18 +523,10 @@
                      <p class="text-slate-400">Then $97/month. Cancel anytime.</p>
                   </div>
                   <ul class="space-y-4 my-8 text-slate-300">
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Everything in the Features section
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Unlimited bookings & reminders
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Calendar sync for all employees
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included
-                     </li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Everything in the Features section</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Unlimited bookings & reminders</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Calendar sync for all employees</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included</li>
                   </ul>
                   <div class="bg-green-500/10 border border-green-400/30 text-green-300 p-4 rounded-lg text-center mb-6">
                      <h4 class="font-bold">🛡️ 30-Day Money-Back Guarantee</h4>
@@ -291,100 +537,53 @@
          </div>
       </section>
 
-      <!-- New Features Section -->
-      <section id="features" class="py-20">
+      <!-- About Us Section -->
+      <section id="about" class="py-20 bg-slate-900/50">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
-               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Everything You Need to Fill Your Calendar</h2>
-               <p class="mt-4 text-slate-400 text-lg">ProBookingQR isn't just a QR code. It's a complete, automated system designed to bring you more business with less effort.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-               <!-- Feature 1 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Your Own Booking Page</h3>
-                  <p class="text-slate-400">Get a simple, beautiful booking page branded for your business. No ugly third-party logos. Just your services, your times, and your brand.</p>
-               </div>
-               <!-- Feature 2 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Unlimited QR Code Scans</h3>
-                  <p class="text-slate-400">Put your QR code everywhere: business cards, your front door, social media posts. There are no limits on how many clients can scan and book.</p>
-               </div>
-               <!-- Feature 3 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Google Calendar Sync</h3>
-                  <p class="text-slate-400">New appointments appear in your Google Calendar instantly. We block off times you're already busy, so you're never double-booked.</p>
-               </div>
-               <!-- Feature 4 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Automated Reminders</h3>
-                  <p class="text-slate-400">Dramatically reduce no-shows with automated SMS reminders sent to your clients 24 hours before their appointment. You don't lift a finger.</p>
-               </div>
-               <!-- Feature 5 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Automatic Review Requests</h3>
-                  <p class="text-slate-400">After their appointment, clients automatically get a text asking for a review, with a direct link to your Google or Yelp page. Build your reputation on autopilot.</p>
-               </div>
-               <!-- Feature 6 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Hands-Free Setup</h3>
-                  <p class="text-slate-400">There's no complicated software for you to learn. Just answer a few questions in our setup chat, and we build the entire system for you in under 24 hours.</p>
-               </div>
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">About ProBookingQR</h2>
+               <p class="mt-4 text-slate-400 text-lg">We're a team of developers and designers passionate about helping small businesses thrive. We believe that technology should be simple, affordable, and effective. That's why we created ProBookingQR - to give solo professionals the tools they need to succeed without the complexity and cost of traditional software.</p>
             </div>
          </div>
       </section>
 
-      <!-- New FAQ Section -->
+      <!-- FAQ Section -->
       <section id="faq" class="py-20">
          <div class="container mx-auto px-6 max-w-4xl relative">
             <div class="text-center">
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Frequently Asked Questions</h2>
             </div>
             <div class="mt-12 space-y-6">
-               <!-- FAQ Item 1 -->
+               <!-- FAQ Items -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     What if I already have a website?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a "Book Now" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">What if I already have a website?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a "Book Now" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine.</p>
                </details>
-               <!-- FAQ Item 2 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     Can I block off personal time?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like "Doctor's Appointment" or "Lunch"). Our system will see that you're busy and won't show that time as available for booking.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">Do I need a website to offer online booking?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">No, you don't need a website for QR code booking. The system creates a standalone booking page that customers access by scanning your QR code. You can display the QR code anywhere - business cards, tables, social media, or print materials.</p>
                </details>
-               <!-- FAQ Item 3 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     What do I need to get started?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     Just two things: 1) The ability to answer a few simple questions about your business (your name, services, hours), and 2) A Google Calendar account to sync your appointments to. That's it. We handle all the technical setup.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">When should I send appointment reminders?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">We recommend sending the first reminder 24 hours before the appointment and a second, final reminder 2 hours before. Our system automates this for you, and we've found this two-reminder system is the most effective at reducing no-shows without annoying clients.</p>
                </details>
-               <!-- FAQ Item 4 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     Is it really unlimited? What's the catch?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     No catch. For the flat monthly fee, you get unlimited bookings, unlimited client reminders, and unlimited review requests. We want you to grow. Our price stays the same whether you get 10 bookings or 1,000.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">Can I block off personal time?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like "Doctor's Appointment" or "Lunch"). Our system will see that you're busy and won't show that time as available for booking.</p>
+               </details>
+               <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">Should I charge no-show fees?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">It's up to you, but we recommend starting without them. Our automated reminders and confirmation requests reduce no-shows so effectively that fees often aren't necessary. If you do want to charge fees, you can state that in your booking policies.</p>
+               </details>
+               <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">What's the cheapest way to start taking online bookings?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">QR code booking systems like ours are typically the most affordable option. They require no large setup costs, no developer fees, and no expensive website modifications. Our flat monthly fee covers everything.</p>
                </details>
             </div>
          </div>
       </section>
 
-      <!-- New Final CTA Section -->
+      <!-- Final CTA Section -->
       <section class="bg-indigo-600">
          <div class="container mx-auto px-6 py-20 text-center relative">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Stop Missing Bookings?</h2>
@@ -569,7 +768,7 @@
                    setProgress(currentProgress);
                    if (currentProgress >= 100) {
                        clearInterval(interval);
-                       fetch("https://formspree.io/f/mnnvldep", { method: 'POST', body: JSON.stringify(userData), headers: { 'Content-Type': 'application/json' } })
+                       fetch("[https://formspree.io/f/mnnvldep](https://formspree.io/f/mnnvldep)", { method: 'POST', body: JSON.stringify(userData), headers: { 'Content-Type': 'application/json' } })
                            .then(res => console.log("Form submission response:", res))
                            .catch(err => console.error("Form submission error:", err));
                        setTimeout(() => goToNextStep(), 500);
@@ -659,7 +858,7 @@
          );
 
          const FinalButton = () => (
-             <a href="https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">Complete Payment for $49</a>
+             <a href="[https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05](https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05)" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">Complete Payment for $49</a>
          );
 
          return (
