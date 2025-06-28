@@ -8,70 +8,55 @@
    <title>ProBookingQR | Stop Losing Clients to Missed Calls</title>
    <meta name="description" content="ProBookingQR helps solo professionals capture more clients with 24/7 automated booking via QR codes. No missed calls, no complex software.">
    <!-- Favicon -->
-   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22[http://www.w3.org/2000/svg%22](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
    <!-- Social Media Sharing (Open Graph & Twitter) -->
    <meta property="og:title" content="ProBookingQR | Stop Losing Clients to Missed Calls">
    <meta property="og:description" content="Automated QR-to-Book system for solo service pros. Book more clients without missing calls.">
-   <meta property="og:image" content="[https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR](https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR)">
-   <meta property="og:url" content="[https://your-domain.com/](https://your-domain.com/)">
+   <meta property="og:image" content="https://placehold.co/1200x630/1e293b/93c5fd?text=ProBookingQR">
+   <meta property="og:url" content="https://your-domain.com/">
    <meta name="twitter:card" content="summary_large_image">
    <!-- Google Fonts: Inter -->
-   <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-   <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-   <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap)" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
    <!-- Tailwind CSS -->
-   <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+   <script src="https://cdn.tailwindcss.com"></script>
    <!-- React -->
-   <script src="[https://unpkg.com/react@17/umd/react.development.js](https://unpkg.com/react@17/umd/react.development.js)" crossorigin></script>
-   <script src="[https://unpkg.com/react-dom@17/umd/react-dom.development.js](https://unpkg.com/react-dom@17/umd/react-dom.development.js)" crossorigin></script>
-   <script src="[https://unpkg.com/babel-standalone@6/babel.min.js](https://unpkg.com/babel-standalone@6/babel.min.js)"></script>
-   <!-- FAQ Schema Markup -->
-   <script type="application/ld+json">
-      {
-         "@context": "[https://schema.org](https://schema.org)",
-         "@type": "FAQPage",
-         "mainEntity": [{
-               "@type": "Question",
-               "name": "How do QR codes work for booking appointments?",
-               "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar without downloading any apps. The QR code links directly to your online booking form where customers can select services, pick times, and confirm appointments in under 30 seconds."
-               }
-            },
-            {
-               "@type": "Question",
-               "name": "Do customers need to download an app to use QR code booking?",
-               "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "No, customers don't need to download any apps. QR code booking works through the customer's existing phone camera and web browser. They simply scan the code and the booking form opens instantly in their browser."
-               }
-            },
-            {
-               "@type": "Question",
-               "name": "How long does it take to book an appointment with a QR code?",
-               "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Booking with a QR code takes less than 30 seconds. Customers scan the code, select their service and preferred time, enter their contact details, and receive instant confirmation."
-               }
-            },
-            {
-               "@type": "Question",
-               "name": "What if I already have a website?",
-               "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a \"Book Now\" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine."
-               }
-            },
-            {
-               "@type": "Question",
-               "name": "Can I block off personal time?",
-               "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like \"Doctor's Appointment\" or \"Lunch\"). Our system will see that you're busy and won't show that time as available for booking."
-               }
-            }
-         ]
-      }
+   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   <!-- Firebase -->
+   <script type="module">
+      import {
+         initializeApp
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import {
+         getFirestore,
+         doc,
+         getDoc,
+         setDoc,
+         onSnapshot
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+      import {
+         getAuth,
+         signInAnonymously,
+         signInWithCustomToken,
+         onAuthStateChanged
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+      // Make Firebase services available globally for the React component
+      window.firebaseServices = {
+         initializeApp,
+         getFirestore,
+         doc,
+         getDoc,
+         setDoc,
+         onSnapshot,
+         getAuth,
+         signInAnonymously,
+         signInWithCustomToken,
+         onAuthStateChanged
+      };
    </script>
    <style>
       /* Custom styles to supplement Tailwind */
@@ -227,12 +212,6 @@
          <a href="#" class="text-2xl font-bold text-white">
             ProBooking<span class="text-indigo-400">QR</span>
          </a>
-         <nav class="hidden md:flex items-center space-x-6">
-            <a href="#features" class="text-slate-300 hover:text-indigo-400 transition-colors">Features</a>
-            <a href="#how-it-works" class="text-slate-300 hover:text-indigo-400 transition-colors">How It Works</a>
-            <a href="#pricing" class="text-slate-300 hover:text-indigo-400 transition-colors">Pricing</a>
-            <a href="#faq" class="text-slate-300 hover:text-indigo-400 transition-colors">FAQ</a>
-         </nav>
       </div>
    </header>
    <!-- Main Content -->
@@ -260,6 +239,7 @@
             </div>
          </div>
       </section>
+
       <!-- Problem Section -->
       <section class="py-20">
          <div class="container mx-auto px-6 relative">
@@ -304,50 +284,37 @@
          </div>
       </section>
 
-      <!-- How It Works Section -->
-      <section id="how-it-works" class="py-20 bg-slate-900/50">
+      <!-- New Features Section -->
+      <section id="features" class="py-20">
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
-               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">How QR Code Booking Works</h2>
-               <p class="mt-4 text-slate-400 text-lg">From scan to confirmation in under 30 seconds. No apps, no passwords, no hassle.</p>
+               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Everything You Need to Fill Your Calendar</h2>
+               <p class="mt-4 text-slate-400 text-lg">ProBookingQR isn't just a QR code. It's a complete, automated system designed to bring you more business with less effort.</p>
             </div>
-
-            <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl my-12 max-w-4xl mx-auto">
-               <p class="text-lg text-slate-300 text-center"><strong>QR code booking allows customers to scan a code with their phone camera and instantly access your booking calendar.</strong> The code links directly to your online form where they can pick services, choose times, and confirm appointments.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-               <!-- Step 1 -->
-               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                  <div class="flex items-center mb-4">
-                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">1</div>
-                     <h3 class="font-bold text-white text-lg ml-4">Customer Scans</h3>
-                  </div>
-                  <p class="text-slate-400">They point their phone camera at your QR code on a business card, your front door, or a social media post.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Your Own Booking Page</h3>
+                  <p class="text-slate-400">Get a simple, beautiful booking page branded for your business. No ugly third-party logos. Just your services, your times, and your brand.</p>
                </div>
-               <!-- Step 2 -->
-               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                  <div class="flex items-center mb-4">
-                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">2</div>
-                     <h3 class="font-bold text-white text-lg ml-4">Form Opens</h3>
-                  </div>
-                  <p class="text-slate-400">The code instantly opens your branded booking page in their phone's web browser. No app download is required.</p>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Unlimited QR Code Scans</h3>
+                  <p class="text-slate-400">Put your QR code everywhere: business cards, your front door, social media posts. There are no limits on how many clients can scan and book.</p>
                </div>
-               <!-- Step 3 -->
-               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                  <div class="flex items-center mb-4">
-                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">3</div>
-                     <h3 class="font-bold text-white text-lg ml-4">Select & Book</h3>
-                  </div>
-                  <p class="text-slate-400">They choose a service, pick an available time from your live calendar, and enter their contact details.</p>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Google Calendar Sync</h3>
+                  <p class="text-slate-400">New appointments appear in your Google Calendar instantly. We block off times you're already busy, so you're never double-booked.</p>
                </div>
-               <!-- Step 4 -->
-               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                  <div class="flex items-center mb-4">
-                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-500 text-white rounded-full font-bold">4</div>
-                     <h3 class="font-bold text-white text-lg ml-4">Get Confirmed</h3>
-                  </div>
-                  <p class="text-slate-400">You both receive instant confirmation, and the client gets an automatic reminder before the appointment.</p>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Automated Reminders</h3>
+                  <p class="text-slate-400">Dramatically reduce no-shows with automated SMS reminders sent to your clients 24 hours before their appointment. You don't lift a finger.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Automatic Review Requests</h3>
+                  <p class="text-slate-400">After their appointment, clients automatically get a text asking for a review, with a direct link to your Google or Yelp page. Build your reputation on autopilot.</p>
+               </div>
+               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                  <h3 class="font-bold text-white text-lg mb-2">Hands-Free Setup</h3>
+                  <p class="text-slate-400">There's no complicated software for you to learn. Just answer a few questions in our setup chat, and we build the entire system for you in under 24 hours.</p>
                </div>
             </div>
          </div>
@@ -372,65 +339,15 @@
                      <p class="text-slate-400">Then $97/month. Cancel anytime.</p>
                   </div>
                   <ul class="space-y-4 my-8 text-slate-300">
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Everything in the Features section
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Unlimited bookings & reminders
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Calendar sync for all employees
-                     </li>
-                     <li class="flex items-center">
-                        <span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included
-                     </li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Everything in the Features section</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Unlimited bookings & reminders</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Calendar sync for all employees</li>
+                     <li class="flex items-center"><span class="text-green-400 w-5 h-5 mr-3">✓</span> Complete setup & training included</li>
                   </ul>
                   <div class="bg-green-500/10 border border-green-400/30 text-green-300 p-4 rounded-lg text-center mb-6">
                      <h4 class="font-bold">🛡️ 30-Day Money-Back Guarantee</h4>
                      <p class="text-sm mt-1">If you're not completely satisfied after your first month, we'll refund every penny. No questions asked.</p>
                   </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
-      <!-- New Features Section -->
-      <section id="features" class="py-20 bg-slate-900/50">
-         <div class="container mx-auto px-6 relative">
-            <div class="text-center max-w-3xl mx-auto">
-               <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Everything You Need to Fill Your Calendar</h2>
-               <p class="mt-4 text-slate-400 text-lg">ProBookingQR isn't just a QR code. It's a complete, automated system designed to bring you more business with less effort.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-               <!-- Feature 1 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Your Own Booking Page</h3>
-                  <p class="text-slate-400">Get a simple, beautiful booking page branded for your business. No ugly third-party logos. Just your services, your times, and your brand.</p>
-               </div>
-               <!-- Feature 2 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Unlimited QR Code Scans</h3>
-                  <p class="text-slate-400">Put your QR code everywhere: business cards, your front door, social media posts. There are no limits on how many clients can scan and book.</p>
-               </div>
-               <!-- Feature 3 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Google Calendar Sync</h3>
-                  <p class="text-slate-400">New appointments appear in your Google Calendar instantly. We block off times you're already busy, so you're never double-booked.</p>
-               </div>
-               <!-- Feature 4 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Automated Reminders</h3>
-                  <p class="text-slate-400">Dramatically reduce no-shows with automated SMS reminders sent to your clients 24 hours before their appointment. You don't lift a finger.</p>
-               </div>
-               <!-- Feature 5 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Automatic Review Requests</h3>
-                  <p class="text-slate-400">After their appointment, clients automatically get a text asking for a review, with a direct link to your Google or Yelp page. Build your reputation on autopilot.</p>
-               </div>
-               <!-- Feature 6 -->
-               <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-                  <h3 class="font-bold text-white text-lg mb-2">Hands-Free Setup</h3>
-                  <p class="text-slate-400">There's no complicated software for you to learn. Just answer a few questions in our setup chat, and we build the entire system for you in under 24 hours.</p>
                </div>
             </div>
          </div>
@@ -443,45 +360,21 @@
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Frequently Asked Questions</h2>
             </div>
             <div class="mt-12 space-y-6">
-               <!-- FAQ Item 1 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     What if I already have a website?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a "Book Now" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">What if I already have a website?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">That's perfect! You can easily add your ProBookingQR link or QR code to your existing site with a "Book Now" button. This system is designed to complement what you already have, not replace it. It's a lightweight, dedicated booking engine.</p>
                </details>
-               <!-- FAQ Item 2 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     Can I block off personal time?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like "Doctor's Appointment" or "Lunch"). Our system will see that you're busy and won't show that time as available for booking.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">Can I block off personal time?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">Yes. Since ProBookingQR syncs directly with your Google Calendar, all you have to do is create an event in your calendar for your personal time (like "Doctor's Appointment" or "Lunch"). Our system will see that you're busy and won't show that time as available for booking.</p>
                </details>
-               <!-- FAQ Item 3 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     What do I need to get started?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     Just two things: 1) The ability to answer a few simple questions about your business (your name, services, hours), and 2) A Google Calendar account to sync your appointments to. That's it. We handle all the technical setup.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">What do I need to get started?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">Just two things: 1) The ability to answer a few simple questions about your business (your name, services, hours), and 2) A Google Calendar account to sync your appointments to. That's it. We handle all the technical setup.</p>
                </details>
-               <!-- FAQ Item 4 -->
                <details class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 cursor-pointer">
-                  <summary class="flex justify-between items-center font-semibold text-white text-lg">
-                     Is it really unlimited? What's the catch?
-                     <span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span>
-                  </summary>
-                  <p class="text-slate-400 mt-4">
-                     No catch. For the flat monthly fee, you get unlimited bookings, unlimited client reminders, and unlimited review requests. We want you to grow. Our price stays the same whether you get 10 bookings or 1,000.
-                  </p>
+                  <summary class="flex justify-between items-center font-semibold text-white text-lg">Is it really unlimited? What's the catch?<span class="plus-icon text-indigo-400 text-3xl transition-transform duration-300">+</span></summary>
+                  <p class="text-slate-400 mt-4">No catch. For the flat monthly fee, you get unlimited bookings, unlimited client reminders, and unlimited review requests. We want you to grow. Our price stays the same whether you get 10 bookings or 1,000.</p>
                </details>
             </div>
          </div>
@@ -502,293 +395,448 @@
    <!-- Footer -->
    <footer class="bg-slate-900 border-t border-slate-800">
       <div class="container mx-auto px-6 py-8 text-center text-slate-500">
-         <p>© 2025 ProBookingQR. All rights reserved.</p>
+         <p>© <span id="current-year">2025</span> ProBookingQR. All rights reserved.</p>
       </div>
    </footer>
+
    <!-- Chatbot Modal -->
-   <div id="chatbot-modal">
+   <div id="chatbot-modal" role="dialog" aria-modal="true" aria-labelledby="chatbot-heading">
       <div class="chatbot-container">
          <div class="chatbot-content">
-            <button onclick="closeChatbot()" class="chatbot-close-btn">×</button>
+            <button onclick="closeChatbot()" class="chatbot-close-btn" aria-label="Close Chatbot">×</button>
             <div id="chatbot-root" class="w-full h-full"></div>
          </div>
       </div>
    </div>
+
    <script>
-      let ProBookingChatbot;
+      let ProBookingChatbot; // Will be defined by Babel
+      const modal = document.getElementById('chatbot-modal');
+      const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+      let focusableElements;
+      let firstFocusableElement;
+      let lastFocusableElement;
 
       function openChatbot() {
-         const modal = document.getElementById('chatbot-modal');
          modal.style.display = 'block';
          document.body.style.overflow = 'hidden';
+
+         // Render React component
          if (ProBookingChatbot) {
             ReactDOM.render(React.createElement(ProBookingChatbot), document.getElementById('chatbot-root'));
          }
+
+         // Accessibility: Trap focus inside the modal
+         focusableElements = modal.querySelectorAll(focusableElementsString);
+         firstFocusableElement = focusableElements[0];
+         lastFocusableElement = focusableElements[focusableElements.length - 1];
+         firstFocusableElement.focus();
+         modal.addEventListener('keydown', trapFocus);
       }
 
       function closeChatbot() {
-         const modal = document.getElementById('chatbot-modal');
          modal.style.display = 'none';
          document.body.style.overflow = 'auto';
+
+         // Unmount React component
          const chatbotRoot = document.getElementById('chatbot-root');
-         ReactDOM.unmountComponentAtNode(chatbotRoot);
+         if (chatbotRoot) {
+            ReactDOM.unmountComponentAtNode(chatbotRoot);
+         }
+         modal.removeEventListener('keydown', trapFocus);
       }
 
+      // Close modal on outside click
       document.addEventListener('click', function(event) {
-         const modal = document.getElementById('chatbot-modal');
          if (event.target === modal) {
             closeChatbot();
          }
       });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(event) {
+         if (event.key === 'Escape' && modal.style.display === 'block') {
+            closeChatbot();
+         }
+      });
+
+      function trapFocus(e) {
+         if (e.key !== 'Tab') {
+            return;
+         }
+         if (e.shiftKey) { // Shift + Tab
+            if (document.activeElement === firstFocusableElement) {
+               lastFocusableElement.focus();
+               e.preventDefault();
+            }
+         } else { // Tab
+            if (document.activeElement === lastFocusableElement) {
+               firstFocusableElement.focus();
+               e.preventDefault();
+            }
+         }
+      }
+
+      // Dynamically update footer year
+      document.getElementById('current-year').textContent = new Date().getFullYear();
    </script>
+
    <!-- React Chatbot Component Definition -->
    <script type="text/babel">
       const { useState, useEffect, useRef } = React;
 
-      ProBookingChatbot = () => {
-         // --- Core State ---
-         const [currentStep, setCurrentStep] = useState(0);
-         const [messages, setMessages] = useState([]);
-         const [userData, setUserData] = useState({
-            firstName: '',
-            salonName: '',
-            fullAddress: '',
-            employeeCount: 0,
-            employees: [],
-            services: [],
-            smartMessages: []
-         });
-         const [isTyping, setIsTyping] = useState(false);
-         const [progress, setProgress] = useState(0);
-         const messagesEndRef = useRef(null);
+        // --- Global Firebase Config ---
+        // These are assumed to be provided by the environment
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-         // --- State for Dynamic Employee Loop ---
-         const [isCollectingEmployees, setIsCollectingEmployees] = useState(false);
-         const [currentEmployeeIndex, setCurrentEmployeeIndex] = useState(0);
-         const [tempEmployee, setTempEmployee] = useState({ name: '', role: 'Stylist' });
-         
-         // --- Static Data ---
-         const serviceOptions = ['Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions', 'Scalp Treatments', 'Blowouts'];
-         const messageOptions = ['Booking confirmation', '24-hour reminder', 'Thank you & review', 'Win-back inactive', 'Rebook promotion'];
-         const employeeRoles = ['Stylist', 'Barber', 'Esthetician', 'Nail Technician', 'Massage Therapist', 'Receptionist'];
+        ProBookingChatbot = () => {
+            // --- Firebase State ---
+            const [db, setDb] = useState(null);
+            const [auth, setAuth] = useState(null);
+            const [userId, setUserId] = useState(null);
+            const [isAuthReady, setIsAuthReady] = useState(false);
+            const [isLoadingState, setIsLoadingState] = useState(true);
 
-         const conversationSteps = [
-            { id: 'welcome', botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?", inputType: 'text', field: 'firstName', placeholder: 'Enter your first name...' },
-            { id: 'salon_name', botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`, inputType: 'text', field: 'salonName', placeholder: 'Enter your salon name...' },
-            { id: 'address', botMessage: "Perfect! Now I need your business address so clients know where to find you. 📍", inputType: 'text', field: 'fullAddress', placeholder: 'Enter your full business address...' },
-            { id: 'employee_count', botMessage: "Great. How many employees take appointments or service customers?", inputType: 'number', field: 'employeeCount', placeholder: 'e.g., 3' },
-            { id: 'services', botMessage: "Excellent! Now, what services do you want people to book online? Pick up to 5.", inputType: 'multiselect', options: serviceOptions, maxSelections: 5, field: 'services' },
-            { id: 'smart_messages', botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:", inputType: 'multiselect', options: messageOptions, maxSelections: 5, field: 'smartMessages' },
-            { id: 'building_system', botMessage: "Awesome! Let me build your system. This will just take a moment...", inputType: 'progress' },
-            { id: 'final_summary', botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• **Location:** ${data.fullAddress}\n• **Team:**\n${data.employees.map(e => `  - ${e.name} (${e.role})`).join('\n')}\n• **Services:** ${data.services.join(', ')}\n• **Automated Messages:** ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`, inputType: 'final' }
-         ];
+            // --- Core State ---
+            const [currentStep, setCurrentStep] = useState(0);
+            const [messages, setMessages] = useState([]);
+            const [userData, setUserData] = useState({
+                firstName: '', salonName: '', fullAddress: '', employeeCount: 0,
+                employees: [], services: [], smartMessages: []
+            });
+            const [isTyping, setIsTyping] = useState(false);
+            const [progress, setProgress] = useState(0);
+            const messagesEndRef = useRef(null);
 
-         // --- Helper Functions ---
-         const scrollToBottom = () => { if (messagesEndRef.current) { messagesEndRef.current.scrollIntoView({ behavior: "smooth" }); } };
-         useEffect(scrollToBottom, [messages, isTyping]);
+            // --- Dynamic State ---
+            const [isCollectingEmployees, setIsCollectingEmployees] = useState(false);
+            const [currentEmployeeIndex, setCurrentEmployeeIndex] = useState(0);
+            const [tempEmployee, setTempEmployee] = useState({ name: '', role: 'Stylist' });
 
-         useEffect(() => { if (messages.length === 0 && currentStep === 0) { addBotMessage(conversationSteps[0].botMessage); } }, []);
+            // --- Static Data ---
+            const serviceOptions = ['Haircuts & Styling', 'Hair Color', 'Highlights/Balayage', 'Perms & Texturizing', 'Deep Conditioning', 'Eyebrow Services', 'Makeup Application', 'Hair Extensions', 'Scalp Treatments', 'Blowouts'];
+            const messageOptions = ['Booking confirmation', '24-hour reminder', 'Thank you & review', 'Win-back inactive', 'Rebook promotion'];
+            const employeeRoles = ['Stylist', 'Barber', 'Esthetician', 'Nail Technician', 'Massage Therapist', 'Receptionist'];
 
-         const addBotMessage = (message, delay = 1000) => {
-            setIsTyping(true);
-            setTimeout(() => {
-               setMessages(prev => [...prev, { type: 'bot', content: message }]);
-               setIsTyping(false);
-            }, delay);
-         };
+            const conversationSteps = [
+                { id: 'welcome', botMessage: "Hi! I'm here to set up your salon's QR booking system. This takes about 3 minutes. First, what's your name?", inputType: 'text', field: 'firstName', placeholder: 'Enter your first name...' },
+                { id: 'salon_name', botMessage: (data) => `Nice to meet you, ${data.firstName}! What's your salon called?`, inputType: 'text', field: 'salonName', placeholder: 'Enter your salon name...' },
+                { id: 'address', botMessage: "Perfect! Now I need your business address so clients know where to find you. 📍", inputType: 'text', field: 'fullAddress', placeholder: 'Enter your full business address...' },
+                { id: 'employee_count', botMessage: "Great. How many employees take appointments or service customers?", inputType: 'number', field: 'employeeCount', placeholder: 'e.g., 3' },
+                { id: 'services', botMessage: "Excellent! Now, what services do you want people to book online? Pick up to 5.", inputType: 'multiselect', options: serviceOptions, maxSelections: 5, field: 'services' },
+                { id: 'smart_messages', botMessage: "Got it. Now, let's automate your follow-ups. Pick any you'd like to use:", inputType: 'multiselect', options: messageOptions, maxSelections: 5, field: 'smartMessages' },
+                { id: 'building_system', botMessage: "Awesome! Let me build your system. This will just take a moment...", inputType: 'progress' },
+                { id: 'final_summary', botMessage: (data) => `🎉 Your QR booking system is ready, ${data.firstName}! Here's what I've set up for ${data.salonName}:\n\n• **Location:** ${data.fullAddress}\n• **Team:**\n${data.employees.map(e => `  - ${e.name} (${e.role})`).join('\n')}\n• **Services:** ${data.services.join(', ')}\n• **Automated Messages:** ${data.smartMessages.join(', ')}\n\nYou'll receive your custom QR code and booking page within 24 hours. Click the button below to complete your payment and activate your system.`, inputType: 'final' }
+            ];
 
-         const addUserMessage = (message) => { setMessages(prev => [...prev, { type: 'user', content: message }]); };
-         
-         const goToNextStep = (newData) => {
-             const nextStepIndex = currentStep + 1;
-             if (conversationSteps[nextStepIndex]) {
-                 setCurrentStep(nextStepIndex);
-                 const nextMessage = typeof conversationSteps[nextStepIndex].botMessage === 'function' ? conversationSteps[nextStepIndex].botMessage(newData || userData) : conversationSteps[nextStepIndex].botMessage;
-                 addBotMessage(nextMessage);
-             }
-         };
+            // --- Firebase Initialization and Auth ---
+            useEffect(() => {
+                if (!firebaseConfig || !window.firebaseServices) {
+                    console.error("Firebase config or services not found.");
+                    setIsAuthReady(true); // Proceed without persistence
+                    setIsLoadingState(false);
+                    return;
+                }
+                
+                const { initializeApp, getFirestore, getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } = window.firebaseServices;
+                
+                const app = initializeApp(firebaseConfig);
+                const authInstance = getAuth(app);
+                const dbInstance = getFirestore(app);
 
-         // --- Core Logic ---
-         const handleSend = (value) => {
-             const step = conversationSteps[currentStep];
-             if (!step || !value.trim()) return;
-             
-             addUserMessage(value);
-             const newData = { ...userData, [step.field]: value };
-             setUserData(newData);
+                setDb(dbInstance);
+                setAuth(authInstance);
 
-             if (step.id === 'employee_count') {
-                 const count = parseInt(value, 10);
-                 if (isNaN(count) || count <= 0) {
-                     addBotMessage("Please enter a valid number greater than 0.");
-                     setUserData(prev => ({...prev, employeeCount: 0})); // Reset if invalid
-                 } else {
-                     setUserData(prev => ({...prev, employeeCount: count}));
-                     setIsCollectingEmployees(true);
-                     addBotMessage(`OK, let's get the details for employee 1 of ${count}.`, 500);
-                 }
-             } else {
-                 setTimeout(() => goToNextStep(newData), 500);
-             }
-         };
+                onAuthStateChanged(authInstance, async (user) => {
+                    if (user) {
+                        setUserId(user.uid);
+                    } else {
+                        try {
+                            if(initialAuthToken) {
+                                await signInWithCustomToken(authInstance, initialAuthToken);
+                            } else {
+                                await signInAnonymously(authInstance);
+                            }
+                        } catch (error) {
+                            console.error("Anonymous sign-in failed", error);
+                            setIsLoadingState(false); // Stop loading on auth error
+                        }
+                    }
+                    setIsAuthReady(true);
+                });
+            }, []);
 
-         const handleMultiSelectNext = () => {
-             const step = conversationSteps[currentStep];
-             if (userData[step.field].length === 0) return;
-             addUserMessage(userData[step.field].join(', '));
-             setTimeout(() => goToNextStep(), 500);
-         };
+            // --- Load State from Firestore ---
+            useEffect(() => {
+                if (!isAuthReady || !db || !userId) {
+                    if(isAuthReady) setIsLoadingState(false); // If auth is ready but no db/userId, stop loading
+                    return;
+                };
 
-         const handleSaveEmployee = () => {
-             if (!tempEmployee.name.trim()) {
-                 addBotMessage("Please enter the employee's name.");
-                 return;
-             }
-             addUserMessage(`Employee ${currentEmployeeIndex + 1}: ${tempEmployee.name} (${tempEmployee.role})`);
-             
-             const updatedEmployees = [...userData.employees, tempEmployee];
-             const newUserData = {...userData, employees: updatedEmployees};
-             setUserData(newUserData);
-             
-             const nextEmployeeNum = currentEmployeeIndex + 2;
-             if (nextEmployeeNum <= userData.employeeCount) {
-                 setCurrentEmployeeIndex(prev => prev + 1);
-                 setTempEmployee({ name: '', role: 'Stylist' });
-                 addBotMessage(`Great! Now for employee ${nextEmployeeNum} of ${userData.employeeCount}.`);
-             } else {
-                 setIsCollectingEmployees(false);
-                 setCurrentEmployeeIndex(0);
-                 setTempEmployee({ name: '', role: 'Stylist' });
-                 setTimeout(() => goToNextStep(newUserData), 500);
-             }
-         };
+                const { doc, getDoc } = window.firebaseServices;
+                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'onboardingState', 'data');
+                
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        const savedState = docSnap.data();
+                        // Restore state only if it's past the initial welcome message
+                        if(savedState.messages && savedState.messages.length > 1) {
+                            setUserData(savedState.userData || userData);
+                            setCurrentStep(savedState.currentStep || 0);
+                            setMessages(savedState.messages || []);
+                        }
+                    }
+                    setIsLoadingState(false); // Done loading from Firestore
+                }).catch(error => {
+                    console.error("Error loading state from Firestore:", error);
+                    setIsLoadingState(false); // Stop loading on fetch error
+                });
+            }, [isAuthReady, db, userId]);
 
-         // --- Progress Bar & Data Submission ---
-         useEffect(() => {
-            if (conversationSteps[currentStep] && conversationSteps[currentStep].id === 'building_system') {
-               let currentProgress = 0;
-               const interval = setInterval(() => {
-                   currentProgress += 25;
-                   setProgress(currentProgress);
-                   if (currentProgress >= 100) {
-                       clearInterval(interval);
-                       fetch("[https://formspree.io/f/mnnvldep](https://formspree.io/f/mnnvldep)", { method: 'POST', body: JSON.stringify(userData), headers: { 'Content-Type': 'application/json' } })
-                           .then(res => console.log("Form submission response:", res))
-                           .catch(err => console.error("Form submission error:", err));
-                       setTimeout(() => goToNextStep(), 500);
-                   }
-               }, 700);
-            }
-         }, [currentStep]);
+            // --- Save State to Firestore ---
+            useEffect(() => {
+                // Don't save initial state or while loading
+                if (isLoadingState || !isAuthReady || !db || !userId) return;
+                // Only save if we have some user interaction
+                if (messages.length <= 1 && !userData.firstName) return;
 
-         // --- Render Functions ---
-         const renderInput = () => {
-            if (isCollectingEmployees) return renderEmployeeForm();
+                const { doc, setDoc } = window.firebaseServices;
+                const stateToSave = { userData, currentStep, messages };
+                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'onboardingState', 'data');
 
-            const step = conversationSteps[currentStep];
-            if (!step) return null;
+                setDoc(docRef, stateToSave, { merge: true })
+                  .catch(error => console.error("Error saving state:", error));
 
-            switch(step.inputType) {
-                case 'text':
-                case 'number':
-                    return <TextInput onSubmit={handleSend} placeholder={step.placeholder} disabled={isTyping} type={step.inputType} />;
-                case 'multiselect':
-                    return <MultiSelectInput step={step} userData={userData} setUserData={setUserData} onNext={handleMultiSelectNext} disabled={isTyping} />;
-                case 'progress':
-                    return <ProgressBar progress={progress} />;
-                case 'final':
-                    return <FinalButton />;
-                default:
-                    return null;
-            }
-         };
-         
-         const renderEmployeeForm = () => (
-             <div className="space-y-3">
-                 <p className="font-semibold text-slate-700">Employee {currentEmployeeIndex + 1} of {userData.employeeCount}</p>
-                 <input type="text" placeholder="Employee's Name" value={tempEmployee.name} onChange={e => setTempEmployee({...tempEmployee, name: e.target.value})} className="w-full p-3 border border-slate-300 rounded-lg" autoFocus />
-                 <select value={tempEmployee.role} onChange={e => setTempEmployee({...tempEmployee, role: e.target.value})} className="w-full p-3 border border-slate-300 rounded-lg bg-white">
-                     {employeeRoles.map(role => <option key={role} value={role}>{role}</option>)}
-                 </select>
-                 <button onClick={handleSaveEmployee} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700">
-                     {currentEmployeeIndex + 1 < userData.employeeCount ? 'Next Employee' : 'Finish & Continue'}
-                 </button>
-             </div>
-         );
+            }, [userData, currentStep, messages, isLoadingState, isAuthReady, db, userId]);
+            
 
-         // --- Sub-Components ---
-         const TextInput = ({ onSubmit, placeholder, disabled, type }) => {
-             const [input, setInput] = useState('');
-             const handleKeyDown = (event) => { if (event.key === 'Enter') { onSubmit(input); setInput(''); } };
-             return (
-                 <div className="flex items-center space-x-2">
-                    <input type={type === 'number' ? 'number' : 'text'} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={placeholder} className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" disabled={disabled} autoFocus />
-                    <button onClick={() => { onSubmit(input); setInput(''); }} disabled={disabled || !input.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Send</button>
-                 </div>
-             );
-         };
+            // --- Chat Logic ---
+            const scrollToBottom = () => { if (messagesEndRef.current) { messagesEndRef.current.scrollIntoView({ behavior: "smooth" }); } };
+            useEffect(scrollToBottom, [messages, isTyping]);
 
-         const MultiSelectInput = ({ step, userData, setUserData, onNext, disabled }) => {
-             const handleToggle = (option) => {
-                 setUserData(prev => {
-                     const currentSelection = prev[step.field];
-                     const isSelected = currentSelection.includes(option);
-                     if (isSelected) {
-                         return { ...prev, [step.field]: currentSelection.filter(item => item !== option) };
-                     } else if (currentSelection.length < step.maxSelections) {
-                         return { ...prev, [step.field]: [...currentSelection, option] };
-                     }
-                     return prev;
-                 });
-             };
-             return (
-                 <div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                       {step.options.map(option => {
-                          const isSelected = userData[step.field].includes(option);
-                          return <button key={option} onClick={() => handleToggle(option)} className={`p-3 border rounded-lg text-sm text-left ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}>{option} {isSelected && '✓'}</button>;
-                       })}
+            useEffect(() => {
+                // Start conversation only if it's fresh (no loaded messages)
+                if (!isLoadingState && messages.length === 0 && currentStep === 0) {
+                    addBotMessage(conversationSteps[0].botMessage, 500);
+                }
+            }, [isLoadingState]);
+
+            const addBotMessage = (message, delay = 1000) => {
+                setIsTyping(true);
+                setTimeout(() => {
+                    setMessages(prev => [...prev, { type: 'bot', content: message, id: Date.now() }]);
+                    setIsTyping(false);
+                }, delay);
+            };
+
+            const addUserMessage = (message) => { setMessages(prev => [...prev, { type: 'user', content: message, id: Date.now() }]); };
+
+            const goToNextStep = (newData) => {
+                const nextStepIndex = currentStep + 1;
+                if (conversationSteps[nextStepIndex]) {
+                    setCurrentStep(nextStepIndex);
+                    const nextMessage = typeof conversationSteps[nextStepIndex].botMessage === 'function' 
+                        ? conversationSteps[nextStepIndex].botMessage(newData || userData) 
+                        : conversationSteps[nextStepIndex].botMessage;
+                    addBotMessage(nextMessage);
+                }
+            };
+
+            const handleSend = (value) => {
+                const step = conversationSteps[currentStep];
+                if (!step || !value.trim()) return;
+                addUserMessage(value);
+                const newData = { ...userData, [step.field]: value };
+                setUserData(newData);
+
+                if (step.id === 'employee_count') {
+                    const count = parseInt(value, 10);
+                    if (isNaN(count) || count <= 0) {
+                        addBotMessage("Please enter a valid number greater than 0.");
+                        setUserData(prev => ({ ...prev, employeeCount: 0 }));
+                    } else {
+                        setUserData(prev => ({ ...prev, employeeCount: count }));
+                        setIsCollectingEmployees(true);
+                        addBotMessage(`OK, let's get the details for employee 1 of ${count}.`, 500);
+                    }
+                } else {
+                    setTimeout(() => goToNextStep(newData), 500);
+                }
+            };
+            
+            const handleMultiSelectNext = () => {
+                const step = conversationSteps[currentStep];
+                if (userData[step.field].length === 0) return;
+                addUserMessage(userData[step.field].join(', '));
+                setTimeout(() => goToNextStep(), 500);
+            };
+
+            const handleSaveEmployee = () => {
+                if (!tempEmployee.name.trim()) {
+                    addBotMessage("Please enter the employee's name."); return;
+                }
+                addUserMessage(`Employee ${currentEmployeeIndex + 1}: ${tempEmployee.name} (${tempEmployee.role})`);
+                
+                const updatedEmployees = [...userData.employees, tempEmployee];
+                const newUserData = { ...userData, employees: updatedEmployees };
+                setUserData(newUserData);
+                
+                const nextEmployeeNum = currentEmployeeIndex + 2;
+                if (nextEmployeeNum <= userData.employeeCount) {
+                    setCurrentEmployeeIndex(prev => prev + 1);
+                    setTempEmployee({ name: '', role: 'Stylist' });
+                    addBotMessage(`Great! Now for employee ${nextEmployeeNum} of ${userData.employeeCount}.`);
+                } else {
+                    setIsCollectingEmployees(false);
+                    setCurrentEmployeeIndex(0);
+                    setTempEmployee({ name: '', role: 'Stylist' });
+                    setTimeout(() => goToNextStep(newUserData), 500);
+                }
+            };
+            
+            // --- Progress Bar & Data Submission ---
+            useEffect(() => {
+                if (conversationSteps[currentStep] && conversationSteps[currentStep].id === 'building_system') {
+                    let currentProgress = 0;
+                    const interval = setInterval(() => {
+                        currentProgress += 25;
+                        setProgress(currentProgress);
+                        if (currentProgress >= 100) {
+                            clearInterval(interval);
+                            // Submit to Formspree
+                            fetch("https://formspree.io/f/mnnvldep", { 
+                                method: 'POST', 
+                                body: JSON.stringify(userData), 
+                                headers: { 'Content-Type': 'application/json' } 
+                            })
+                            .then(res => {
+                                if (!res.ok) throw new Error("Submission failed");
+                                console.log("Form submission successful:", res);
+                                setTimeout(() => goToNextStep(), 500);
+                            })
+                            .catch(err => {
+                                console.error("Form submission error:", err);
+                                addBotMessage("Oh no! There was an issue sending your info. Please try refreshing or contact support. Don't worry, your progress is saved.");
+                            });
+                        }
+                    }, 700);
+                }
+            }, [currentStep]);
+            
+            // --- Component Renders ---
+            const renderInput = () => {
+                if (isLoadingState) return null;
+                if (isCollectingEmployees) return <EmployeeForm />;
+                
+                const step = conversationSteps[currentStep];
+                if (!step || isTyping) return null;
+
+                switch (step.inputType) {
+                    case 'text':
+                    case 'number':
+                        return <TextInput onSubmit={handleSend} placeholder={step.placeholder} disabled={isTyping} type={step.inputType} label={step.botMessage} />;
+                    case 'multiselect':
+                        return <MultiSelectInput />;
+                    case 'progress':
+                        return <ProgressBar progress={progress} />;
+                    case 'final':
+                        return <FinalButton />;
+                    default: return null;
+                }
+            };
+            
+            const EmployeeForm = () => (
+                <div className="space-y-3">
+                    <p className="font-semibold text-slate-700" id="employee-form-heading">Employee {currentEmployeeIndex + 1} of {userData.employeeCount}</p>
+                    <input type="text" placeholder="Employee's Name" value={tempEmployee.name} onChange={e => setTempEmployee({ ...tempEmployee, name: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg" aria-label="Employee's Name" autoFocus />
+                    <select value={tempEmployee.role} onChange={e => setTempEmployee({ ...tempEmployee, role: e.target.value })} className="w-full p-3 border border-slate-300 rounded-lg bg-white" aria-label="Employee's Role">
+                        {employeeRoles.map(role => <option key={role} value={role}>{role}</option>)}
+                    </select>
+                    <button onClick={handleSaveEmployee} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700">
+                        {currentEmployeeIndex + 1 < userData.employeeCount ? 'Next Employee' : 'Finish & Continue'}
+                    </button>
+                </div>
+            );
+
+            const TextInput = ({ onSubmit, placeholder, disabled, type, label }) => {
+                const [input, setInput] = useState('');
+                const inputId = 'text-input-' + type;
+                const handleSubmit = (e) => { 
+                    e.preventDefault();
+                    if (!input.trim()) return;
+                    onSubmit(input); 
+                    setInput(''); 
+                };
+                return (
+                    <form onSubmit={handleSubmit} className="flex items-center space-x-2">
+                        <label htmlFor={inputId} className="sr-only">{label}</label>
+                        <input id={inputId} type={type} value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} className="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" disabled={disabled} autoFocus />
+                        <button type="submit" disabled={disabled || !input.trim()} className="bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Send</button>
+                    </form>
+                );
+            };
+
+            const MultiSelectInput = () => {
+                const step = conversationSteps[currentStep];
+                const handleToggle = (option) => {
+                    setUserData(prev => {
+                        const currentSelection = prev[step.field];
+                        const isSelected = currentSelection.includes(option);
+                        if (isSelected) {
+                            return { ...prev, [step.field]: currentSelection.filter(item => item !== option) };
+                        } else if (currentSelection.length < step.maxSelections) {
+                            return { ...prev, [step.field]: [...currentSelection, option] };
+                        }
+                        return prev;
+                    });
+                };
+                return (
+                    <div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                            {step.options.map(option => {
+                                const isSelected = userData[step.field].includes(option);
+                                return <button key={option} onClick={() => handleToggle(option)} className={`p-3 border rounded-lg text-sm text-left ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}>{option} {isSelected && '✓'}</button>;
+                            })}
+                        </div>
+                        <button onClick={handleMultiSelectNext} disabled={isTyping || userData[step.field].length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Continue</button>
                     </div>
-                    <button onClick={onNext} disabled={disabled || userData[step.field].length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed">Continue</button>
-                 </div>
-             );
-         };
+                );
+            };
 
-         const ProgressBar = ({ progress }) => (
-             <div className="p-4 flex flex-col items-center justify-center">
-                 <div className="progress-bar-container w-full"><div className="progress-bar" style={{width: `${progress}%`}}></div></div>
-                 <p className="text-slate-600 mt-2 text-sm">Building your system & sending info...</p>
-             </div>
-         );
-
-         const FinalButton = () => (
-             <a href="[https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05](https://buy.stripe.com/00w9AS3JX5HW2lFdKZbbG05)" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">Complete Payment for $49</a>
-         );
-
-         return (
-            <div className="flex flex-col h-full bg-slate-100 text-slate-800">
-               <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                  {messages.map((msg, index) => (
-                     <div key={index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`max-w-xs md:max-w-md p-3 rounded-2xl whitespace-pre-wrap ${msg.type === 'user' ? 'bg-indigo-600 text-white rounded-br-lg' : 'bg-slate-200 text-slate-800 rounded-bl-lg'}`}>{msg.content}</div>
-                     </div>
-                  ))}
-                  {isTyping && (
-                     <div className="flex justify-start">
-                        <div className="p-3 rounded-2xl bg-slate-200 rounded-bl-lg"><div className="typing-indicator"><span></span><span></span><span></span></div></div>
-                     </div>
-                  )}
-                  <div ref={messagesEndRef} />
-               </div>
-               <div className="p-4 bg-white border-t border-slate-200">
-                  {renderInput()}
-               </div>
-            </div>
-         );
-      };
-
-      // Initial render is handled by the openChatbot function
-   </script>
+            const ProgressBar = ({ progress }) => (<div className="p-4 flex flex-col items-center justify-center"><div className="progress-bar-container w-full"><div className="progress-bar" style={{ width: `${progress}%` }}></div></div><p className="text-slate-600 mt-2 text-sm">Building your system & sending info...</p></div>);
+            const FinalButton = () => (<a href="https://buy.stripe.com/00g14qg9r9T2dEI5kk" target="_blank" rel="noopener noreferrer" className="w-full block text-center bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600">Complete Payment for $49</a>);
+            
+            return (
+                <div className="flex flex-col h-full bg-slate-100 text-slate-800">
+                    <h2 id="chatbot-heading" className="sr-only">ProBookingQR Setup Chatbot</h2>
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                        {isLoadingState ? (
+                            <div className="flex justify-center items-center h-full"><div className="typing-indicator"><span></span><span></span><span></span></div></div>
+                        ) : (
+                            <>
+                                {messages.map((msg, index) => (
+                                    <div key={msg.id || index} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        <div className={`max-w-xs md:max-w-md p-3 rounded-2xl whitespace-pre-wrap shadow-sm ${msg.type === 'user' ? 'bg-indigo-600 text-white rounded-br-lg' : 'bg-slate-200 text-slate-800 rounded-bl-lg'}`}>{msg.content}</div>
+                                    </div>
+                                ))}
+                                {isTyping && (
+                                    <div className="flex justify-start">
+                                        <div className="p-3 rounded-2xl bg-slate-200 rounded-bl-lg"><div className="typing-indicator"><span></span><span></span><span></span></div></div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </>
+                        )}
+                    </div>
+                    <div className="p-4 bg-white border-t border-slate-200">
+                        {renderInput()}
+                    </div>
+                </div>
+            );
+        };
+    </script>
 </body>
 
 </html>
