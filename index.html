@@ -186,20 +186,6 @@
          }
       }
 
-      .progress-bar-container {
-         width: 100%;
-         background-color: #e5e7eb;
-         border-radius: 9999px;
-         overflow: hidden;
-      }
-
-      .progress-bar {
-         height: 12px;
-         background-color: #6366f1;
-         border-radius: 9999px;
-         transition: width 0.5s ease-in-out;
-      }
-
       details>summary {
          list-style: none;
       }
@@ -295,35 +281,23 @@
                <p class="mt-4 text-slate-400 text-lg">You're wearing all the hats, and something has to give. Usually, it's missed opportunities.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-               <!-- Card 1 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-red-500/10 text-red-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
-                     📞
-                  </div>
+                  <div class="bg-red-500/10 text-red-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">📞</div>
                   <h3 class="font-bold text-white text-lg mb-2">Missed Call = Lost Money</h3>
                   <p class="text-slate-400">New customers call once, get your voicemail, and book somewhere else immediately.</p>
                </div>
-               <!-- Card 2 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-blue-500/10 text-blue-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
-                     🔄
-                  </div>
+                  <div class="bg-blue-500/10 text-blue-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">🔄</div>
                   <h3 class="font-bold text-white text-lg mb-2">Clients Forget to Rebook</h3>
                   <p class="text-slate-400">Happy clients walk out but forget to schedule their next visit, leaving gaps in your calendar.</p>
                </div>
-               <!-- Card 3 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-yellow-500/10 text-yellow-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
-                     ⭐
-                  </div>
+                  <div class="bg-yellow-500/10 text-yellow-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">⭐</div>
                   <h3 class="font-bold text-white text-lg mb-2">No Reviews = No Growth</h3>
                   <p class="text-slate-400">Without a steady stream of fresh reviews, it's hard to build the trust needed to attract new clients.</p>
                </div>
-               <!-- Card 4 -->
                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 transform hover:-translate-y-2 transition-transform duration-300">
-                  <div class="bg-green-500/10 text-green-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">
-                     💰
-                  </div>
+                  <div class="bg-green-500/10 text-green-400 rounded-lg w-12 h-12 flex items-center justify-center mb-4 text-2xl">💰</div>
                   <h3 class="font-bold text-white text-lg mb-2">Expensive, Bloated Software</h3>
                   <p class="text-slate-400">Complex salon software costs a fortune with features you'll never use. You just want more bookings.</p>
                </div>
@@ -372,45 +346,49 @@
          <div class="container mx-auto px-6 relative">
             <div class="text-center max-w-3xl mx-auto">
                <h2 class="text-3xl md:text-4xl font-bold text-white text-glow">Simple, Transparent Pricing</h2>
-               <p class="mt-4 text-slate-400 text-lg">Choose the plan that's right for you. Cancel anytime.</p>
+               <p class="mt-4 text-slate-400 text-lg">Each stylist gets their own individual booking system. Cancel anytime.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
-               <!-- Basic Plan -->
-               <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 flex flex-col">
-                  <div class="text-center flex-grow">
-                     <h3 class="text-2xl font-bold text-white mb-2">Basic Plan</h3>
-                     <p class="text-lg font-medium text-slate-400">Perfect for getting started.</p>
-                     <div class="flex items-baseline justify-center text-5xl font-extrabold text-white my-4">
-                        $25
-                        <span class="text-lg font-medium text-slate-400 ml-2">/month</span>
+            <!-- Merged Pricing Box -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 mt-12 max-w-4xl mx-auto">
+               <div class="grid md:grid-cols-2 gap-8">
+                  <!-- Basic Plan Details -->
+                  <div class="border-b md:border-b-0 md:border-r border-slate-700 pb-8 md:pb-0 md:pr-8">
+                     <div class="text-center">
+                        <h3 class="text-2xl font-bold text-white mb-2">Basic Plan</h3>
+                        <p class="text-lg font-medium text-slate-400">Perfect for getting started.</p>
+                        <div class="flex items-baseline justify-center text-5xl font-extrabold text-white my-4">
+                           $25<span class="text-lg font-medium text-slate-400 ml-2">/month</span>
+                        </div>
                      </div>
+                     <ul class="space-y-4 my-8 text-slate-300">
+                        <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>QR Code & Booking Page</span></li>
+                        <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Google Calendar Sync</span></li>
+                        <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Automated SMS Reminders</span></li>
+                     </ul>
                   </div>
-                  <ul class="space-y-4 my-8 text-slate-300 flex-grow">
-                     <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>QR Code & Booking Page</span></li>
-                     <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Google Calendar Sync</span></li>
-                     <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Automated SMS Reminders</span></li>
-                  </ul>
-                  <button onclick="openChatbot()" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
-                     Get Started
-                  </button>
+                  <!-- Pro Plan Details -->
+                  <div class="pt-8 md:pt-0 md:pl-8">
+                     <div class="text-center">
+                        <h3 class="text-2xl font-bold text-indigo-400 mb-2">Pro Plan</h3>
+                        <p class="text-lg font-medium text-slate-400">For professionals ready to grow.</p>
+                        <div class="flex items-baseline justify-center text-5xl font-extrabold text-white my-4">
+                           $35<span class="text-lg font-medium text-slate-400 ml-2">/month</span>
+                        </div>
+                     </div>
+                     <ul class="space-y-4 my-8 text-slate-300">
+                        <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Everything in Basic, plus:</span></li>
+                        <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Automated Review Requests</span></li>
+                        <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Win-back & Re-booking Promos</span></li>
+                        <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Enhanced Features & More</span></li>
+                     </ul>
+                  </div>
                </div>
-               <!-- Pro Plan -->
-               <div class="bg-slate-800 border-2 border-indigo-500 rounded-2xl p-8 flex flex-col shadow-2xl shadow-indigo-500/10">
-                  <div class="text-center flex-grow">
-                     <h3 class="text-2xl font-bold text-white mb-2">Pro Plan</h3>
-                     <p class="text-lg font-medium text-indigo-400">For professionals ready to grow.</p>
-                     <div class="flex items-baseline justify-center text-5xl font-extrabold text-white my-4">
-                        $35
-                        <span class="text-lg font-medium text-slate-400 ml-2">/month</span>
-                     </div>
-                  </div>
-                  <ul class="space-y-4 my-8 text-slate-300 flex-grow">
-                     <li class="flex items-start"><span class="text-green-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Everything in Basic, plus:</span></li>
-                     <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Automated Review Requests</span></li>
-                     <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Win-back & Re-booking Promos</span></li>
-                     <li class="flex items-start"><span class="text-indigo-400 w-5 h-5 mr-3 mt-1 shrink-0">✓</span><span>Enhanced Features & More</span></li>
-                  </ul>
-                  <button onclick="openChatbot()" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
+               <!-- Centered Button -->
+               <div class="mt-10 text-center">
+                  <p class="text-sm text-slate-400 mb-4">
+                     A Google Calendar account is required. <a href="https://accounts.google.com/signup" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline">Create one here</a>.
+                  </p>
+                  <button onclick="openChatbot()" class="w-full max-w-md mx-auto bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105">
                      Get Started
                   </button>
                </div>
@@ -684,26 +662,19 @@
 
             // --- Revised & Corrected Calculations ---
 
-            // 1. Calculate new bookings from captured missed calls
             const monthlyLostBookings = (missedCalls * conversionRate) * 4.33;
-            const capturedBookings = monthlyLostBookings * 0.85; // Assume 85% of missed calls are captured
-
-            // 2. Calculate additional bookings from improved rebooking rate on the NEWLY captured clients
-            // A 20% improvement on the existing rate, capped at 85% total.
+            const capturedBookings = monthlyLostBookings * 0.85;
             const improvedRebookRate = Math.min(rebookRate * 1.20, 0.85);
             const rebookingLift = improvedRebookRate - rebookRate;
             const additionalRebookings = capturedBookings * rebookingLift;
 
-            // 3. Total new appointments and revenue
             const totalNewBookings = Math.round(capturedBookings + additionalRebookings);
             const additionalRevenue = totalNewBookings * avgService;
             const annualIncrease = additionalRevenue * 12;
 
-            // 4. Calculate ROI based on correct annual cost (using Pro plan for this example)
-            const annualCost = 35 * 12;
+            const annualCost = 35 * 12; // Using Pro plan for calculation
             const roi = annualCost > 0 ? ((annualIncrease - annualCost) / annualCost * 100) : 0;
 
-            // Update display
             newBookingsSpan.textContent = `${totalNewBookings} appointments`;
             additionalRevenueSpan.textContent = `$${Math.round(additionalRevenue).toLocaleString()}`;
             annualIncreaseSpan.textContent = `$${Math.round(annualIncrease).toLocaleString()}`;
@@ -713,12 +684,9 @@
          [avgServiceInput, missedCallsInput, conversionRateInput, rebookRateInput].forEach(input => {
             input.addEventListener('input', updateCalculation);
          });
-
-         // Initial calculation on page load
          updateCalculation();
       }
 
-      // Ensure the calculator is set up after the DOM is loaded
       if (document.readyState === 'loading') {
          document.addEventListener('DOMContentLoaded', setupROICalculator);
       } else {
@@ -736,7 +704,7 @@
         const FORMSPREE_ENDPOINT_URL = "https://formspree.io/f/your_form_id";
 
         const INITIAL_USER_DATA = {
-            firstName: '', phoneNumber: '', emailAddress: '', 
+            firstName: '', phoneNumber: '', emailAddress: '', googleCalendarEmail: '',
             salonName: '', specializedServices: [], serviceDurations: {}, 
             bufferTime: '', workingDays: [], workingHours: {},
             lunchBreak: { takes: 'No', duration: '', schedule: {} }, 
@@ -767,6 +735,7 @@
             { id: 'start_lunch_schedule', botMessage: "Great. Let's set the start time for your lunch on each day.", inputType: 'lunch_schedule_start', condition: (data) => data.lunchBreak.takes === 'Yes' },
             { id: 'booking_advance', botMessage: "How far in advance can clients book?", inputType: 'choice', field: 'bookingAdvance', options: BOOKING_ADVANCE_OPTIONS },
             { id: 'cancellation_policy', botMessage: "What's your cancellation policy?", inputType: 'choice', field: 'cancellationPolicy', options: CANCELLATION_POLICIES_OPTIONS },
+            { id: 'google_calendar_email', botMessage: "What's your Google Calendar email address? This is required to sync your bookings.", inputType: 'email', field: 'googleCalendarEmail', placeholder: 'Enter your Gmail address...' },
             { id: 'client_volume', botMessage: "On average, how many clients do you see per day?", inputType: 'choice', field: 'clientVolume', options: ['1-6 clients', '7+ clients'] },
             { id: 'payment', botMessage: "Awesome! You're all set. Please choose a plan below to activate your booking system.", inputType: 'payment' }
         ];
@@ -785,19 +754,13 @@
             return (<div><div className="grid grid-cols-1 gap-2 mb-3">{options.map(option => { const isSelected = selection.includes(option); return (<button key={option} onClick={() => handleToggle(option)} className={`p-3 border rounded-lg text-sm text-left transition-colors ${isSelected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-700 hover:bg-slate-50'}`}>{option} {isSelected && '✓'}</button>); })}</div><button onClick={onComplete} disabled={selection.length === 0} className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-indigo-300">Continue ({selection.length} selected)</button></div>);
         };
         const ServiceDurationInput = ({ service, onSelect, disabled }) => (<div className="space-y-2"><p className="text-sm font-semibold text-slate-600 mb-2">How long does this service take?</p><div className="p-3 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-800 font-bold mb-3">{service}</div>{SERVICE_DURATION_OPTIONS.map(option => (<button key={option} onClick={() => onSelect(option)} disabled={disabled} className="w-full p-3 bg-white border border-slate-300 hover:bg-indigo-50 hover:border-indigo-300 rounded-lg text-left transition-colors disabled:opacity-50">{option}</button>))}</div>);
-        const TimeToggle = ({ time, onTimeChange, disabled }) => {
-            const currentIndex = TIME_OPTIONS.indexOf(time);
-            const handleUp = () => { const nextIndex = (currentIndex + 1) % TIME_OPTIONS.length; onTimeChange(TIME_OPTIONS[nextIndex]); };
-            const handleDown = () => { const prevIndex = (currentIndex - 1 + TIME_OPTIONS.length) % TIME_OPTIONS.length; onTimeChange(TIME_OPTIONS[prevIndex]); };
-            return (<div className="flex items-center space-x-2"><div className="flex-1 text-center font-semibold text-indigo-700 p-2 bg-indigo-100 rounded-md">{time || 'Set Time'}</div><div className="flex flex-col"><button onClick={handleUp} disabled={disabled} className="px-2 py-0.5 rounded-t-md text-indigo-700 hover:bg-indigo-200 disabled:opacity-50">▲</button><button onClick={handleDown} disabled={disabled} className="px-2 py-0.5 rounded-b-md text-indigo-700 hover:bg-indigo-200 disabled:opacity-50">▼</button></div></div>);
-        };
         const ScheduleInput = ({ days, onComplete, savedHours, disabled }) => {
             const [hours, setHours] = useState(savedHours);
             const handleTimeChange = (day, part, time) => { setHours(prev => ({ ...prev, [day]: { ...prev[day], [part]: time } })); };
             const allDaysSet = days.every(day => hours[day] && hours[day].start && hours[day].end);
-            return (<div className="space-y-4"><div className="space-y-3">{days.map(day => (<div key={day} className="grid grid-cols-12 gap-2 items-center"><div className="col-span-2 font-bold text-slate-700">{day.substring(0,3)}</div><div className="col-span-5"><TimeToggle time={hours[day] ? hours[day].start : null} onTimeChange={(time) => handleTimeChange(day, 'start', time)} disabled={disabled} /></div><div className="col-span-5"><TimeToggle time={hours[day] ? hours[day].end : null} onTimeChange={(time) => handleTimeChange(day, 'end', time)} disabled={disabled} /></div></div>))}</div>{allDaysSet && <button onClick={() => onComplete(hours)} className="w-full p-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600">Finish Schedule Setup</button>}</div>);
+            return (<div className="space-y-4"><div className="space-y-3">{days.map(day => (<div key={day} className="grid grid-cols-3 gap-2 items-center"><div className="col-span-1 font-bold text-slate-700">{day.substring(0,3)}</div><div className="col-span-1"><SelectInput options={TIME_OPTIONS} value={hours[day] ? hours[day].start : ''} onChange={(time) => handleTimeChange(day, 'start', time)} disabled={disabled} placeholder="Start"/></div><div className="col-span-1"><SelectInput options={TIME_OPTIONS} value={hours[day] ? hours[day].end : ''} onChange={(time) => handleTimeChange(day, 'end', time)} disabled={disabled} placeholder="End"/></div></div>))}</div>{allDaysSet && <button onClick={() => onComplete(hours)} className="w-full p-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600">Finish Schedule Setup</button>}</div>);
         };
-        const SelectInput = ({ options, value, onChange, disabled, placeholder }) => (<select value={value || ''} onChange={(e) => onChange(e.target.value)} disabled={disabled} className="w-full p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"><option value="" disabled>{placeholder}</option>{options.map(option => <option key={option} value={option}>{option}</option>)}</select>);
+        const SelectInput = ({ options, value, onChange, disabled, placeholder }) => (<select value={value || ''} onChange={(e) => onChange(e.target.value)} disabled={disabled} className="w-full p-2 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"><option value="" disabled>{placeholder}</option>{options.map(option => <option key={option} value={option}>{option}</option>)}</select>);
         const LunchScheduleInput = ({ days, onComplete, savedTimes, disabled }) => {
             const [lunchTimes, setLunchTimes] = useState(savedTimes || {});
             const handleTimeChange = (day, time) => { setLunchTimes(prev => ({ ...prev, [day]: time })); };
